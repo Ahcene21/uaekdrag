@@ -3,7 +3,7 @@
  * Plugin Name:       Ahcene Babori Core
  * Plugin URI:        https://ahcenebabori.com
  * Description:       Academic data layer for the website of Dr. Ahcene Babori: publications, books, projects, presentations, teaching, academic service, resources, research notes, researcher profile, statistics, SEO/schema, contact form and future import connectors. Content lives here, so it survives a theme change.
- * Version:           1.0.11
+ * Version:           1.0.13
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            Dr. Ahcene Babori
@@ -18,7 +18,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'ABC_VERSION', '1.0.11' );
+define( 'ABC_VERSION', '1.0.13' );
 define( 'ABC_FILE', __FILE__ );
 define( 'ABC_DIR', plugin_dir_path( __FILE__ ) );
 define( 'ABC_URL', plugin_dir_url( __FILE__ ) );
@@ -107,7 +107,7 @@ add_action(
 	'init',
 	static function () {
 		$done = (string) get_option( 'abc_db_version', '0' );
-		if ( version_compare( $done, '1.0.7', '>=' ) ) {
+		if ( version_compare( $done, '1.0.13', '>=' ) ) {
 			return;
 		}
 		if ( version_compare( $done, '1.0.1', '<' ) ) {
@@ -160,7 +160,14 @@ add_action(
 				}
 			}
 		}
-		update_option( 'abc_db_version', '1.0.7', false );
+		// 1.0.13: Emerald & Gold becomes the colour scheme chosen by the owner.
+		if ( version_compare( $done, '1.0.13', '<' ) ) {
+			$st            = get_option( 'abc_settings', array() );
+			$st            = is_array( $st ) ? $st : array();
+			$st['palette'] = 'emerald';
+			update_option( 'abc_settings', $st, false );
+		}
+		update_option( 'abc_db_version', '1.0.13', false );
 		update_option( 'abc_needs_flush', 1, false );
 	},
 	100

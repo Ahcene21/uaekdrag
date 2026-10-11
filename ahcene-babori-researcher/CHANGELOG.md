@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.13 – 2026-10-11
+- **Emerald & Gold is now the default colour scheme** (chosen by the owner). Other schemes remain available in *Researcher → Appearance*.
+
 ## 1.0.12 – 2026-10-11
 - **Quick-access tiles**: eight large coloured tiles with icons (Publications, Books, Projects, Presentations, Teaching, Academic Service, Blog, Contact) overlapping the bottom of the hero; they follow the chosen colour scheme. The old three-column teaching/service/presentations row was removed (the tiles replace it).
 - **Mega menu**: Publications, Projects, Presentations, Teaching, Academic Service and Blog open a wide panel with their categories/types/research areas and latest items (automatic, cached 10 min); hover, keyboard focus, touch toggle button and Escape supported; accordion on mobile.

@@ -15,9 +15,9 @@ defined( 'ABSPATH' ) || exit;
  */
 function abt_palettes() {
 	$p = array(
-		'teal'     => array( 'Teal Navy (default)', '#0b1f3a', '#13294b', '#1d3a63', '#0b7a7c', '#075f61', '#5ad1d3', '#e3f3f3', '#eef3f6', '#0f3a5c' ),
+		'teal'     => array( 'Teal Navy (previous)', '#0b1f3a', '#13294b', '#1d3a63', '#0b7a7c', '#075f61', '#5ad1d3', '#e3f3f3', '#eef3f6', '#0f3a5c' ),
 		'indigo'   => array( 'Indigo & Amber', '#161a45', '#1f2560', '#2b3380', '#3a3fa3', '#2b2f85', '#f4c15d', '#e8e9fa', '#eff0fa', '#2a2f7a' ),
-		'emerald'  => array( 'Emerald & Gold', '#0c2f26', '#114034', '#1a5646', '#0f6b4f', '#0a5640', '#e6c76b', '#e0f2ea', '#eef5f1', '#145a45' ),
+		'emerald'  => array( 'Emerald & Gold (default)', '#0c2f26', '#114034', '#1a5646', '#0f6b4f', '#0a5640', '#e6c76b', '#e0f2ea', '#eef5f1', '#145a45' ),
 		'burgundy' => array( 'Burgundy & Gold', '#4a1426', '#5e1a31', '#78243f', '#8a1f43', '#6e1835', '#e9c46a', '#f7e4ea', '#f8eef1', '#6b1d36' ),
 		'ocean'    => array( 'Ocean Blue & Sky', '#0a2540', '#0f3358', '#16477a', '#1565c0', '#0f4f9a', '#7cc7f5', '#e1eefb', '#edf3fa', '#124a82' ),
 		'slate'    => array( 'Slate & Coral', '#1c2433', '#252f43', '#34415c', '#0e7490', '#0b5a70', '#ff9b7a', '#e0f1f5', '#eef2f6', '#2c3a55' ),
@@ -57,11 +57,11 @@ add_filter( 'abc_menu_styles', 'abt_menu_styles' );
  * Selected palette id / menu style (administrators can preview with ?abc_palette=…&abc_menu=…).
  */
 function abt_current_palette() {
-	$id = (string) abc_setting( 'palette', 'teal' );
+	$id = (string) abc_setting( 'palette', 'emerald' );
 	if ( isset( $_GET['abc_palette'] ) && current_user_can( 'manage_options' ) ) { // phpcs:ignore WordPress.Security.NonceVerification
 		$id = sanitize_key( wp_unslash( $_GET['abc_palette'] ) ); // phpcs:ignore WordPress.Security.NonceVerification
 	}
-	return isset( abt_palettes()[ $id ] ) ? $id : 'teal';
+	return isset( abt_palettes()[ $id ] ) ? $id : 'emerald';
 }
 
 function abt_current_menu_style() {

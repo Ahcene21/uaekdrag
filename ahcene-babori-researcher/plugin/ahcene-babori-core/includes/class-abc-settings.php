@@ -43,7 +43,7 @@ class ABC_Settings {
 			'email'               => 'contact@ahcenebabori.com',
 			'contact_to'          => '',
 			'store_messages'      => '1',
-			'palette'             => 'teal',
+			'palette'             => 'emerald',
 			'menu_style'          => 'light',
 			'page_about'          => 0,
 			'page_contact'        => 0,
@@ -489,9 +489,9 @@ class ABC_Settings {
 				}
 				break;
 			case 'appearance':
-				$pal = isset( $in['palette'] ) ? sanitize_key( $in['palette'] ) : 'teal';
+				$pal = isset( $in['palette'] ) ? sanitize_key( $in['palette'] ) : 'emerald';
 				$men = isset( $in['menu_style'] ) ? sanitize_key( $in['menu_style'] ) : 'light';
-				$cur['palette']    = array_key_exists( $pal, (array) apply_filters( 'abc_palettes', array() ) ) ? $pal : 'teal';
+				$cur['palette']    = array_key_exists( $pal, (array) apply_filters( 'abc_palettes', array() ) ) ? $pal : 'emerald';
 				$cur['menu_style'] = array_key_exists( $men, (array) apply_filters( 'abc_menu_styles', array() ) ) ? $men : 'light';
 				break;
 			case 'contact':
