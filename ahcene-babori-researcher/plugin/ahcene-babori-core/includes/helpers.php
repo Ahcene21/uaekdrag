@@ -241,40 +241,60 @@ function abc_cv_page_url() {
 }
 
 /**
- * URL of a demo/starter page by its key (home, about, research, cv, contact, discover), translated.
+ * Permalink of a starter page by its key (home, about, research, cv, contact, discover), in the
+ * current language, or '' when no such page exists. Never falls back to the homepage.
+ *
+ * Lookup order: page with the key in this language → translation (Polylang) of a keyed page in
+ * another language → page containing the matching shortcode → usual slug.
+ *
+ * @param string $key Page key.
+ * @return string
+ */
+function abc_find_page( $key ) {
+	$key  = sanitize_key( $key );
+	$lang = abc_lang();
+	$base = array( 'post_type' => 'page', 'post_status' => 'publish', 'posts_per_page' => 1, 'fields' => 'ids' );
+	$meta = array( 'meta_key' => '_abc_page_key', 'meta_value' => $key ); // phpcs:ignore WordPress.DB.SlowDBQuery
+	$ids  = get_posts( $base + $meta + array( 'lang' => $lang ) );
+	if ( $ids ) {
+		return (string) get_permalink( $ids[0] );
+	}
+	if ( function_exists( 'pll_get_post' ) ) { // Translation created by hand: the key was not copied.
+		$any = get_posts( $base + $meta + array( 'lang' => '' ) );
+		if ( $any ) {
+			$t = pll_get_post( $any[0], $lang );
+			if ( $t ) {
+				return (string) get_permalink( $t );
+			}
+		}
+	}
+	$needle = array( 'contact' => 'abc_contact_form', 'discover' => 'abc_search_form' );
+	if ( isset( $needle[ $key ] ) ) {
+		$found = get_posts( $base + array( 's' => $needle[ $key ], 'lang' => $lang ) );
+		if ( $found ) {
+			return (string) get_permalink( $found[0] );
+		}
+	}
+	$slugs = array( 'about' => array( 'about', 'a-propos', 'nubdha-anni' ), 'research' => array( 'research', 'recherche', 'al-bahth' ), 'contact' => array( 'contact', 'ittisal' ), 'cv' => array( 'cv', 'al-sira-al-dhatiya' ), 'discover' => array( 'discover', 'explorer', 'istikshaf' ) );
+	foreach ( (array) ( $slugs[ $key ] ?? array() ) as $slug ) {
+		$found = get_posts( $base + array( 'name' => $slug, 'lang' => $lang ) );
+		if ( $found ) {
+			return (string) get_permalink( $found[0] );
+		}
+	}
+	return '';
+}
+
+/**
+ * URL of a starter page by key; the (translated) homepage when it does not exist.
  *
  * @param string $key Page key.
  * @return string
  */
 function abc_page_url( $key ) {
-	$pages = get_posts(
-		array(
-			'post_type'      => 'page',
-			'post_status'    => 'publish',
-			'posts_per_page' => 1,
-			'meta_key'       => '_abc_page_key', // phpcs:ignore WordPress.DB.SlowDBQuery
-			'meta_value'     => sanitize_key( $key ), // phpcs:ignore WordPress.DB.SlowDBQuery
-			'lang'           => abc_lang(),
-			'fields'         => 'ids',
-		)
-	);
-	if ( $pages ) {
-		return get_permalink( $pages[0] );
-	}
-	// Pages created by hand (not by the installer): find them by their content or usual slug.
-	$needle = array( 'contact' => 'abc_contact_form', 'discover' => 'abc_search_form' );
-	if ( isset( $needle[ $key ] ) ) {
-		$found = get_posts( array( 'post_type' => 'page', 'post_status' => 'publish', 'posts_per_page' => 1, 's' => $needle[ $key ], 'lang' => abc_lang(), 'fields' => 'ids' ) );
-		if ( $found ) {
-			return get_permalink( $found[0] );
-		}
-	}
-	$slugs = array( 'about' => array( 'about', 'a-propos' ), 'research' => array( 'research', 'recherche' ), 'contact' => array( 'contact' ), 'cv' => array( 'cv' ) );
-	foreach ( (array) ( $slugs[ $key ] ?? array() ) as $slug ) {
-		$found = get_posts( array( 'post_type' => 'page', 'post_status' => 'publish', 'posts_per_page' => 1, 'name' => $slug, 'lang' => abc_lang(), 'fields' => 'ids' ) );
-		if ( $found ) {
-			return get_permalink( $found[0] );
-		}
+	$url = abc_find_page( $key );
+	if ( $url ) {
+		return $url;
 	}
 	if ( 'cv' === $key ) {
 		return abc_cv_page_url();
@@ -290,8 +310,8 @@ function abc_page_url( $key ) {
  */
 function abc_contact_url() {
 	$home = function_exists( 'pll_home_url' ) ? pll_home_url() : home_url( '/' );
-	$url  = abc_page_url( 'contact' );
-	if ( $url && untrailingslashit( $url ) !== untrailingslashit( $home ) ) {
+	$url  = abc_find_page( 'contact' );
+	if ( $url ) {
 		return $url;
 	}
 	return 'mailto:' . antispambot( abc_setting( 'email', 'contact@ahcenebabori.com' ) );

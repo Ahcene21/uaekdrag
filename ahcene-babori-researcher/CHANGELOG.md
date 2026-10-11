@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.8 – 2026-10-11
+- **Fix: *About* link in every language.** Menu links to pages are now resolved through the page’s Polylang translation first, and a link is never replaced by the homepage; the “About me” and “Contact” buttons also find hand-made translations (the page key is now copied when a translation is created, and pages are also found by their usual slug or shortcode).
+- **Fix: *Back to top* in the footer.** The target is no longer the sticky header (browsers cannot scroll to an element that is already stuck at the top).
+
 ## 1.0.7 – 2026-10-11
 - **Resources removed** (menu, dashboard, search, templates, sample data). Previously saved resource data stays untouched in the database.
 - **Research Notes became the Blog** (menu, URLs `/blog/`, labels, categories and tags; old `/research-notes/…` links redirect). Existing posts are kept.

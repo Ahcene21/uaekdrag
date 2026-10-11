@@ -29,6 +29,7 @@ html[lang="ar"] body{font-weight:400}
 
 /* ---------- Reset / base ---------- */
 *,*::before,*::after{box-sizing:border-box}
+#top{display:block;height:0;overflow:hidden}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:6rem}
 body{margin:0;font-family:var(--font);font-size:var(--fs-base);line-height:var(--lh);color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 img,svg,video{max-width:100%;height:auto}

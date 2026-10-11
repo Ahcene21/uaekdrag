@@ -17,9 +17,10 @@ $home = function_exists( 'pll_home_url' ) ? pll_home_url() : home_url( '/' );
 </head>
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
+<span id="top"></span>
 <a class="skip-link screen-reader-text" href="#main"><?php echo esc_html( abc_t( 'skip_to_content' ) ); ?></a>
 
-<header class="abt-header" id="top">
+<header class="abt-header">
 	<div class="abt-container abt-header__bar">
 		<a class="abt-brand" href="<?php echo esc_url( $home ); ?>" rel="home">
 			<?php if ( has_custom_logo() ) : ?>

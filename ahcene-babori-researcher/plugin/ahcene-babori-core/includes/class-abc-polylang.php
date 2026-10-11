@@ -50,6 +50,7 @@ class ABC_Polylang {
 				$keys[] = 'abc_' . $k;
 			}
 		}
+		$keys[] = '_abc_page_key';
 		return array_unique( $keys );
 	}
 

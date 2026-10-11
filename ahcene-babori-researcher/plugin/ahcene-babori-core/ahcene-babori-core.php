@@ -3,7 +3,7 @@
  * Plugin Name:       Ahcene Babori Core
  * Plugin URI:        https://ahcenebabori.com
  * Description:       Academic data layer for the website of Dr. Ahcene Babori: publications, books, projects, presentations, teaching, academic service, resources, research notes, researcher profile, statistics, SEO/schema, contact form and future import connectors. Content lives here, so it survives a theme change.
- * Version:           1.0.7
+ * Version:           1.0.8
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            Dr. Ahcene Babori
@@ -18,7 +18,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'ABC_VERSION', '1.0.7' );
+define( 'ABC_VERSION', '1.0.8' );
 define( 'ABC_FILE', __FILE__ );
 define( 'ABC_DIR', plugin_dir_path( __FILE__ ) );
 define( 'ABC_URL', plugin_dir_url( __FILE__ ) );
@@ -80,9 +80,18 @@ add_filter(
 		if ( is_admin() || empty( $item->type ) || 'post_type' !== $item->type || 'page' !== $item->object ) {
 			return $item;
 		}
-		$key = get_post_meta( (int) $item->object_id, '_abc_page_key', true );
+		$id = (int) $item->object_id;
+		if ( function_exists( 'pll_get_post' ) ) {
+			$t = pll_get_post( $id, abc_lang() );
+			if ( $t ) {
+				$item->url       = get_permalink( $t );
+				$item->object_id = (string) $t;
+				return $item;
+			}
+		}
+		$key = get_post_meta( $id, '_abc_page_key', true );
 		if ( $key && 'home' !== $key ) {
-			$url = abc_page_url( $key );
+			$url = abc_find_page( $key ); // Never replaces a working link by the homepage.
 			if ( $url ) {
 				$item->url = $url;
 			}
