@@ -158,7 +158,9 @@ html[lang="fr"] .abt-menu a{letter-spacing:.05em}
 .home .abt-section--dark .abt-section__title::before{background:var(--teal-light)}
 .home .abt-section--tint{background:var(--tint);border-block:1px solid var(--line);position:relative}
 .home .abt-section--tint::before{content:"";position:absolute;inset-inline:0;top:0;height:4px;background:linear-gradient(90deg,var(--teal),var(--teal-light) 40%,transparent 40%)}
-.home .abt-bio{padding-top:2rem}
+.home .abt-bio{padding-top:2rem;background:var(--teal-soft);border-block:0;border-top:3px solid var(--teal-light)}
+.home .abt-bio__text{color:var(--navy)}
+.home .abt-section--tint .abc-area{background:#fff;border-color:rgba(var(--navy-rgb),.12)}
 
 /* ---------- Mega menu ---------- */
 .abt-nav{position:relative}

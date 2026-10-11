@@ -86,7 +86,7 @@ $notes    = ABC_Render::query( 'note', array( 'limit' => 3 ) );
 	</div>
 </section>
 
-<section class="abt-section" aria-labelledby="areas-title">
+<section class="abt-section abt-section--tint" aria-labelledby="areas-title">
 	<div class="abt-container">
 		<?php abt_section_head( abc_t( 'home_areas_title' ), abc_t( 'home_areas_intro' ), $res_url, abc_t( 'nav_research' ) ); ?>
 		<?php echo ABC_Render::research_areas( 8 ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
@@ -103,7 +103,7 @@ $notes    = ABC_Render::query( 'note', array( 'limit' => 3 ) );
 <?php endif; ?>
 
 <?php if ( $projects ) : ?>
-<section class="abt-section abt-section--tint" aria-labelledby="projects-title">
+<section class="abt-section" aria-labelledby="projects-title">
 	<div class="abt-container">
 		<?php abt_section_head( abc_t( 'home_projects_title' ), abc_t( 'home_projects_intro' ), abc_archive_url( 'abc_project' ), abc_t( 'projects' ) ); ?>
 		<div class="abc-grid abc-grid--cards">

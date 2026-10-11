@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.15 – 2026-10-11
+- Homepage: the biography strip and the research-areas block now use tints of the chosen colour scheme (soft green / pale green with white cards) instead of white; bands alternate tinted → dark → white → tinted down the page.
+
 ## 1.0.14 – 2026-10-11
 - **Biography strip on the homepage uses the full width** (the text no longer stops halfway, leaving the other side empty).
 - **Same colours on every page**: all inner pages (About, Publications, Projects, single items, Blog, Contact, CV, search, 404…) now open with the same green gradient header as the homepage hero, with light breadcrumbs and titles.
