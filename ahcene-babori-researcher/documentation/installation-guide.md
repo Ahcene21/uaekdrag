@@ -45,7 +45,7 @@ Both methods only **add** content; nothing existing is overwritten or deleted.
 Every sample entry shows a yellow **Demo** label and the marker `[ADD VERIFIED INFORMATION]`.
 
 ## 7. Menus
-*Appearance → Menus*. Method A creates *Primary menu (EN/FR/AR)* and *Footer menu (EN/FR/AR)* and assigns them per language. Check *Languages → Settings → Menus* (Polylang) that each language has its own menu in the **Primary menu** and **Footer menu** locations. The twelve entries are: Home, About, Research, Publications, Projects, Teaching, Academic Service, Presentations, Resources, Research Notes, CV, Contact.
+*Appearance → Menus*. Method A creates *Primary menu (EN/FR/AR)* and *Footer menu (EN/FR/AR)* and assigns them per language. Check *Languages → Settings → Menus* (Polylang) that each language has its own menu in the **Primary menu** and **Footer menu** locations. The eleven entries are: Home, About, Publications, Projects, Teaching, Academic Service, Presentations, Resources, Research Notes, CV, Contact.
 
 ## 8. Upload the profile photo
 *Researcher → Profile & Photo* → **Choose / upload** → portrait (recommended 800 × 1000 px or larger) → add a short alt text → Save. Replace it any time from the Media Library.
@@ -58,7 +58,7 @@ Fill in the online CV text in *Pages → Curriculum Vitae* (one per language).
 *Researcher → Identifiers & Links*: ORCID iD, Google Scholar, Scopus, ResearchGate, LinkedIn, institutional profile, public e-mail. Only filled fields appear on the website. **Do not enter anything you have not verified.**
 
 ## 11. Add publications
-*Publications → Add publication*: title, authors (one per line), year, journal, DOI (only the DOI), abstract, PDF (only if legally shareable), Open Access status, repository URL; tick **Publication Type**, **Research Areas**, **Keywords**; tick “Show on the homepage” for featured items. The *Year* filter is generated automatically. Use the same pattern for books, projects, presentations, academic service, courses, resources and research notes (*Researcher → Overview* has a button for each).
+*Publications → Add publication*: title, authors (one per line), year, journal, DOI (only the DOI), abstract, PDF (only if legally shareable), Open Access status, repository URL; tick **Publication Type**, **Research Areas**, **Keywords**; tick “Show on the homepage” for featured items. The *Year* filter is generated automatically. Presentation types (Keynote, Invited talk, …) are managed under *Presentations → Presentation Types*. Use the same pattern for books, projects, presentations, academic service, courses, resources and research notes (*Researcher → Overview* has a button for each).
 To add an entry in another language: use the “+” of that language in the Polylang column.
 
 ## 12. SEO

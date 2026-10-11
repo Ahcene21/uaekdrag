@@ -3,7 +3,7 @@
  * Plugin Name:       Ahcene Babori Core
  * Plugin URI:        https://ahcenebabori.com
  * Description:       Academic data layer for the website of Dr. Ahcene Babori: publications, books, projects, presentations, teaching, academic service, resources, research notes, researcher profile, statistics, SEO/schema, contact form and future import connectors. Content lives here, so it survives a theme change.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            Dr. Ahcene Babori
@@ -18,7 +18,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'ABC_VERSION', '1.0.0' );
+define( 'ABC_VERSION', '1.0.1' );
 define( 'ABC_FILE', __FILE__ );
 define( 'ABC_DIR', plugin_dir_path( __FILE__ ) );
 define( 'ABC_URL', plugin_dir_url( __FILE__ ) );
@@ -69,3 +69,63 @@ register_deactivation_hook( __FILE__, 'abc_core_deactivate' );
 function abc_core_deactivate() {
 	flush_rewrite_rules();
 }
+
+/**
+ * Menu links to starter pages are resolved at run time to the page of the CURRENT language,
+ * so a menu item can never point to the wrong-language or a missing page.
+ */
+add_filter(
+	'wp_setup_nav_menu_item',
+	static function ( $item ) {
+		if ( is_admin() || empty( $item->type ) || 'post_type' !== $item->type || 'page' !== $item->object ) {
+			return $item;
+		}
+		$key = get_post_meta( (int) $item->object_id, '_abc_page_key', true );
+		if ( $key && 'home' !== $key ) {
+			$url = abc_page_url( $key );
+			if ( $url ) {
+				$item->url = $url;
+			}
+		}
+		return $item;
+	}
+);
+
+/**
+ * One-time upgrade tasks.
+ */
+add_action(
+	'init',
+	static function () {
+		if ( version_compare( (string) get_option( 'abc_db_version', '0' ), '1.0.1', '>=' ) ) {
+			return;
+		}
+		// 1.0.1: "Research" removed from the starter primary menus.
+		foreach ( array( 'EN', 'FR', 'AR' ) as $l ) {
+			$menu = wp_get_nav_menu_object( 'Primary menu (' . $l . ')' );
+			if ( ! $menu ) {
+				continue;
+			}
+			foreach ( (array) wp_get_nav_menu_items( $menu->term_id ) as $it ) {
+				if ( 'page' === $it->object && 'research' === get_post_meta( (int) $it->object_id, '_abc_page_key', true ) ) {
+					wp_delete_post( $it->ID, true );
+				}
+			}
+		}
+		// 1.0.1: Presentation Type became a taxonomy – migrate the old select value.
+		$ids = get_posts( array( 'post_type' => 'abc_presentation', 'post_status' => 'any', 'posts_per_page' => -1, 'fields' => 'ids', 'lang' => '', 'meta_key' => 'abc_pres_type' ) ); // phpcs:ignore WordPress.DB.SlowDBQuery
+		foreach ( $ids as $pid ) {
+			$old = get_post_meta( $pid, 'abc_pres_type', true );
+			$map = array( 'keynote' => 'Keynote', 'invited' => 'Invited talk', 'paper' => 'Conference paper', 'poster' => 'Poster', 'workshop' => 'Workshop', 'webinar' => 'Webinar', 'seminar' => 'Seminar' );
+			if ( $old && isset( $map[ $old ] ) && ! has_term( '', 'abc_pres_type', $pid ) ) {
+				$t = term_exists( $map[ $old ], 'abc_pres_type' );
+				if ( $t ) {
+					wp_set_object_terms( $pid, array( (int) ( is_array( $t ) ? $t['term_id'] : $t ) ), 'abc_pres_type' );
+				}
+			}
+		}
+		update_option( 'abc_db_version', '1.0.1', false );
+		update_option( 'abc_needs_flush', 1, false );
+	},
+	100
+);

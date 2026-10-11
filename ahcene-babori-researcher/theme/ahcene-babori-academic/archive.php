@@ -24,6 +24,7 @@ abt_page_header( $title, $desc, is_tax() ? abc_t( 'browse' ) : '' );
 $chip_tax = array(
 	'abc_project'  => '',
 	'abc_resource' => 'abc_resource_type',
+	'abc_presentation' => 'abc_pres_type',
 	'abc_note'     => 'abc_note_category',
 );
 $tax_obj = is_tax() ? get_queried_object() : null;
@@ -32,6 +33,8 @@ $tax_obj = is_tax() ? get_queried_object() : null;
 	<?php
 	if ( $pt && ! empty( $chip_tax[ $pt ] ) ) {
 		abt_term_chips( $chip_tax[ $pt ] );
+	} elseif ( $tax_obj && 'abc_pres_type' === $tax_obj->taxonomy ) {
+		abt_term_chips( 'abc_pres_type' );
 	} elseif ( $tax_obj && 'abc_resource_type' === $tax_obj->taxonomy ) {
 		abt_term_chips( 'abc_resource_type' );
 	} elseif ( $tax_obj && 'abc_note_category' === $tax_obj->taxonomy ) {

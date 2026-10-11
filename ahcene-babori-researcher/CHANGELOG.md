@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.1 – 2026-10-11
+- Fix: menu links to starter pages (e.g. *About / نبذة عني*) are now resolved at run time to the page of the current language, so they cannot point to a wrong-language or missing page.
+- “Research” removed from the starter primary menus (installer, `demo-content.xml`, fallback menu); the plugin removes it from existing *Primary menu (EN/FR/AR)* menus once. The Research page itself is kept.
+- **Presentation Type is now a taxonomy** (*Presentations → Presentation Types*): add, rename and translate types freely. Default types: Keynote, Invited talk, Conference paper, Poster, Workshop, Webinar, Seminar. Old values are migrated automatically. Types appear as filter chips on the Presentations archive.
+
 ## 1.0.0 – 2026-10-08
 First release.
 

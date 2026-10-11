@@ -129,7 +129,7 @@ foreach ( $d['menus'] as $loc => $mitems ) {
 			$mid = ++$id;
 			$meta = array( '_menu_item_menu_item_parent' => '0', '_menu_item_status' => 'publish' );
 			if ( 'page' === $it[0] ) {
-				$meta += array( '_menu_item_type' => 'post_type', '_menu_item_object' => 'page', '_menu_item_object_id' => (string) $ids[ "page:{$it[1]}:$l" ], '_menu_item_url' => '' );
+				$meta += array( '_abc_page_key' => $it[1], '_menu_item_type' => 'post_type', '_menu_item_object' => 'page', '_menu_item_object_id' => (string) $ids[ "page:{$it[1]}:$l" ], '_menu_item_url' => '' );
 			} else {
 				$meta += array( '_menu_item_type' => 'post_type_archive', '_menu_item_object' => $it[1], '_menu_item_object_id' => $it[1], '_menu_item_url' => '' );
 			}

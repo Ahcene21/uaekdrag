@@ -36,7 +36,6 @@ function abt_menu_fallback() {
 	$items = array(
 		array( abc_t( 'nav_home' ), abc_page_url( 'home' ) ),
 		array( abc_t( 'nav_about' ), abc_page_url( 'about' ) ),
-		array( abc_t( 'nav_research' ), abc_page_url( 'research' ) ),
 		array( abc_t( 'publications' ), abc_archive_url( 'abc_publication' ) ),
 		array( abc_t( 'projects' ), abc_archive_url( 'abc_project' ) ),
 		array( abc_t( 'teaching' ), abc_archive_url( 'abc_teaching' ) ),

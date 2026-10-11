@@ -167,7 +167,9 @@ class ABC_Render {
 				$meta = abc_get( 'book_author', $id ) ? esc_html( abc_get( 'book_author', $id ) ) : '';
 				break;
 			case 'abc_presentation':
-				$kick = abc_get( 'pres_date', $id ) ? abc_format_date( abc_get( 'pres_date', $id ) ) : '';
+				$ptype = wp_strip_all_tags( self::terms( $id, 'abc_pres_type', false ) );
+				$kick  = $ptype ? esc_html( $ptype ) : '';
+				$kick .= ( $kick && abc_get( 'pres_date', $id ) ? ' · ' : '' ) . ( abc_get( 'pres_date', $id ) ? esc_html( abc_format_date( abc_get( 'pres_date', $id ) ) ) : '' );
 				$meta = esc_html( trim( abc_get( 'pres_conference', $id ) . ( abc_get( 'pres_location', $id ) ? ' — ' . abc_get( 'pres_location', $id ) : '' ) ) );
 				break;
 			case 'abc_resource':

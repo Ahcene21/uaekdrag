@@ -116,6 +116,16 @@ $tax['abc_research_area'] = array(
 	),
 );
 
+$tax['abc_pres_type'] = array(
+	'keynote'  => array( 'name' => $L( 'Keynote', 'Conférence plénière', 'كلمة رئيسية' ) ),
+	'invited'  => array( 'name' => $L( 'Invited talk', 'Conférence invitée', 'محاضرة مدعوة' ) ),
+	'paper'    => array( 'name' => $L( 'Conference paper', 'Communication', 'ورقة مؤتمر' ) ),
+	'poster'   => array( 'name' => $L( 'Poster', 'Poster', 'ملصق علمي' ) ),
+	'workshop' => array( 'name' => $L( 'Workshop', 'Atelier', 'ورشة عمل' ) ),
+	'webinar'  => array( 'name' => $L( 'Webinar', 'Webinaire', 'ندوة عبر الإنترنت' ) ),
+	'seminar'  => array( 'name' => $L( 'Seminar', 'Séminaire', 'ندوة' ) ),
+);
+
 $tax['abc_service_type'] = array(
 	'peer-reviewer'        => array( 'name' => $L( 'Peer Reviewer', 'Évaluateur (relecteur)', 'محكّم علمي' ) ),
 	'editorial-board'      => array( 'name' => $L( 'Editorial Board', 'Comité éditorial', 'هيئة التحرير' ) ),
@@ -309,7 +319,6 @@ $menus = array(
 	'primary' => array(
 		array( 'page', 'home',      $L( 'Home', 'Accueil', 'الرئيسية' ) ),
 		array( 'page', 'about',     $L( 'About', 'À propos', 'نبذة عني' ) ),
-		array( 'page', 'research',  $L( 'Research', 'Recherche', 'البحث' ) ),
 		array( 'archive', 'abc_publication',  $L( 'Publications', 'Publications', 'المنشورات' ) ),
 		array( 'archive', 'abc_project',      $L( 'Projects', 'Projets', 'المشاريع' ) ),
 		array( 'archive', 'abc_teaching',     $L( 'Teaching', 'Enseignement', 'التدريس' ) ),
@@ -416,14 +425,14 @@ $posts[] = array(
 	'title'   => $L( $P . ' Presentation title', $P . ' Titre de la communication', $P . ' عنوان المداخلة' ),
 	'content' => $L( '<p>Sample entry. Add the conference, date, location and slides when verified.</p>', '<p>Notice d’exemple. Ajoutez la conférence, la date, le lieu et les diapositives lorsqu’ils sont vérifiés.</p>', '<p>مدخل تجريبي. أضف المؤتمر والتاريخ والمكان والشرائح بعد التحقق منها.</p>' ),
 	'meta'    => array( 'pres_conference' => $P ),
-	'terms'   => array( 'abc_research_area' => array( 'institutional-repositories' ) ),
+	'terms'   => array( 'abc_pres_type' => array( 'paper' ), 'abc_research_area' => array( 'institutional-repositories' ) ),
 );
 $posts[] = array(
 	'key' => 'pres-sample-2', 'type' => 'abc_presentation', 'slug' => 'sample-presentation-2', 'order' => 0,
 	'title'   => $L( $P . ' Invited talk title', $P . ' Titre de la conférence invitée', $P . ' عنوان المحاضرة المدعوة' ),
 	'content' => $L( '<p>Sample entry.</p>', '<p>Notice d’exemple.</p>', '<p>مدخل تجريبي.</p>' ),
 	'meta'    => array( 'pres_conference' => $P ),
-	'terms'   => array( 'abc_research_area' => array( 'ai-in-libraries' ) ),
+	'terms'   => array( 'abc_pres_type' => array( 'invited' ), 'abc_research_area' => array( 'ai-in-libraries' ) ),
 );
 
 // Academic service – placeholders.

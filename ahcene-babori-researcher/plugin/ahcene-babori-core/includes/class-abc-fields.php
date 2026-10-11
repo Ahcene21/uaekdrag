@@ -101,9 +101,8 @@ class ABC_Fields {
 				array(
 					'title'  => 'Presentation details',
 					'fields' => array(
-						'pres_conference' => array( 'type' => 'text', 'label' => 'Conference / event', 'width' => 'half' ),
-						'pres_type'       => array( 'type' => 'select', 'label' => 'Type', 'options' => array( '' => '— Not specified —', 'keynote' => 'Keynote', 'invited' => 'Invited talk', 'paper' => 'Conference paper', 'poster' => 'Poster', 'workshop' => 'Workshop', 'webinar' => 'Webinar', 'seminar' => 'Seminar' ), 'width' => 'quarter' ),
-						'pres_date'       => array( 'type' => 'date', 'label' => 'Date', 'width' => 'quarter' ),
+						'pres_conference' => array( 'type' => 'text', 'label' => 'Conference / event', 'help' => 'Choose or add the Presentation Type in the “Presentation Types” box on the right.', 'width' => 'half' ),
+						'pres_date'       => array( 'type' => 'date', 'label' => 'Date', 'width' => 'third' ),
 						'pres_location'   => array( 'type' => 'text', 'label' => 'Location' ),
 						'pres_abstract'   => array( 'type' => 'textarea', 'label' => 'Abstract', 'rows' => 5 ),
 						'pres_slides_id'  => array( 'type' => 'media', 'label' => 'Slides (PDF or PPTX)', 'mime' => 'application/pdf,application/vnd.openxmlformats-officedocument.presentationml.presentation,application/vnd.ms-powerpoint' ),

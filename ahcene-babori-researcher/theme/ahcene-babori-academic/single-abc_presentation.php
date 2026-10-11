@@ -47,7 +47,7 @@ while ( have_posts() ) :
 					abc_t( 'conference' ) => abc_get( 'pres_conference', $id ),
 					abc_t( 'date' )       => abc_get( 'pres_date', $id ) ? abc_format_date( abc_get( 'pres_date', $id ) ) : '',
 					abc_t( 'location' )   => abc_get( 'pres_location', $id ),
-					abc_t( 'type' )       => abc_option_label( 'pres_type', abc_get( 'pres_type', $id ) ),
+					abc_t( 'type' )       => wp_strip_all_tags( ABC_Render::terms( $id, 'abc_pres_type', false ) ) ? wp_strip_all_tags( ABC_Render::terms( $id, 'abc_pres_type', false ) ) : abc_option_label( 'pres_type', abc_get( 'pres_type', $id ) ),
 				);
 				foreach ( $rows as $k => $v ) {
 					if ( $v ) {

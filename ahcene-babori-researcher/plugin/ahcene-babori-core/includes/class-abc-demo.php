@@ -225,7 +225,10 @@ class ABC_Demo {
 						} else {
 							$args += array( 'menu-item-type' => 'post_type_archive', 'menu-item-object' => $it[1], 'menu-item-url' => get_post_type_archive_link( $it[1] ) ? get_post_type_archive_link( $it[1] ) : home_url( '/' ) );
 						}
-						wp_update_nav_menu_item( $mid, 0, $args );
+						$item_id = wp_update_nav_menu_item( $mid, 0, $args );
+						if ( 'page' === $it[0] && $item_id && ! is_wp_error( $item_id ) ) {
+							update_post_meta( $item_id, '_abc_page_key', $it[1] );
+						}
 					}
 					self::log( "Menu created: $name" );
 					$menu = wp_get_nav_menu_object( $mid );

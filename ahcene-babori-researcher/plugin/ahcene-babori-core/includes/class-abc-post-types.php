@@ -125,6 +125,7 @@ class ABC_Post_Types {
 			'abc_research_area'   => array( 'Research Area', 'Research Areas', array( 'abc_publication', 'abc_book', 'abc_project', 'abc_presentation', 'abc_note', 'abc_resource' ), true, 'research-area', true ),
 			'abc_pub_year'        => array( 'Year', 'Years', array( 'abc_publication' ), false, 'publication-year', false ),
 			'abc_keyword'         => array( 'Keyword', 'Keywords', array( 'abc_publication', 'abc_project', 'abc_book', 'abc_presentation' ), false, 'keyword', true ),
+			'abc_pres_type'       => array( 'Presentation Type', 'Presentation Types', array( 'abc_presentation' ), true, 'presentation-type', true ),
 			'abc_service_type'    => array( 'Service Category', 'Service Categories', array( 'abc_service' ), true, 'service-category', true ),
 			'abc_teaching_section' => array( 'Teaching Section', 'Teaching Sections', array( 'abc_teaching' ), true, 'teaching-section', true ),
 			'abc_resource_type'   => array( 'Resource Type', 'Resource Types', array( 'abc_resource' ), true, 'resource-type', true ),

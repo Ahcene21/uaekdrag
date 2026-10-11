@@ -68,7 +68,7 @@ class ABC_Query {
 		} elseif ( $q->is_post_type_archive( 'abc_book' ) ) {
 			self::order_by_meta( $q, 'abc_book_year', 'NUMERIC', 'DESC' );
 			$q->set( 'posts_per_page', 24 );
-		} elseif ( $q->is_post_type_archive( 'abc_presentation' ) ) {
+		} elseif ( $q->is_post_type_archive( 'abc_presentation' ) || $q->is_tax( 'abc_pres_type' ) ) {
 			self::order_by_meta( $q, 'abc_pres_date', 'CHAR', 'DESC' );
 			$q->set( 'posts_per_page', 20 );
 		} elseif ( $q->is_post_type_archive( 'abc_service' ) || $q->is_tax( 'abc_service_type' ) ) {
