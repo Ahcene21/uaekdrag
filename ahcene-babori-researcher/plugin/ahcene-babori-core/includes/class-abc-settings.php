@@ -43,6 +43,8 @@ class ABC_Settings {
 			'email'               => 'contact@ahcenebabori.com',
 			'contact_to'          => '',
 			'store_messages'      => '1',
+			'palette'             => 'teal',
+			'menu_style'          => 'light',
 			'page_about'          => 0,
 			'page_contact'        => 0,
 			'page_cv'             => 0,
@@ -68,6 +70,7 @@ class ABC_Settings {
 			'abc-identifiers'  => array( 'Identifiers & Links', 'render_identifiers' ),
 			'abc-stats'        => array( 'Statistics', 'render_stats' ),
 			'abc-cv'           => array( 'CV files', 'render_cv' ),
+			'abc-appearance'   => array( 'Appearance', 'render_appearance' ),
 			'abc-contact'      => array( 'Contact form', 'render_contact' ),
 		);
 	}
@@ -351,6 +354,39 @@ class ABC_Settings {
 	}
 
 	/**
+	 * Appearance tab: colour scheme and menu style.
+	 */
+	public static function render_appearance() {
+		self::form(
+			'Appearance',
+			'appearance',
+			static function () {
+				$s        = abc_settings();
+				$palettes = (array) apply_filters( 'abc_palettes', array() );
+				$menus    = (array) apply_filters( 'abc_menu_styles', array() );
+				if ( ! $palettes ) {
+					echo '<p>Activate the theme “Ahcene Babori Academic” to choose colours.</p>';
+					return;
+				}
+				echo '<h2>Colour scheme</h2><p class="description">Applies to the whole website. Use “Preview” to see it on your homepage before saving.</p><div class="abc-admin-cards" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr))">';
+				foreach ( $palettes as $id => $p ) {
+					echo '<label class="abc-admin-card" style="cursor:pointer;display:block"><input type="radio" name="abc[palette]" value="' . esc_attr( $id ) . '" ' . checked( $s['palette'], $id, false ) . '> <strong style="display:inline">' . esc_html( $p['label'] ) . '</strong>';
+					echo '<span style="display:flex;height:34px;margin:10px 0;border-radius:6px;overflow:hidden;border:1px solid #dcdcde">';
+					foreach ( array( 'navy', 'navy2', 'primary', 'accent', 'soft' ) as $k ) {
+						echo '<i style="flex:1;background:' . esc_attr( $p[ $k ] ) . '"></i>';
+					}
+					echo '</span><a href="' . esc_url( add_query_arg( array( 'abc_palette' => $id, 'abc_menu' => $s['menu_style'] ), home_url( '/' ) ) ) . '" target="_blank" rel="noopener">Preview on the site</a></label>';
+				}
+				echo '</div><h2>Main menu style</h2><p>';
+				foreach ( $menus as $id => $label ) {
+					echo '<label style="display:block;margin:6px 0"><input type="radio" name="abc[menu_style]" value="' . esc_attr( $id ) . '" ' . checked( $s['menu_style'], $id, false ) . '> ' . esc_html( $label ) . ' — <a href="' . esc_url( add_query_arg( array( 'abc_palette' => $s['palette'], 'abc_menu' => $id ), home_url( '/' ) ) ) . '" target="_blank" rel="noopener">preview</a></label>';
+				}
+				echo '</p>';
+			}
+		);
+	}
+
+	/**
 	 * Contact tab.
 	 */
 	public static function render_contact() {
@@ -391,6 +427,7 @@ class ABC_Settings {
 			'stats'       => 'abc-stats',
 			'cv'          => 'abc-cv',
 			'contact'     => 'abc-contact',
+			'appearance'  => 'abc-appearance',
 		);
 
 		switch ( $tab ) {
@@ -450,6 +487,12 @@ class ABC_Settings {
 					}
 					$cur[ 'cv_id_' . $l ] = $id;
 				}
+				break;
+			case 'appearance':
+				$pal = isset( $in['palette'] ) ? sanitize_key( $in['palette'] ) : 'teal';
+				$men = isset( $in['menu_style'] ) ? sanitize_key( $in['menu_style'] ) : 'light';
+				$cur['palette']    = array_key_exists( $pal, (array) apply_filters( 'abc_palettes', array() ) ) ? $pal : 'teal';
+				$cur['menu_style'] = array_key_exists( $men, (array) apply_filters( 'abc_menu_styles', array() ) ) ? $men : 'light';
 				break;
 			case 'contact':
 				$to                    = sanitize_email( $in['contact_to'] ?? '' );

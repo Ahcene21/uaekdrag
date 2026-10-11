@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'ABT_VERSION', '1.0.10' );
+define( 'ABT_VERSION', '1.0.11' );
 define( 'ABT_DIR', get_template_directory() );
 define( 'ABT_URI', get_template_directory_uri() );
 
@@ -67,6 +67,7 @@ if ( ! abt_core_active() ) {
 }
 
 require_once ABT_DIR . '/inc/template-tags.php';
+require_once ABT_DIR . '/inc/palettes.php';
 
 /* --------------------------------------------------------------- assets */
 add_action(
@@ -92,7 +93,7 @@ add_action(
 	static function () {
 		$f = 'ar' === abc_lang() ? 'almarai-arabic-400-normal.woff2' : 'inter-latin-wght-normal.woff2';
 		echo '<link rel="preload" href="' . esc_url( ABT_URI . '/assets/fonts/' . $f ) . '" as="font" type="font/woff2" crossorigin>' . "\n";
-		echo '<meta name="theme-color" content="#0b1f3a">' . "\n";
+		echo '<meta name="theme-color" content="' . esc_attr( abt_palettes()[ abt_current_palette() ]['navy'] ) . '">' . "\n";
 	},
 	1
 );
