@@ -196,21 +196,29 @@ html[dir="rtl"] .abt-mega .abc-icon--arrow{transform:scaleX(-1)}
 }
 
 /* ---------- Page header ---------- */
-.abt-page-header{background:linear-gradient(180deg,var(--tint),#fff);border-bottom:1px solid var(--line);padding-block:clamp(1.5rem,4vw,3rem) clamp(1.5rem,3vw,2.2rem)}
+.abt-page-header{position:relative;overflow:hidden;color:#fff;background:linear-gradient(135deg,var(--navy) 0%,var(--navy-2) 55%,var(--hero-end) 100%);border-bottom:3px solid var(--teal-light);padding-block:clamp(1.5rem,4vw,3rem) clamp(1.5rem,3vw,2.2rem)}
+.abt-page-header::before{content:"";position:absolute;inset:0;opacity:.55;background:radial-gradient(circle at 85% 20%,rgba(var(--accent-rgb),.22),transparent 45%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160' fill='none' stroke='%23ffffff' stroke-opacity='.09'%3E%3Cpath d='M0 40h60l20 20h80M0 120h40l30-30h90M80 0v60M120 160v-70'/%3E%3Ccircle cx='60' cy='40' r='3' fill='%23ffffff' fill-opacity='.22'/%3E%3Ccircle cx='80' cy='60' r='3' fill='%23ffffff' fill-opacity='.22'/%3E%3Ccircle cx='70' cy='90' r='3' fill='%23ffffff' fill-opacity='.22'/%3E%3Ccircle cx='120' cy='90' r='3' fill='%23ffffff' fill-opacity='.22'/%3E%3C/svg%3E");pointer-events:none}
+.abt-page-header>.abt-container{position:relative}
+.abt-page-header h1,.abt-page-header .abt-page-title{color:#fff}
 .abt-page-title{margin-bottom:.35em;max-width:26ch}
 html[lang="ar"] .abt-page-title,.abt-note .abt-page-title{max-width:none}
-.abt-page-desc{font-size:1.15rem;color:var(--muted);max-width:62ch;margin-bottom:0}
+.abt-page-desc{font-size:1.15rem;color:#dfe8f2;max-width:62ch;margin-bottom:0}
 .abt-eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-dark);margin-bottom:.8rem}
 html[lang="ar"] .abt-eyebrow{letter-spacing:0;font-size:.9rem}
 .abt-eyebrow a{color:inherit}
-.abt-eyebrow--light{color:var(--teal-light)}
+.abt-eyebrow--light,.abt-page-header .abt-eyebrow{color:var(--teal-light)}
 .abt-breadcrumbs{margin-bottom:1rem;font-size:.85rem}
 .abt-breadcrumbs ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.25rem}
-.abt-breadcrumbs li{color:var(--muted)}
-.abt-breadcrumbs li+li::before{content:"/";margin-inline:.45rem;color:#9aa5b1}
+.abt-breadcrumbs li{color:#c8d3e0}
+.abt-breadcrumbs li+li::before{content:"/";margin-inline:.45rem;color:rgba(255,255,255,.45)}
 html[dir="rtl"] .abt-breadcrumbs li+li::before{content:"\\";}
-.abt-breadcrumbs a{color:var(--muted)}
-.abt-breadcrumbs a:hover{color:var(--teal-dark)}
+.abt-breadcrumbs a{color:#e6edf6}
+.abt-breadcrumbs a:hover{color:#fff}
+.abt-page-header :focus-visible{outline-color:var(--teal-light)}
+.abt-page-header .abt-pub-venue,.abt-page-header .abt-note__meta{color:#c8d3e0}
+.abt-page-header .abc-badge{background:rgba(255,255,255,.14);color:#fff}
+.abt-page-header .abc-badge--demo{background:var(--warn-bg);color:var(--warn)}
+.abt-page-header .abt-eyebrow a{color:var(--teal-light)}
 
 /* ---------- Sections ---------- */
 .abt-section{padding-block:clamp(2.5rem,6vw,4.5rem)}
@@ -281,7 +289,7 @@ html[dir="rtl"] .abt-orbit__ring{transform:translate(50%,-50%)}
 /* ---------- Bio strip ---------- */
 .abt-bio{padding-block:clamp(1.8rem,4vw,2.8rem);border-bottom:1px solid var(--line)}
 .abt-bio__inner{display:flex;flex-wrap:wrap;gap:1.2rem 2.5rem;align-items:center;justify-content:space-between}
-.abt-bio__text{margin:0;font-size:clamp(1.05rem,1rem + .35vw,1.25rem);line-height:1.6;color:var(--charcoal);max-width:62ch}
+.abt-bio__text{margin:0;flex:1 1 560px;font-size:clamp(1.05rem,1rem + .35vw,1.25rem);line-height:1.6;color:var(--charcoal);max-width:none}
 
 /* ---------- Grids and cards ---------- */
 .abc-grid{display:grid;gap:clamp(1rem,2vw,1.5rem)}
@@ -540,7 +548,7 @@ html[lang="ar"] .abt-footer__title{letter-spacing:0;font-size:.95rem}
 .home .abt-section__title{font-size:clamp(1.3rem,1.15rem + .6vw,1.65rem)}
 .home .abt-section__intro{font-size:.95rem;margin-top:.25rem}
 .home .abt-bio{padding-block:1.1rem}
-.home .abt-bio__text{font-size:1rem;line-height:1.6}
+.home .abt-bio__text{font-size:1rem;line-height:1.6;max-width:none}
 .home .abc-grid{gap:.9rem}
 .home .abc-grid--areas{grid-template-columns:repeat(auto-fill,minmax(min(100%,235px),1fr))}
 .home .abc-grid--cards{grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr))}
