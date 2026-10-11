@@ -21,9 +21,9 @@ A real, installable **WordPress** website for *Dr. Ahcene Babori – Assistant P
 ## Architecture
 
 * **Theme `ahcene-babori-academic`** – design only: header/footer, EN|FR|AR switcher, hero, templates, responsive CSS, RTL, fonts (bundled Inter + Noto Sans Arabic), print CV.
-* **Plugin `ahcene-babori-core`** – all data and behaviour: custom post types (Publications, Books, Research Projects, Presentations, Academic Service, Teaching, Blog, About Timeline, Contact Messages), taxonomies (Publication Type, Research Area, Year, Keywords, Service Category, Teaching Section, Resource Type, Note Category/Tags), custom fields with admin meta boxes, researcher profile & identifiers, editable statistics, CV files, contact form, SEO/schema/citation tags, search and publication filters, REST endpoints, Polylang integration, import framework, sample-content installer.
+* **Plugin `ahcene-babori-core`** – all data and behaviour: custom post types (Publications, Books, Research Projects, Presentations, Academic Service, Teaching, Blog, About Timeline, Contact Messages), taxonomies (Publication Type, Research Area, Year, Keywords, Service Category, Teaching Section, Blog Category/Tags, Timeline Section), custom fields with admin meta boxes, researcher profile & identifiers, editable statistics, CV files, contact form, SEO/schema/citation tags, search and publication filters, REST endpoints, Polylang integration, import framework, sample-content installer.
 * **Content survives a theme change** because data lives in the plugin.
-* **Academic knowledge network:** Research Area → Projects → Publications → Presentations → Research Notes, connected by shared research-area taxonomy and explicit relation fields (project ↔ publications ↔ presentations ↔ notes). Research-area pages list everything linked to the area.
+* **Academic knowledge network:** Research Area → Projects → Publications → Presentations → Blog posts, connected by shared research-area taxonomy and explicit relation fields (project ↔ publications ↔ presentations ↔ notes). Research-area pages list everything linked to the area.
 
 ## Features checklist
 
@@ -35,7 +35,7 @@ A real, installable **WordPress** website for *Dr. Ahcene Babori – Assistant P
 - Contact form (first name, last name, e-mail, reason, message) with nonce, honeypot, time token, rate limit, validation; every message is a dashboard entry with status
 - Researcher identifiers (ORCID, Scholar, Scopus, ResearchGate, LinkedIn, institutional) – **empty until you add verified values**
 - SEO: meta, canonical, Open Graph, schema.org (Person, WebSite, ScholarlyArticle, Book, ResearchProject, BreadcrumbList), Google Scholar `citation_*` tags, Yoast/Rank Math compatibility, XML sitemap
-- Site-wide search (pages, publications, books, projects, presentations, notes, resources) also over authors/journal/abstract/keywords
+- Site-wide search (pages, publications, books, projects, presentations, blog posts) also over authors/journal/abstract/keywords
 - Accessibility: skip link, semantic landmarks, visible focus, keyboard menu, ARIA states, accessible forms with error summary, AA colour contrast, reduced-motion support
 - Performance: no external requests, self-hosted variable fonts, one 32 KB stylesheet, one 2 KB deferred script, lazy-loaded images, WebP sub-sizes, minimal DOM
 - Security: capability checks, nonces, input sanitisation, escaped output, no secrets in the package

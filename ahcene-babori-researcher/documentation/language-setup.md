@@ -17,7 +17,7 @@ Use the exact codes `en`, `fr`, `ar` (the theme’s switcher and the content ins
 - *The language is set from the directory name in pretty permalinks* → URLs `/en/`, `/fr/`, `/ar/`.
 - Untick “Hide URL language information for default language” if you want `/en/` visible.
 - *Detect browser language*: optional.
-- Tick **Custom post types and Taxonomies** support in *Languages → Settings → Custom post types and Taxonomies*: the plugin already declares Publications, Books, Projects, Presentations, Academic Service, Teaching, Resources, Research Notes and their taxonomies; they should be pre-ticked.
+- Tick **Custom post types and Taxonomies** support in *Languages → Settings → Custom post types and Taxonomies*: the plugin already declares Publications, Books, Projects, Presentations, Academic Service, Teaching, Blog, About Timeline and their taxonomies; they should be pre-ticked.
 
 ## 3. Create the content
 Fastest: *Researcher → Sample content → Install structure / sample entries* – creates every page, category, research area, menu and sample entry in the three languages and links them as translations.

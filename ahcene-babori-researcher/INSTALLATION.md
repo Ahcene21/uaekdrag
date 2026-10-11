@@ -25,7 +25,7 @@ Install WordPress 6.0 or newer on `https://ahcenebabori.com` (one-click installe
 
 ## 3. Install the core plugin
 *Plugins → Add New → Upload Plugin* → `ahcene-babori-core-plugin.zip` → **Install** → **Activate**.
-A new **Researcher** menu appears in the dashboard, plus the content types: Publications, Books, Research Projects, Presentations, Academic Service, Teaching, Research Resources, Research Notes.
+A new **Researcher** menu appears in the dashboard, plus the content types: Publications, Books, Research Projects, Presentations, Academic Service, Teaching, Blog, About Timeline and Contact Messages.
 
 ## 4. Install Polylang
 *Plugins → Add New* → search **Polylang** → Install → Activate. (The free version is enough.)
