@@ -255,6 +255,17 @@ function abc_find_page( $key ) {
 	$lang = abc_lang();
 	$base = array( 'post_type' => 'page', 'post_status' => 'publish', 'posts_per_page' => 1, 'fields' => 'ids' );
 	$meta = array( 'meta_key' => '_abc_page_key', 'meta_value' => $key ); // phpcs:ignore WordPress.DB.SlowDBQuery
+	// 0. Page chosen by the administrator (Researcher → Profile & Photo → page links).
+	$chosen = absint( abc_setting( 'page_' . $key, 0 ) );
+	if ( $chosen && 'publish' === get_post_status( $chosen ) ) {
+		if ( function_exists( 'pll_get_post' ) ) {
+			$t = pll_get_post( $chosen, $lang );
+			if ( $t ) {
+				$chosen = (int) $t;
+			}
+		}
+		return (string) get_permalink( $chosen );
+	}
 	$ids  = get_posts( $base + $meta + array( 'lang' => $lang ) );
 	if ( $ids ) {
 		return (string) get_permalink( $ids[0] );
@@ -278,6 +289,14 @@ function abc_find_page( $key ) {
 	$slugs = array( 'about' => array( 'about', 'a-propos', 'nubdha-anni' ), 'research' => array( 'research', 'recherche', 'al-bahth' ), 'contact' => array( 'contact', 'ittisal' ), 'cv' => array( 'cv', 'al-sira-al-dhatiya' ), 'discover' => array( 'discover', 'explorer', 'istikshaf' ) );
 	foreach ( (array) ( $slugs[ $key ] ?? array() ) as $slug ) {
 		$found = get_posts( $base + array( 'name' => $slug, 'lang' => $lang ) );
+		if ( $found ) {
+			return (string) get_permalink( $found[0] );
+		}
+	}
+	// Last resort: a page whose title is the usual menu label in this language.
+	$titles = array( 'about' => array( 'nav_about' ), 'contact' => array( 'nav_contact' ), 'cv' => array( 'nav_cv' ), 'research' => array( 'nav_research' ) );
+	foreach ( (array) ( $titles[ $key ] ?? array() ) as $tk ) {
+		$found = get_posts( $base + array( 'title' => abc_t( $tk ), 'lang' => $lang ) );
 		if ( $found ) {
 			return (string) get_permalink( $found[0] );
 		}

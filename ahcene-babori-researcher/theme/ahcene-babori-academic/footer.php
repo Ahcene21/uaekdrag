@@ -14,7 +14,6 @@ defined( 'ABSPATH' ) || exit;
 		<div class="abt-footer__brand">
 			<p class="abt-footer__name"><?php echo esc_html( abc_setting( 'name', 'Dr. Ahcene Babori' ) ); ?></p>
 			<p class="abt-footer__role"><?php echo esc_html( abc_ml( 'role' ) ); ?></p>
-			<p class="abt-footer__statement"><?php echo esc_html( abc_ml( 'tagline' ) ); ?></p>
 		</div>
 		<nav class="abt-footer__nav" aria-label="<?php echo esc_attr( abc_t( 'footer_menu' ) ); ?>">
 			<p class="abt-footer__title"><?php echo esc_html( abc_t( 'explore' ) ); ?></p>

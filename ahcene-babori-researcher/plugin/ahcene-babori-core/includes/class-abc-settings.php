@@ -43,6 +43,10 @@ class ABC_Settings {
 			'email'               => 'contact@ahcenebabori.com',
 			'contact_to'          => '',
 			'store_messages'      => '1',
+			'page_about'          => 0,
+			'page_contact'        => 0,
+			'page_cv'             => 0,
+			'page_research'       => 0,
 			'cv_id_en'            => 0,
 			'cv_id_fr'            => 0,
 			'cv_id_ar'            => 0,
@@ -266,6 +270,11 @@ class ABC_Settings {
 				self::row_ml( 'Positioning statement', 'tagline', true, 'Appears under the title in the homepage hero.' );
 				self::row_ml( 'Affiliation (optional)', 'affiliation', false, 'Only add verified information, e.g. your university and faculty.' );
 				self::row_ml( 'Short biography (homepage)', 'bio', true );
+				foreach ( array( 'page_about' => 'About page', 'page_contact' => 'Contact page', 'page_cv' => 'Online CV page', 'page_research' => 'Research page' ) as $k => $label ) {
+					echo '<tr><th scope="row"><label for="abc_s_' . esc_attr( $k ) . '">' . esc_html( $label ) . '</label></th><td>';
+					wp_dropdown_pages( array( 'name' => 'abc[' . $k . ']', 'id' => 'abc_s_' . $k, 'selected' => absint( $s[ $k ] ?? 0 ), 'show_option_none' => '— Automatic —', 'option_none_value' => 0, 'post_status' => array( 'publish' ) ) );
+					echo '<p class="description">Used by the “About me”, “Contact” and “Download CV” buttons. Leave on “Automatic” unless a button opens the wrong page (choose the page of one language: the others are found through Polylang translations).</p></td></tr>';
+				}
 				echo '</table>';
 			},
 			'These texts exist in English, French and Arabic. Each language shows its own version.'
@@ -394,6 +403,9 @@ class ABC_Settings {
 						$v = $in[ "ml_{$k}_{$l}" ] ?? '';
 						$cur[ "ml_{$k}_{$l}" ] = $area ? sanitize_textarea_field( $v ) : sanitize_text_field( $v );
 					}
+				}
+				foreach ( array( 'page_about', 'page_contact', 'page_cv', 'page_research' ) as $pk ) {
+					$cur[ $pk ] = absint( $in[ $pk ] ?? 0 );
 				}
 				if ( $cur['photo_id'] && ! wp_attachment_is_image( $cur['photo_id'] ) ) {
 					$cur['photo_id'] = 0;

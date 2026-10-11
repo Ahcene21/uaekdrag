@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.10 – 2026-10-11
+- **“About me” / “Contact” / “Download CV” buttons can no longer silently open the homepage**: new **page links** in *Researcher → Profile & Photo* let you choose the About, Contact, Online CV and Research pages (pick the page of one language; the others are found through Polylang translations). Automatic detection also tries the page title (About / À propos / نبذة عني…) when slugs differ.
+- Footer: the research-interests paragraph (statement under the name) was removed.
+
 ## 1.0.9 – 2026-10-11
 - **Compact homepage** (about one third shorter): tighter sections, smaller cards and research-area tiles, one-line teaching/service/presentations row, slimmer statistics and call-to-action. Base font 16 px.
 - **“Selected publications” block removed** from the homepage (publications stay in their own section).

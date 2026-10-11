@@ -49,6 +49,7 @@ Every sample entry shows a yellow **Demo** label and the marker `[ADD VERIFIED I
 
 ## 8. Upload the profile photo
 *Researcher → Profile & Photo* → **Choose / upload** → portrait (recommended 800 × 1000 px or larger) → add a short alt text → Save. Replace it any time from the Media Library.
+On the same screen, **Page links** let you choose which page the *About me*, *Contact*, *Online CV* and *Research* buttons open – use it if you created your own pages or a button opens the homepage.
 
 ## 9. Upload the CV
 *Researcher → CV files* → upload one PDF per language (EN / FR / AR). The *Download CV* buttons use the visitor’s language. To replace a CV, choose a new file.

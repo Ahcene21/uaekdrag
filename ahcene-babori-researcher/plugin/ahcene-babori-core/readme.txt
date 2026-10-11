@@ -4,7 +4,7 @@ Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
 License: GPLv2 or later
-Stable tag: 1.0.8
+Stable tag: 1.0.10
 
 Academic data layer (custom post types, taxonomies, fields, profile settings, SEO/schema, contact form, import framework) for the website of Dr. Ahcene Babori. Works with the ahcene-babori-academic theme and with Polylang (EN/FR/AR).
 
