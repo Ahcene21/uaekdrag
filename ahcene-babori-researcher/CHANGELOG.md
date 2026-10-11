@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.4 – 2026-10-11
+- Homepage hero redesigned to be about half as tall: arch-shaped portrait with offset ring and dotted accent, smaller name/title/tagline, tighter spacing, slimmer topics bar.
+
 ## 1.0.3 – 2026-10-11
 - **Almarai (Regular 400, Bold 700) is now the primary typeface of the Arabic interface**, bundled in the theme (SIL OFL); Noto Sans Arabic remains as fallback.
 
