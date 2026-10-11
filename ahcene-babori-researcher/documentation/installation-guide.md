@@ -45,7 +45,7 @@ Both methods only **add** content; nothing existing is overwritten or deleted.
 Every sample entry shows a yellow **Demo** label and the marker `[ADD VERIFIED INFORMATION]`.
 
 ## 7. Menus
-*Appearance → Menus*. Method A creates *Primary menu (EN/FR/AR)* and *Footer menu (EN/FR/AR)* and assigns them per language. Check *Languages → Settings → Menus* (Polylang) that each language has its own menu in the **Primary menu** and **Footer menu** locations. The eleven entries are: Home, About, Publications, Projects, Teaching, Academic Service, Presentations, Resources, Research Notes, CV, Contact.
+*Appearance → Menus*. Method A creates *Primary menu (EN/FR/AR)* and *Footer menu (EN/FR/AR)* and assigns them per language. Check *Languages → Settings → Menus* (Polylang) that each language has its own menu in the **Primary menu** and **Footer menu** locations. The nine entries are: Home, About, Publications, Projects, Teaching, Academic Service, Presentations, Blog, Contact.
 
 ## 8. Upload the profile photo
 *Researcher → Profile & Photo* → **Choose / upload** → portrait (recommended 800 × 1000 px or larger) → add a short alt text → Save. Replace it any time from the Media Library.
@@ -58,7 +58,7 @@ Fill in the online CV text in *Pages → Curriculum Vitae* (one per language).
 *Researcher → Identifiers & Links*: ORCID iD, Google Scholar, Scopus, ResearchGate, LinkedIn, institutional profile, public e-mail. Only filled fields appear on the website. **Do not enter anything you have not verified.**
 
 ## 11. Add publications
-*Publications → Add publication*: title, authors (one per line), year, journal, DOI (only the DOI), abstract, PDF (only if legally shareable), Open Access status, repository URL; tick **Publication Type**, **Research Areas**, **Keywords**; tick “Show on the homepage” for featured items. The *Year* filter is generated automatically. The *About* page shows your career timeline: manage it under **About Timeline** (entries) and **About Timeline → Timeline Sections** (Education, Positions, Experience, Awards, Certificates…); the introduction text stays in *Pages → About*. Presentation types (Keynote, Invited talk, …) are managed under *Presentations → Presentation Types*. Use the same pattern for books, projects, presentations, academic service, courses, resources and research notes (*Researcher → Overview* has a button for each).
+*Publications → Add publication*: title, authors (one per line), year, journal, DOI (only the DOI), abstract, PDF (only if legally shareable), Open Access status, repository URL; tick **Publication Type**, **Research Areas**, **Keywords**; tick “Show on the homepage” for featured items. The *Year* filter is generated automatically. The *About* page shows your career timeline: manage it under **About Timeline** (entries) and **About Timeline → Timeline Sections** (Education, Positions, Experience, Awards, Certificates…); the introduction text stays in *Pages → About*. Presentation types (Keynote, Invited talk, …) are managed under *Presentations → Presentation Types*. Use the same pattern for books, projects, presentations, academic service, courses and blog posts (*Researcher → Overview* has a button for each).
 To add an entry in another language: use the “+” of that language in the Polylang column.
 
 ## 12. SEO
@@ -68,8 +68,8 @@ The theme/plugin already output: meta description, canonical URLs, Open Graph, T
 - Submit `https://ahcenebabori.com/sitemap_index.xml` (Yoast/Rank Math) or `/wp-sitemap.xml` to Google Search Console. In *Settings → Reading* make sure “Discourage search engines” is **unticked** at launch.
 
 ## 13. Contact form
-The page *Contact* contains `[abc_contact_form]`. Mail goes to the public e-mail address unless you set another one in *Researcher → Contact form*. Spam protection: nonce, hidden honeypot, signed minimum-time token, rate limit (5/hour/visitor), link limit – no CAPTCHA service, no cookies.
-For reliable delivery install an SMTP plugin (e.g. “WP Mail SMTP”) and send a test message. With *Save messages* on, every message is also kept under *Researcher → Contact messages*.
+The page *Contact* contains `[abc_contact_form]`. Mail goes to the public e-mail address unless you set another one in *Researcher → Contact form*. The form asks for first name, last name, e-mail, reason for contact and message. Spam protection: nonce, hidden honeypot, signed minimum-time token, rate limit (5/hour/visitor), link limit – no CAPTCHA service, no cookies.
+For reliable delivery install an SMTP plugin (e.g. “WP Mail SMTP”) and send a test message. Every message is also saved under the top-level **Contact Messages** menu (first name, last name, e-mail, reason for contact, message, status) with a red counter for new ones.
 If you use a page-cache plugin, **exclude the Contact page** from caching (the form contains a time-limited security token).
 
 ## 14. Replace demo content with verified information
@@ -84,7 +84,7 @@ If you use a page-cache plugin, **exclude the Contact page** from caching (the f
 New JPEG uploads get WebP sub-sizes automatically when your server supports it (WordPress 6.1+ with GD/Imagick WebP). Images are lazy-loaded by WordPress; the homepage portrait is loaded with high priority.
 
 ## Privacy
-The site loads **no external fonts, scripts or trackers** (Inter and Noto Sans Arabic are bundled, SIL Open Font Licence). Contact messages stored in the dashboard contain name, e-mail and message – delete them periodically (*Researcher → Contact messages*) and mention the form in your privacy notice.
+The site loads **no external fonts, scripts or trackers** (Inter and Noto Sans Arabic are bundled, SIL Open Font Licence). Contact messages stored in the dashboard contain name, e-mail and message – delete them periodically (*Contact Messages*) and mention the form in your privacy notice.
 
 ## Updating / moving
 Back up with any WordPress backup tool. Content is in the database, files in `wp-content/uploads`. Switching themes keeps all academic content (the plugin owns it).

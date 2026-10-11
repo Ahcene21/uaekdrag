@@ -140,7 +140,7 @@ $notes    = ABC_Render::query( 'note', array( 'limit' => 3 ) );
 			<p><?php echo esc_html( abc_t( 'home_collab_text' ) ); ?></p>
 		</div>
 		<div class="abt-cta__actions">
-			<a class="abc-btn abc-btn--accent" href="<?php echo esc_url( abc_page_url( 'contact' ) ); ?>"><?php echo abc_icon( 'mail', 18 ); // phpcs:ignore WordPress.Security.EscapeOutput ?><span><?php echo esc_html( abc_t( 'nav_contact' ) ); ?></span></a>
+			<a class="abc-btn abc-btn--accent" href="<?php echo esc_url( abc_contact_url(), array( 'http', 'https', 'mailto' ) ); ?>"><?php echo abc_icon( 'mail', 18 ); // phpcs:ignore WordPress.Security.EscapeOutput ?><span><?php echo esc_html( abc_t( 'nav_contact' ) ); ?></span></a>
 			<a class="abc-btn abc-btn--outline-light" href="<?php echo esc_url( $cv['url'] ); ?>"<?php echo $cv['is_file'] ? ' download' : ''; ?>><span><?php echo esc_html( abc_t( 'download_cv' ) ); ?></span></a>
 		</div>
 	</div>

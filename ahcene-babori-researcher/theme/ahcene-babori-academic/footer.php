@@ -23,8 +23,8 @@ defined( 'ABSPATH' ) || exit;
 				wp_nav_menu( array( 'theme_location' => 'footer', 'container' => false, 'menu_class' => 'abt-footer__menu', 'depth' => 1 ) );
 			} else {
 				echo '<ul class="abt-footer__menu">';
-				foreach ( array( array( abc_t( 'nav_cv' ), abc_page_url( 'cv' ) ), array( abc_t( 'books' ), abc_archive_url( 'abc_book' ) ), array( abc_t( 'advanced_search' ), abc_page_url( 'discover' ) ), array( abc_t( 'nav_contact' ), abc_page_url( 'contact' ) ) ) as $i ) {
-					echo '<li><a href="' . esc_url( $i[1] ) . '">' . esc_html( $i[0] ) . '</a></li>';
+				foreach ( array( array( abc_t( 'nav_cv' ), abc_page_url( 'cv' ) ), array( abc_t( 'books' ), abc_archive_url( 'abc_book' ) ), array( abc_t( 'advanced_search' ), abc_page_url( 'discover' ) ), array( abc_t( 'nav_contact' ), abc_contact_url() ) ) as $i ) {
+					echo '<li><a href="' . esc_url( $i[1], array( 'http', 'https', 'mailto' ) ) . '">' . esc_html( $i[0] ) . '</a></li>';
 				}
 				echo '</ul>';
 			}

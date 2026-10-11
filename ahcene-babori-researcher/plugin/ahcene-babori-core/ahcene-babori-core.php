@@ -3,7 +3,7 @@
  * Plugin Name:       Ahcene Babori Core
  * Plugin URI:        https://ahcenebabori.com
  * Description:       Academic data layer for the website of Dr. Ahcene Babori: publications, books, projects, presentations, teaching, academic service, resources, research notes, researcher profile, statistics, SEO/schema, contact form and future import connectors. Content lives here, so it survives a theme change.
- * Version:           1.0.6
+ * Version:           1.0.7
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            Dr. Ahcene Babori
@@ -18,7 +18,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'ABC_VERSION', '1.0.6' );
+define( 'ABC_VERSION', '1.0.7' );
 define( 'ABC_FILE', __FILE__ );
 define( 'ABC_DIR', plugin_dir_path( __FILE__ ) );
 define( 'ABC_URL', plugin_dir_url( __FILE__ ) );
@@ -98,7 +98,7 @@ add_action(
 	'init',
 	static function () {
 		$done = (string) get_option( 'abc_db_version', '0' );
-		if ( version_compare( $done, '1.0.6', '>=' ) ) {
+		if ( version_compare( $done, '1.0.7', '>=' ) ) {
 			return;
 		}
 		if ( version_compare( $done, '1.0.1', '<' ) ) {
@@ -136,7 +136,22 @@ add_action(
 				}
 			}
 		}
-		update_option( 'abc_db_version', '1.0.6', false );
+		// 1.0.7: Resources and CV removed from the primary menus; "Research Notes" renamed "Blog".
+		$blog = array( 'en' => 'Blog', 'fr' => 'Blog', 'ar' => 'المدونة' );
+		foreach ( array( 'EN', 'FR', 'AR' ) as $l ) {
+			$menu = wp_get_nav_menu_object( 'Primary menu (' . $l . ')' );
+			if ( ! $menu ) {
+				continue;
+			}
+			foreach ( (array) wp_get_nav_menu_items( $menu->term_id ) as $it ) {
+				if ( 'abc_resource' === $it->object || ( 'page' === $it->object && 'cv' === get_post_meta( (int) $it->object_id, '_abc_page_key', true ) ) ) {
+					wp_delete_post( $it->ID, true );
+				} elseif ( 'abc_note' === $it->object && in_array( $it->title, array( 'Research Notes', 'Notes de recherche', 'ملاحظات بحثية' ), true ) ) {
+					wp_update_post( array( 'ID' => $it->ID, 'post_title' => $blog[ strtolower( $l ) ] ) );
+				}
+			}
+		}
+		update_option( 'abc_db_version', '1.0.7', false );
 		update_option( 'abc_needs_flush', 1, false );
 	},
 	100
@@ -173,3 +188,20 @@ function abc_core_upgrade_101() {
 		}
 	}
 }
+
+/**
+ * Old Research Notes URLs (/research-notes/…) now live under /blog/….
+ */
+add_action(
+	'template_redirect',
+	static function () {
+		if ( ! is_404() || empty( $_SERVER['REQUEST_URI'] ) ) {
+			return;
+		}
+		$uri = esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) );
+		if ( false !== strpos( $uri, '/research-notes' ) ) {
+			wp_safe_redirect( home_url( str_replace( '/research-notes', '/blog', $uri ) ), 301 );
+			exit;
+		}
+	}
+);

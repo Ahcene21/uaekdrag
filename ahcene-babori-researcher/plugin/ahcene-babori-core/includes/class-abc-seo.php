@@ -23,7 +23,6 @@ function abc_pt_label( $pt ) {
 		'abc_presentation' => 'presentations',
 		'abc_service'      => 'academic_service',
 		'abc_teaching'     => 'teaching',
-		'abc_resource'     => 'resources',
 		'abc_note'         => 'research_notes',
 	);
 	return isset( $map[ $pt ] ) ? abc_t( $map[ $pt ] ) : '';

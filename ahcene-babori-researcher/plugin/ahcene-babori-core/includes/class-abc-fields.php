@@ -140,17 +140,6 @@ class ABC_Fields {
 					),
 				),
 			),
-			'abc_resource'     => array(
-				array(
-					'title'  => 'Resource file',
-					'fields' => array(
-						'res_file_id' => array( 'type' => 'media', 'label' => 'File', 'mime' => '', 'help' => 'Allowed: PDF, DOCX, PPTX, XLSX, CSV.' ),
-						'res_url'     => array( 'type' => 'url', 'label' => 'or external download URL' ),
-						'res_version' => array( 'type' => 'text', 'label' => 'Version / date', 'width' => 'half' ),
-						'res_license' => array( 'type' => 'text', 'label' => 'Licence', 'help' => 'e.g. CC BY 4.0 – only if verified.', 'width' => 'half' ),
-					),
-				),
-			),
 			'abc_career'       => array(
 				array(
 					'title'  => 'Timeline entry',

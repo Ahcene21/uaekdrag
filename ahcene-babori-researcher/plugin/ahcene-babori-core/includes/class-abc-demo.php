@@ -454,7 +454,7 @@ class ABC_Demo {
 		echo '<p class="abc-note">The installer never overwrites or deletes your own content. Run it as often as needed.</p>';
 		$forms = array(
 			array( 'structure', '1. Install structure', 'Research areas, categories, pages (Home, About, Research, CV, Contact, Discovery), primary and footer menus.', 'primary' ),
-			array( 'samples', '2. Install sample entries', 'Placeholder publications, book, four projects, presentations, academic service, teaching entries, resources and two research notes. Each is marked “Demo”.', 'secondary' ),
+			array( 'samples', '2. Install sample entries', 'Placeholder publications, book, four projects, presentations, academic service, teaching entries and two blog posts. Each is marked “Demo”.', 'secondary' ),
 			array( 'remove', 'Remove sample entries', 'Deletes only the entries still marked as sample content. Pages, menus and categories stay.', 'delete' ),
 		);
 		foreach ( $forms as $f ) {

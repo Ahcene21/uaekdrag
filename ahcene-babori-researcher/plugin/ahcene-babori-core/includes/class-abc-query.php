@@ -11,7 +11,7 @@ class ABC_Query {
 
 	/** Post types searched site-wide. */
 	public static function search_types() {
-		return array( 'page', 'abc_publication', 'abc_book', 'abc_project', 'abc_presentation', 'abc_note', 'abc_resource', 'abc_service', 'abc_teaching' );
+		return array( 'page', 'abc_publication', 'abc_book', 'abc_project', 'abc_presentation', 'abc_note', 'abc_service', 'abc_teaching' );
 	}
 
 	/**
@@ -79,9 +79,6 @@ class ABC_Query {
 			$q->set( 'orderby', array( 'menu_order' => 'ASC', 'title' => 'ASC' ) );
 		} elseif ( $q->is_post_type_archive( 'abc_project' ) ) {
 			$q->set( 'posts_per_page', 24 );
-			$q->set( 'orderby', array( 'menu_order' => 'ASC', 'date' => 'DESC' ) );
-		} elseif ( $q->is_post_type_archive( 'abc_resource' ) || $q->is_tax( 'abc_resource_type' ) ) {
-			$q->set( 'posts_per_page', 18 );
 			$q->set( 'orderby', array( 'menu_order' => 'ASC', 'date' => 'DESC' ) );
 		} elseif ( $q->is_post_type_archive( 'abc_note' ) || $q->is_tax( 'abc_note_category' ) || $q->is_tax( 'abc_note_tag' ) ) {
 			$q->set( 'posts_per_page', 9 );
@@ -231,7 +228,6 @@ class ABC_Query {
 			'abc_project'      => abc_t( 'projects' ),
 			'abc_presentation' => abc_t( 'presentations' ),
 			'abc_note'         => abc_t( 'research_notes' ),
-			'abc_resource'     => abc_t( 'resources' ),
 			'page'             => abc_t( 'pages' ),
 		);
 		$home = function_exists( 'pll_home_url' ) ? pll_home_url() : home_url( '/' );

@@ -197,8 +197,7 @@ class ABC_Settings {
 			array( 'Add a presentation', 'Conference talk, keynote, poster', $new( 'abc_presentation' ) ),
 			array( 'Add academic service', 'Reviewer, editorial board, committee', $new( 'abc_service' ) ),
 			array( 'Add a course', 'Teaching, supervision, materials', $new( 'abc_teaching' ) ),
-			array( 'Add a resource', 'Guide, dataset, template (PDF, DOCX…)', $new( 'abc_resource' ) ),
-			array( 'Publish a research note', 'Short academic blog article', $new( 'abc_note' ) ),
+			array( 'Publish a blog post', 'Short academic article for the Blog', $new( 'abc_note' ) ),
 			array( 'Edit About timeline', 'Education, positions, experience, awards', admin_url( 'edit.php?post_type=abc_career' ) ),
 			array( 'Update photo', 'Portrait shown on the homepage', admin_url( 'admin.php?page=abc-profile' ) ),
 			array( 'Upload CV (PDF)', 'One file per language', admin_url( 'admin.php?page=abc-cv' ) ),
@@ -207,7 +206,7 @@ class ABC_Settings {
 			array( 'Research areas', 'Edit the eight research-area cards', admin_url( 'edit-tags.php?taxonomy=abc_research_area&post_type=abc_publication' ) ),
 			array( 'Manage translations', function_exists( 'pll_languages_list' ) ? 'Polylang languages & strings' : 'Install Polylang first', function_exists( 'pll_languages_list' ) ? admin_url( 'admin.php?page=mlang' ) : admin_url( 'plugin-install.php?s=polylang&tab=search&type=term' ) ),
 			array( 'Menus', 'Primary navigation per language', admin_url( 'nav-menus.php' ) ),
-			array( 'Contact messages', 'Messages received through the form', admin_url( 'edit.php?post_type=abc_message' ) ),
+			array( 'Contact messages', 'Name, e-mail and reason of each sender', admin_url( 'edit.php?post_type=abc_message' ) ),
 		);
 		echo '<div class="wrap"><h1>Researcher dashboard</h1>';
 		echo '<p>Everything you need to keep the website up to date, without any code.</p><div class="abc-admin-cards">';
@@ -353,7 +352,6 @@ class ABC_Settings {
 				$s = abc_settings();
 				echo '<table class="form-table" role="presentation">';
 				self::row_text( 'Send messages to', 'contact_to', $s['contact_to'], 'Leave empty to use the public e-mail address.', 'email', $s['email'] );
-				echo '<tr><th scope="row">Save messages</th><td><label><input type="checkbox" name="abc[store_messages]" value="1" ' . checked( '1', (string) $s['store_messages'], false ) . '> Keep a private copy of each message in the dashboard</label><p class="description">Useful if e-mail delivery fails. Messages are visible only to administrators. Delete them regularly (see the privacy note in the documentation).</p></td></tr>';
 				echo '</table>';
 				echo '<p class="abc-note"><strong>Spam protection:</strong> hidden honeypot field, minimum fill-in time, signed form token, nonce and rate limit are always active. No CAPTCHA service and no tracking cookies are used.</p>';
 			}
@@ -444,7 +442,7 @@ class ABC_Settings {
 			case 'contact':
 				$to                    = sanitize_email( $in['contact_to'] ?? '' );
 				$cur['contact_to']     = is_email( $to ) ? $to : '';
-				$cur['store_messages'] = ! empty( $in['store_messages'] ) ? '1' : '';
+				$cur['store_messages'] = '1';
 				break;
 			default:
 				wp_die( 'Unknown settings tab.', 400 );

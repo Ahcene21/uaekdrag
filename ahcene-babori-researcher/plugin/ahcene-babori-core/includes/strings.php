@@ -90,6 +90,16 @@ return array(
 		'fr' => 'Veuillez saisir une adresse e-mail valide.',
 		'ar' => 'يرجى إدخال بريد إلكتروني صحيح.',
 	),
+	'cf_err_first' => array(
+		'en' => 'Please enter your first name.',
+		'fr' => 'Veuillez saisir votre prénom.',
+		'ar' => 'يرجى إدخال اسمك.',
+	),
+	'cf_err_last' => array(
+		'en' => 'Please enter your last name.',
+		'fr' => 'Veuillez saisir votre nom.',
+		'ar' => 'يرجى إدخال لقبك.',
+	),
 	'cf_err_links' => array(
 		'en' => 'Please remove some links from your message.',
 		'fr' => 'Veuillez retirer quelques liens de votre message.',
@@ -115,6 +125,11 @@ return array(
 		'fr' => 'Trop de messages ont été envoyés récemment. Réessayez dans une heure.',
 		'ar' => 'أُرسلت رسائل كثيرة مؤخرًا. يرجى المحاولة بعد ساعة.',
 	),
+	'cf_err_reason' => array(
+		'en' => 'Please state the reason for your message (3 to 150 characters).',
+		'fr' => 'Veuillez indiquer le motif de votre message (3 à 150 caractères).',
+		'ar' => 'يرجى ذكر سبب التواصل (من 3 إلى 150 حرفًا).',
+	),
 	'cf_err_session' => array(
 		'en' => 'Your session has expired. Please reload the page and try again.',
 		'fr' => 'Votre session a expiré. Rechargez la page et réessayez.',
@@ -130,10 +145,20 @@ return array(
 		'fr' => 'Merci de corriger les points suivants :',
 		'ar' => 'يرجى تصحيح ما يلي:',
 	),
+	'cf_first' => array(
+		'en' => 'First name',
+		'fr' => 'Prénom',
+		'ar' => 'الاسم',
+	),
 	'cf_hp' => array(
 		'en' => 'Leave this field empty',
 		'fr' => 'Laissez ce champ vide',
 		'ar' => 'اترك هذا الحقل فارغًا',
+	),
+	'cf_last' => array(
+		'en' => 'Last name',
+		'fr' => 'Nom',
+		'ar' => 'اللقب',
 	),
 	'cf_message' => array(
 		'en' => 'Message',
@@ -149,6 +174,11 @@ return array(
 		'en' => 'Your details are used only to reply to your message.',
 		'fr' => 'Vos informations servent uniquement à répondre à votre message.',
 		'ar' => 'تُستخدم بياناتك للرد على رسالتك فقط.',
+	),
+	'cf_reason' => array(
+		'en' => 'Reason for contact',
+		'fr' => 'Motif du contact',
+		'ar' => 'سبب التواصل',
 	),
 	'cf_send' => array(
 		'en' => 'Send message',
@@ -179,6 +209,11 @@ return array(
 		'en' => 'Conference',
 		'fr' => 'Conférence',
 		'ar' => 'المؤتمر',
+	),
+	'contact_us_direct' => array(
+		'en' => 'Or write directly to',
+		'fr' => 'Ou écrivez directement à',
+		'ar' => 'أو راسلني مباشرة على',
 	),
 	'content_type' => array(
 		'en' => 'Content type',
@@ -236,9 +271,9 @@ return array(
 		'ar' => 'الكتب والمؤلفات الجماعية.',
 	),
 	'desc_abc_note' => array(
-		'en' => 'Short academic notes on digital libraries, open access, scholarly communication and library technology.',
-		'fr' => 'Notes académiques brèves sur les bibliothèques numériques, l’accès ouvert, la communication scientifique et les technologies des bibliothèques.',
-		'ar' => 'ملاحظات أكاديمية موجزة عن المكتبات الرقمية والوصول الحر والاتصال العلمي وتقنيات المكتبات.',
+		'en' => 'Short academic articles on digital libraries, open access, scholarly communication and library technology.',
+		'fr' => 'Courts articles académiques sur les bibliothèques numériques, l’accès ouvert, la communication scientifique et les technologies des bibliothèques.',
+		'ar' => 'مقالات أكاديمية موجزة عن المكتبات الرقمية والوصول الحر والاتصال العلمي وتقنيات المكتبات.',
 	),
 	'desc_abc_presentation' => array(
 		'en' => 'Conference papers, invited talks, workshops and posters, with slides and recordings when available.',
@@ -254,11 +289,6 @@ return array(
 		'en' => 'Journal articles, conference papers, chapters and other scholarly outputs. Filter by year, type, research area or keyword.',
 		'fr' => 'Articles, communications, chapitres et autres productions scientifiques. Filtrez par année, type, domaine ou mot-clé.',
 		'ar' => 'مقالات علمية وأوراق مؤتمرات وفصول كتب ومخرجات علمية أخرى. يمكنك التصفية حسب السنة أو النوع أو المجال أو الكلمة المفتاحية.',
-	),
-	'desc_abc_resource' => array(
-		'en' => 'Guides, tutorials, datasets, templates and tools for researchers and librarians.',
-		'fr' => 'Guides, tutoriels, jeux de données, modèles et outils pour les chercheurs et les bibliothécaires.',
-		'ar' => 'أدلة ودروس تطبيقية ومجموعات بيانات ونماذج وأدوات للباحثين وأخصائيي المكتبات.',
 	),
 	'desc_abc_service' => array(
 		'en' => 'Peer review, editorial roles, committees and open science service.',
@@ -376,9 +406,9 @@ return array(
 		'ar' => 'الأثر البحثي',
 	),
 	'home_notes_intro' => array(
-		'en' => 'Short notes on libraries, open science and scholarly communication.',
-		'fr' => 'Notes brèves sur les bibliothèques, la science ouverte et la communication scientifique.',
-		'ar' => 'ملاحظات موجزة عن المكتبات والعلم المفتوح والاتصال العلمي.',
+		'en' => 'Short articles on libraries, open science and scholarly communication.',
+		'fr' => 'Courts articles sur les bibliothèques, la science ouverte et la communication scientifique.',
+		'ar' => 'مقالات موجزة عن المكتبات والعلم المفتوح والاتصال العلمي.',
 	),
 	'home_presentations_text' => array(
 		'en' => 'Conference papers, invited talks and workshops, with slides and recordings when available.',
@@ -481,9 +511,9 @@ return array(
 		'ar' => 'مدة القراءة %d د',
 	),
 	'more_notes' => array(
-		'en' => 'More research notes',
-		'fr' => 'Autres notes de recherche',
-		'ar' => 'مزيد من الملاحظات البحثية',
+		'en' => 'More blog posts',
+		'fr' => 'Autres articles du blog',
+		'ar' => 'مزيد من مقالات المدونة',
 	),
 	'n_d' => array(
 		'en' => 'n.d.',
@@ -721,9 +751,9 @@ return array(
 		'ar' => 'شراء',
 	),
 	'related_notes' => array(
-		'en' => 'Related research notes',
-		'fr' => 'Notes de recherche associées',
-		'ar' => 'ملاحظات بحثية ذات صلة',
+		'en' => 'Related blog posts',
+		'fr' => 'Articles du blog associés',
+		'ar' => 'مقالات ذات صلة من المدونة',
 	),
 	'related_presentations' => array(
 		'en' => 'Related presentations',
@@ -756,9 +786,9 @@ return array(
 		'ar' => 'مجال البحث',
 	),
 	'research_notes' => array(
-		'en' => 'Research Notes',
-		'fr' => 'Notes de recherche',
-		'ar' => 'ملاحظات بحثية',
+		'en' => 'Blog',
+		'fr' => 'Blog',
+		'ar' => 'المدونة',
 	),
 	'research_profiles' => array(
 		'en' => 'Research profiles',
@@ -774,11 +804,6 @@ return array(
 		'en' => 'Reset',
 		'fr' => 'Réinitialiser',
 		'ar' => 'إعادة ضبط',
-	),
-	'resources' => array(
-		'en' => 'Resources',
-		'fr' => 'Ressources',
-		'ar' => 'الموارد',
 	),
 	'results_count' => array(
 		'en' => '%d result(s)',

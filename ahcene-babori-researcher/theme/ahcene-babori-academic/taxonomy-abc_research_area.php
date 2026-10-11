@@ -16,7 +16,6 @@ $sections = array(
 	array( 'publications', 'abc_publication', abc_t( 'publications' ), 'pubs', 50 ),
 	array( 'presentations', 'abc_presentation', abc_t( 'presentations' ), 'cards', 12 ),
 	array( 'notes', 'abc_note', abc_t( 'research_notes' ), 'cards', 12 ),
-	array( 'resources', 'abc_resource', abc_t( 'resources' ), 'cards', 12 ),
 );
 ?>
 <div class="abt-container abt-section">

@@ -21,7 +21,7 @@ A real, installable **WordPress** website for *Dr. Ahcene Babori – Assistant P
 ## Architecture
 
 * **Theme `ahcene-babori-academic`** – design only: header/footer, EN|FR|AR switcher, hero, templates, responsive CSS, RTL, fonts (bundled Inter + Noto Sans Arabic), print CV.
-* **Plugin `ahcene-babori-core`** – all data and behaviour: 8 custom post types (Publications, Books, Research Projects, Presentations, Academic Service, Teaching, Research Resources, Research Notes), taxonomies (Publication Type, Research Area, Year, Keywords, Service Category, Teaching Section, Resource Type, Note Category/Tags), custom fields with admin meta boxes, researcher profile & identifiers, editable statistics, CV files, contact form, SEO/schema/citation tags, search and publication filters, REST endpoints, Polylang integration, import framework, sample-content installer.
+* **Plugin `ahcene-babori-core`** – all data and behaviour: custom post types (Publications, Books, Research Projects, Presentations, Academic Service, Teaching, Blog, About Timeline, Contact Messages), taxonomies (Publication Type, Research Area, Year, Keywords, Service Category, Teaching Section, Resource Type, Note Category/Tags), custom fields with admin meta boxes, researcher profile & identifiers, editable statistics, CV files, contact form, SEO/schema/citation tags, search and publication filters, REST endpoints, Polylang integration, import framework, sample-content installer.
 * **Content survives a theme change** because data lives in the plugin.
 * **Academic knowledge network:** Research Area → Projects → Publications → Presentations → Research Notes, connected by shared research-area taxonomy and explicit relation fields (project ↔ publications ↔ presentations ↔ notes). Research-area pages list everything linked to the area.
 
@@ -30,9 +30,9 @@ A real, installable **WordPress** website for *Dr. Ahcene Babori – Assistant P
 - Multilingual EN/FR/AR (Polylang), `dir="rtl"` for Arabic, language switcher `EN | FR | AR`, URLs `/en/ /fr/ /ar/`
 - Homepage: hero + portrait (Media Library), 8 research-area cards, editable impact statistics, featured publications/projects, teaching/service/presentations, latest notes, collaboration call-to-action
 - Publications with authors, DOI, PDF, Open Access, repository, citation + BibTeX, related items, filters (year / type / area / keyword)
-- About Timeline (education, positions, experience, awards – editable), Books, Projects, Presentations (PDF/PPTX/video), Academic Service timeline, Teaching portfolio, Resources (PDF/DOCX/PPTX/XLSX/CSV downloads), Research Notes (reading time, categories, tags)
+- About Timeline (education, positions, experience, awards – editable), Books, Projects, Presentations (PDF/PPTX/video), Academic Service timeline, Teaching portfolio, Blog (reading time, categories, tags)
 - Online CV page with sidebar contents, per-language PDF download, print stylesheet
-- Contact form with nonce, honeypot, time token, rate limit, validation, optional dashboard storage
+- Contact form (first name, last name, e-mail, reason, message) with nonce, honeypot, time token, rate limit, validation; every message is a dashboard entry with status
 - Researcher identifiers (ORCID, Scholar, Scopus, ResearchGate, LinkedIn, institutional) – **empty until you add verified values**
 - SEO: meta, canonical, Open Graph, schema.org (Person, WebSite, ScholarlyArticle, Book, ResearchProject, BreadcrumbList), Google Scholar `citation_*` tags, Yoast/Rank Math compatibility, XML sitemap
 - Site-wide search (pages, publications, books, projects, presentations, notes, resources) also over authors/journal/abstract/keywords

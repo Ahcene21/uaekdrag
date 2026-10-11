@@ -152,17 +152,6 @@ $tax['abc_teaching_section'] = array(
 	'research-supervision' => array( 'name' => $L( 'Research Supervision', 'Encadrement de recherche', 'الإشراف البحثي' ) ),
 );
 
-$tax['abc_resource_type'] = array(
-	'guides'             => array( 'name' => $L( 'Guides', 'Guides pratiques', 'أدلة' ) ),
-	'tutorials'          => array( 'name' => $L( 'Tutorials', 'Tutoriels', 'دروس تطبيقية' ) ),
-	'datasets'           => array( 'name' => $L( 'Datasets', 'Jeux de données', 'مجموعات بيانات' ) ),
-	'presentations'      => array( 'name' => $L( 'Presentations', 'Présentations', 'عروض تقديمية' ) ),
-	'templates'          => array( 'name' => $L( 'Templates', 'Modèles', 'نماذج وقوالب' ) ),
-	'research-tools'     => array( 'name' => $L( 'Research Tools', 'Outils de recherche', 'أدوات بحثية' ) ),
-	'teaching-materials' => array( 'name' => $L( 'Teaching Materials', 'Supports pédagogiques', 'مواد تعليمية' ) ),
-	'reports'            => array( 'name' => $L( 'Reports', 'Rapports', 'تقارير' ) ),
-);
-
 $tax['abc_note_category'] = array(
 	'digital-libraries'          => array( 'name' => $L( 'Digital Libraries', 'Bibliothèques numériques', 'المكتبات الرقمية' ) ),
 	'institutional-repositories' => array( 'name' => $L( 'Institutional Repositories', 'Dépôts institutionnels', 'المستودعات المؤسسية' ) ),
@@ -307,9 +296,9 @@ $pages['discover'] = array(
 	'title'   => $L( 'Research Discovery', 'Explorer la recherche', 'استكشاف الأبحاث' ),
 	'slug'    => $L( 'discover', 'explorer', 'istikshaf' ),
 	'content' => $L(
-		'<p>Search across publications, books, projects, presentations, research notes, resources and pages.</p>[abc_search_form]',
-		'<p>Recherchez dans les publications, ouvrages, projets, communications, notes de recherche, ressources et pages.</p>[abc_search_form]',
-		'<p>ابحث في المنشورات والكتب والمشاريع والمداخلات والملاحظات البحثية والموارد والصفحات.</p>[abc_search_form]'
+		'<p>Search across publications, books, projects, presentations, blog posts and pages.</p>[abc_search_form]',
+		'<p>Recherchez dans les publications, ouvrages, projets, communications, articles du blog et pages.</p>[abc_search_form]',
+		'<p>ابحث في المنشورات والكتب والمشاريع والمداخلات ومقالات المدونة والصفحات.</p>[abc_search_form]'
 	),
 );
 
@@ -323,9 +312,7 @@ $menus = array(
 		array( 'archive', 'abc_teaching',     $L( 'Teaching', 'Enseignement', 'التدريس' ) ),
 		array( 'archive', 'abc_service',      $L( 'Academic Service', 'Service académique', 'الخدمة الأكاديمية' ) ),
 		array( 'archive', 'abc_presentation', $L( 'Presentations', 'Communications', 'المداخلات' ) ),
-		array( 'archive', 'abc_resource',     $L( 'Resources', 'Ressources', 'الموارد' ) ),
-		array( 'archive', 'abc_note',         $L( 'Research Notes', 'Notes de recherche', 'ملاحظات بحثية' ) ),
-		array( 'page', 'cv',        $L( 'CV', 'CV', 'السيرة الذاتية' ) ),
+		array( 'archive', 'abc_note',         $L( 'Blog', 'Blog', 'المدونة' ) ),
 		array( 'page', 'contact',   $L( 'Contact', 'Contact', 'اتصل بي' ) ),
 	),
 	'footer' => array(
@@ -499,23 +486,7 @@ $posts[] = array(
 	'terms'   => array( 'abc_teaching_section' => array( 'teaching-materials' ) ),
 );
 
-// Resources – placeholders (no files).
-$posts[] = array(
-	'key' => 'res-sample-1', 'type' => 'abc_resource', 'slug' => 'sample-guide', 'order' => 10,
-	'title'   => $L( $P . ' Guide title', $P . ' Titre du guide', $P . ' عنوان الدليل' ),
-	'content' => $L( '<p>Sample resource. Upload a PDF, DOCX, PPTX, XLSX or CSV file in the “Resource file” box to enable the download button.</p>', '<p>Ressource d’exemple. Téléversez un fichier PDF, DOCX, PPTX, XLSX ou CSV dans le bloc « Resource file » pour activer le bouton de téléchargement.</p>', '<p>مورد تجريبي. ارفع ملف PDF أو DOCX أو PPTX أو XLSX أو CSV في مربع «Resource file» لتفعيل زر التنزيل.</p>' ),
-	'meta'    => array(),
-	'terms'   => array( 'abc_resource_type' => array( 'guides' ), 'abc_research_area' => array( 'institutional-repositories' ) ),
-);
-$posts[] = array(
-	'key' => 'res-sample-2', 'type' => 'abc_resource', 'slug' => 'sample-template', 'order' => 20,
-	'title'   => $L( $P . ' Template title', $P . ' Titre du modèle', $P . ' عنوان القالب' ),
-	'content' => $L( '<p>Sample resource.</p>', '<p>Ressource d’exemple.</p>', '<p>مورد تجريبي.</p>' ),
-	'meta'    => array(),
-	'terms'   => array( 'abc_resource_type' => array( 'templates' ), 'abc_research_area' => array( 'research-data-management' ) ),
-);
-
-// Research notes – general explanatory texts (no claims about the author).
+// Blog posts – general explanatory texts (no claims about the author).
 $posts[] = array(
 	'key' => 'note-ir', 'type' => 'abc_note', 'slug' => 'what-is-an-institutional-repository', 'order' => 0,
 	'title'   => $L( 'What is an institutional repository?', 'Qu’est-ce qu’un dépôt institutionnel ?', 'ما المستودع الرقمي المؤسسي؟' ),

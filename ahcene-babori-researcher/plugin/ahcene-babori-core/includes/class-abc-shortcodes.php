@@ -22,7 +22,6 @@ class ABC_Render {
 			'presentation' => 'abc_presentation',
 			'service'      => 'abc_service',
 			'teaching'     => 'abc_teaching',
-			'resource'     => 'abc_resource',
 			'note'         => 'abc_note',
 		);
 	}
@@ -171,9 +170,6 @@ class ABC_Render {
 				$kick  = $ptype ? esc_html( $ptype ) : '';
 				$kick .= ( $kick && abc_get( 'pres_date', $id ) ? ' · ' : '' ) . ( abc_get( 'pres_date', $id ) ? esc_html( abc_format_date( abc_get( 'pres_date', $id ) ) ) : '' );
 				$meta = esc_html( trim( abc_get( 'pres_conference', $id ) . ( abc_get( 'pres_location', $id ) ? ' — ' . abc_get( 'pres_location', $id ) : '' ) ) );
-				break;
-			case 'abc_resource':
-				$kick = self::terms( $id, 'abc_resource_type', false );
 				break;
 			case 'abc_note':
 				$kick = self::terms( $id, 'abc_note_category', false );

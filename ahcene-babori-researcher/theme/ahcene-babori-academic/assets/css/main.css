@@ -269,6 +269,8 @@ label{font-weight:600;font-size:.92rem}
 .abc-filter--actions{flex:0 0 auto;flex-direction:row;align-items:center;gap:1rem}
 .abc-link-reset{font-size:.9rem}
 .abc-form{max-width:640px;display:flex;flex-direction:column;gap:1.2rem}
+.abc-field-row{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+@media (max-width:560px){.abc-field-row{grid-template-columns:1fr}}
 .abc-form .abc-field{display:flex;flex-direction:column;gap:.4rem}
 .abc-form .req{color:#b42318}
 .abc-form .has-error input,.abc-form .has-error textarea{border-color:#b42318}

@@ -56,8 +56,7 @@ class ABC_Post_Types {
 			'abc_presentation' => array( 'Presentation', 'Presentations', 'presentations', 'dashicons-megaphone', 29, 'Add presentation' ),
 			'abc_service'      => array( 'Academic Service', 'Academic Service', 'academic-service', 'dashicons-groups', 30, 'Add academic service' ),
 			'abc_teaching'     => array( 'Teaching Entry', 'Teaching', 'teaching', 'dashicons-welcome-learn-more', 31, 'Add course / teaching entry' ),
-			'abc_resource'     => array( 'Research Resource', 'Research Resources', 'resources', 'dashicons-portfolio', 32, 'Add resource' ),
-			'abc_note'         => array( 'Research Note', 'Research Notes', 'research-notes', 'dashicons-edit-page', 33, 'Add research note' ),
+			'abc_note'         => array( 'Blog Post', 'Blog', 'blog', 'dashicons-edit-page', 33, 'Add blog post' ),
 		);
 	}
 
@@ -159,18 +158,22 @@ class ABC_Post_Types {
 			'abc_message',
 			array(
 				'labels'              => array(
-					'name'          => 'Contact messages',
+					'name'          => 'Contact Messages',
 					'singular_name' => 'Contact message',
-					'menu_name'     => 'Contact messages',
-					'all_items'     => 'Contact messages',
-					'not_found'     => 'No messages yet.',
+					'menu_name'     => 'Contact Messages',
+					'all_items'     => 'All messages',
+					'edit_item'     => 'Contact message',
+					'search_items'  => 'Search messages',
+					'not_found'     => 'No messages yet. Messages sent through the Contact form appear here.',
 				),
 				'public'              => false,
 				'show_ui'             => true,
-				'show_in_menu'        => 'abc-researcher',
+				'show_in_menu'        => true,
+				'menu_icon'           => 'dashicons-email-alt',
+				'menu_position'       => 24,
 				'show_in_rest'        => false,
 				'exclude_from_search' => true,
-				'supports'            => array( 'title', 'editor' ),
+				'supports'            => array( 'title' ),
 				'capabilities'        => array( 'create_posts' => 'do_not_allow' ),
 				'map_meta_cap'        => true,
 			)
@@ -179,15 +182,14 @@ class ABC_Post_Types {
 		$tax = array(
 			// slug => [ singular, plural, objects, hierarchical, rewrite, show_ui ].
 			'abc_pub_type'        => array( 'Publication Type', 'Publication Types', array( 'abc_publication' ), true, 'publication-type', true ),
-			'abc_research_area'   => array( 'Research Area', 'Research Areas', array( 'abc_publication', 'abc_book', 'abc_project', 'abc_presentation', 'abc_note', 'abc_resource' ), true, 'research-area', true ),
+			'abc_research_area'   => array( 'Research Area', 'Research Areas', array( 'abc_publication', 'abc_book', 'abc_project', 'abc_presentation', 'abc_note' ), true, 'research-area', true ),
 			'abc_pub_year'        => array( 'Year', 'Years', array( 'abc_publication' ), false, 'publication-year', false ),
 			'abc_keyword'         => array( 'Keyword', 'Keywords', array( 'abc_publication', 'abc_project', 'abc_book', 'abc_presentation' ), false, 'keyword', true ),
 			'abc_pres_type'       => array( 'Presentation Type', 'Presentation Types', array( 'abc_presentation' ), true, 'presentation-type', true ),
 			'abc_service_type'    => array( 'Service Category', 'Service Categories', array( 'abc_service' ), true, 'service-category', true ),
 			'abc_teaching_section' => array( 'Teaching Section', 'Teaching Sections', array( 'abc_teaching' ), true, 'teaching-section', true ),
-			'abc_resource_type'   => array( 'Resource Type', 'Resource Types', array( 'abc_resource' ), true, 'resource-type', true ),
-			'abc_note_category'   => array( 'Note Category', 'Note Categories', array( 'abc_note' ), true, 'note-category', true ),
-			'abc_note_tag'        => array( 'Note Tag', 'Note Tags', array( 'abc_note' ), false, 'note-tag', true ),
+			'abc_note_category'   => array( 'Blog Category', 'Blog Categories', array( 'abc_note' ), true, 'blog-category', true ),
+			'abc_note_tag'        => array( 'Blog Tag', 'Blog Tags', array( 'abc_note' ), false, 'blog-tag', true ),
 		);
 		foreach ( $tax as $slug => $t ) {
 			list( $singular, $plural, $objects, $hier, $rewrite, $ui ) = $t;
@@ -319,8 +321,7 @@ class ABC_Post_Types {
 			'abc_presentation' => 'Presentation title',
 			'abc_service'      => 'Short label, e.g. “Peer reviewer – Journal name”',
 			'abc_teaching'     => 'Course or teaching entry title',
-			'abc_resource'     => 'Resource title',
-			'abc_note'         => 'Title of the research note',
+			'abc_note'         => 'Title of the blog post',
 			'abc_career'       => 'Degree, position or title, e.g. “Assistant Professor”',
 		);
 		return $map[ $post->post_type ] ?? $text;
@@ -350,7 +351,6 @@ class ABC_Post_Types {
 			'abc_presentation' => array( 'pres_date' => 'Date', 'pres_conference' => 'Conference' ),
 			'abc_service'      => array( 'svc_org' => 'Organization', 'svc_from' => 'From' ),
 			'abc_teaching'     => array( 'teach_institution' => 'Institution' ),
-			'abc_resource'     => array( 'res_file_id' => 'File' ),
 			'abc_career'       => array( 'career_period' => 'Period', 'career_org' => 'Institution / place' ),
 		);
 		foreach ( $cols as $pt => $fields ) {
@@ -375,9 +375,6 @@ class ABC_Post_Types {
 					foreach ( $fields as $fk => $label ) {
 						if ( 'abc_' . $fk === $col ) {
 							$v = get_post_meta( $post_id, 'abc_' . $fk, true );
-							if ( 'res_file_id' === $fk ) {
-								$v = $v ? wp_basename( (string) get_attached_file( (int) $v ) ) : '—';
-							}
 							echo esc_html( $v ? $v : '—' );
 						}
 					}

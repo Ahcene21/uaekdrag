@@ -23,7 +23,6 @@ abt_page_header( $title, $desc, is_tax() ? abc_t( 'browse' ) : '' );
 
 $chip_tax = array(
 	'abc_project'  => '',
-	'abc_resource' => 'abc_resource_type',
 	'abc_presentation' => 'abc_pres_type',
 	'abc_note'     => 'abc_note_category',
 );
@@ -35,8 +34,6 @@ $tax_obj = is_tax() ? get_queried_object() : null;
 		abt_term_chips( $chip_tax[ $pt ] );
 	} elseif ( $tax_obj && 'abc_pres_type' === $tax_obj->taxonomy ) {
 		abt_term_chips( 'abc_pres_type' );
-	} elseif ( $tax_obj && 'abc_resource_type' === $tax_obj->taxonomy ) {
-		abt_term_chips( 'abc_resource_type' );
 	} elseif ( $tax_obj && 'abc_note_category' === $tax_obj->taxonomy ) {
 		abt_term_chips( 'abc_note_category' );
 	}
@@ -53,11 +50,7 @@ $tax_obj = is_tax() ? get_queried_object() : null;
 				while ( have_posts() ) {
 					the_post();
 					$p = get_post();
-					if ( 'abc_resource' === $p->post_type ) {
-						echo '<div class="abc-resource">' . ABC_Render::card( $p ) . '<p class="abc-resource__dl">' . abt_resource_download( $p->ID ) . '</p></div>'; // phpcs:ignore WordPress.Security.EscapeOutput
-					} else {
-						echo ABC_Render::card( $p ); // phpcs:ignore WordPress.Security.EscapeOutput
-					}
+					echo ABC_Render::card( $p ); // phpcs:ignore WordPress.Security.EscapeOutput
 				}
 				?>
 			</div>

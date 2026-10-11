@@ -261,10 +261,40 @@ function abc_page_url( $key ) {
 	if ( $pages ) {
 		return get_permalink( $pages[0] );
 	}
+	// Pages created by hand (not by the installer): find them by their content or usual slug.
+	$needle = array( 'contact' => 'abc_contact_form', 'discover' => 'abc_search_form' );
+	if ( isset( $needle[ $key ] ) ) {
+		$found = get_posts( array( 'post_type' => 'page', 'post_status' => 'publish', 'posts_per_page' => 1, 's' => $needle[ $key ], 'lang' => abc_lang(), 'fields' => 'ids' ) );
+		if ( $found ) {
+			return get_permalink( $found[0] );
+		}
+	}
+	$slugs = array( 'about' => array( 'about', 'a-propos' ), 'research' => array( 'research', 'recherche' ), 'contact' => array( 'contact' ), 'cv' => array( 'cv' ) );
+	foreach ( (array) ( $slugs[ $key ] ?? array() ) as $slug ) {
+		$found = get_posts( array( 'post_type' => 'page', 'post_status' => 'publish', 'posts_per_page' => 1, 'name' => $slug, 'lang' => abc_lang(), 'fields' => 'ids' ) );
+		if ( $found ) {
+			return get_permalink( $found[0] );
+		}
+	}
 	if ( 'cv' === $key ) {
 		return abc_cv_page_url();
 	}
 	return function_exists( 'pll_home_url' ) ? pll_home_url() : home_url( '/' );
+}
+
+/**
+ * Target of every "Contact" button: the contact page, or a mailto: link when no such page exists,
+ * so the button always works.
+ *
+ * @return string
+ */
+function abc_contact_url() {
+	$home = function_exists( 'pll_home_url' ) ? pll_home_url() : home_url( '/' );
+	$url  = abc_page_url( 'contact' );
+	if ( $url && untrailingslashit( $url ) !== untrailingslashit( $home ) ) {
+		return $url;
+	}
+	return 'mailto:' . antispambot( abc_setting( 'email', 'contact@ahcenebabori.com' ) );
 }
 
 /**

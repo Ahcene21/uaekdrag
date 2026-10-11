@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.7 – 2026-10-11
+- **Resources removed** (menu, dashboard, search, templates, sample data). Previously saved resource data stays untouched in the database.
+- **Research Notes became the Blog** (menu, URLs `/blog/`, labels, categories and tags; old `/research-notes/…` links redirect). Existing posts are kept.
+- **CV removed from the primary menu** (the *Download CV* button and the CV page remain; CV stays in the footer menu).
+- **Contact messages are dashboard entries**: the form now asks for First name, Last name, Email, Reason for contact and Message. Every message is saved under the new top-level **Contact Messages** menu (sender, e-mail, reason, message, status New / Read / Replied / Archived, red counter for new ones, “Reply by e-mail” button) and also e-mailed.
+- The *Contact* button on the homepage (and in menus/footer) always works: it opens the Contact page, or a `mailto:` link when no Contact page exists.
+
 ## 1.0.6 – 2026-10-11
 - **About timeline is now editable from the dashboard** (*About Timeline* menu): add, edit, reorder and translate entries (start year for sorting, period text, badge, institution, details) grouped in **Timeline Sections** (Education & Academic Qualifications, Academic Positions, Professional Experience, Awards & Honours, Certificates – add your own). The About page and the CV page display them via the `[abc_career]` shortcode; entries are sorted newest first and empty sections are hidden.
 - Existing About pages are migrated automatically (current entries become editable posts; your own text in the page is kept).

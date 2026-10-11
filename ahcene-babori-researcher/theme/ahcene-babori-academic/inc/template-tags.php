@@ -41,10 +41,8 @@ function abt_menu_fallback() {
 		array( abc_t( 'teaching' ), abc_archive_url( 'abc_teaching' ) ),
 		array( abc_t( 'academic_service' ), abc_archive_url( 'abc_service' ) ),
 		array( abc_t( 'presentations' ), abc_archive_url( 'abc_presentation' ) ),
-		array( abc_t( 'resources' ), abc_archive_url( 'abc_resource' ) ),
 		array( abc_t( 'research_notes' ), abc_archive_url( 'abc_note' ) ),
-		array( abc_t( 'nav_cv' ), abc_page_url( 'cv' ) ),
-		array( abc_t( 'nav_contact' ), abc_page_url( 'contact' ) ),
+		array( abc_t( 'nav_contact' ), abc_contact_url() ),
 	);
 	echo '<ul class="abt-menu">';
 	foreach ( $items as $i ) {
@@ -220,19 +218,6 @@ function abt_term_chips( $taxonomy ) {
 		echo '<li><a href="' . esc_url( get_term_link( $t ) ) . '"' . ( $cur === $t->term_id ? ' aria-current="true"' : '' ) . '>' . esc_html( $t->name ) . '</a></li>';
 	}
 	echo '</ul></nav>';
-}
-
-/**
- * Resource download button + info.
- */
-function abt_resource_download( $id ) {
-	$info = abc_file_info( abc_get( 'res_file_id', $id ) );
-	if ( $info ) {
-		$label = abc_t( 'download' ) . ' ' . $info['ext'] . ( $info['size'] ? ' (' . $info['size'] . ')' : '' );
-		return ABC_Render::button( $info['url'], $label, 'download', 'abc-btn abc-btn--primary', array( 'download' => true ) );
-	}
-	$u = abc_get( 'res_url', $id );
-	return $u ? ABC_Render::button( $u, abc_t( 'download' ), 'download', 'abc-btn abc-btn--primary' ) : '';
 }
 
 /**
