@@ -34,6 +34,13 @@ $notes    = ABC_Render::query( 'note', array( 'limit' => 3 ) );
 			<div class="abt-hero__profiles"><?php echo ABC_Render::profiles( 'icons' ); // phpcs:ignore WordPress.Security.EscapeOutput ?></div>
 		</div>
 		<figure class="abt-hero__portrait">
+			<span class="abt-orbit" aria-hidden="true">
+				<i class="abt-orbit__ring"></i><i class="abt-orbit__ring abt-orbit__ring--2"></i>
+				<b class="abt-chip abt-chip--1"><?php echo abc_icon( 'library', 20 ); // phpcs:ignore WordPress.Security.EscapeOutput ?></b>
+				<b class="abt-chip abt-chip--2"><?php echo abc_icon( 'openaccess', 20 ); // phpcs:ignore WordPress.Security.EscapeOutput ?></b>
+				<b class="abt-chip abt-chip--3"><?php echo abc_icon( 'ai', 20 ); // phpcs:ignore WordPress.Security.EscapeOutput ?></b>
+				<b class="abt-chip abt-chip--4"><?php echo abc_icon( 'repository', 20 ); // phpcs:ignore WordPress.Security.EscapeOutput ?></b>
+			</span>
 			<?php echo abc_portrait( 'large', array( 'class' => 'abt-hero__img', 'loading' => 'eager', 'fetchpriority' => 'high' ) ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 			<?php if ( current_user_can( 'manage_options' ) && ! absint( abc_setting( 'photo_id', 0 ) ) ) : ?>
 				<figcaption class="abt-hero__hint"><a href="<?php echo esc_url( admin_url( 'admin.php?page=abc-profile' ) ); ?>">Upload your portrait</a></figcaption>

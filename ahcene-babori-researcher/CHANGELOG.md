@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.5 – 2026-10-11
+- Hero portrait: orbit design – slowly rotating dashed rings and four floating topic badges (library, open access, AI, repository) around the arch portrait; motion disabled for visitors who prefer reduced motion.
+
 ## 1.0.4 – 2026-10-11
 - Homepage hero redesigned to be about half as tall: arch-shaped portrait with offset ring and dotted accent, smaller name/title/tagline, tighter spacing, slimmer topics bar.
 
