@@ -185,10 +185,25 @@ $pages['about'] = array(
 <p>He has professional experience in academic and cultural heritage library environments and experience developing and managing institutional digital repositories.</p>
 <h2>Research interests</h2>
 <ul><li>Digital libraries and institutional repositories</li><li>Open access and open science</li><li>Scholarly communication</li><li>Metadata and knowledge organization</li><li>Research data management</li><li>Artificial intelligence in libraries and library technologies</li></ul>
-<h2>Education</h2>
-<p>' . $P . '</p>
-<h2>Current position and affiliation</h2>
-<p>Assistant Professor, Library and Information Science. ' . $P . ' (institution, faculty, city and country).</p>
+<section class="abt-chrono">
+<h2 class="abt-chrono__bar">1. Education &amp; Academic Qualifications</h2>
+<ol class="abt-chrono__list">
+<li class="abt-chrono__item"><div class="abt-chrono__date">2024–2025</div><h3 class="abt-chrono__title">Certificate in Higher Education Teaching and Learning (CHETL) <span class="abc-badge">New</span></h3><p class="abt-chrono__org">Sultan Qaboos University, Oman – Completed October 2025</p><p class="abt-chrono__detail">Modules: Educational Philosophy · Outcome-Based Learning · Pedagogy Models · Critical Thinking · Assessment &amp; Rubric Design · Course Design · Research-Based Teaching, Peer Assessment &amp; Capstone Portfolio</p></li>
+<li class="abt-chrono__item"><div class="abt-chrono__date">2023</div><h3 class="abt-chrono__title">Habilitation à Diriger des Recherches (HDR) <span class="abc-badge">2023</span></h3><p class="abt-chrono__org">University of Manouba, Tunisia – July 20, 2023</p><p class="abt-chrono__detail">In Documentation, Library and Records Management</p></li>
+<li class="abt-chrono__item"><div class="abt-chrono__date">2008</div><h3 class="abt-chrono__title">Qualification for Associate Professor (Maître de Conférences) in Information and Communication Sciences</h3><p class="abt-chrono__org">CNU (Conseil National des Universités), France – MCF Section 71</p></li>
+<li class="abt-chrono__item"><div class="abt-chrono__date">2002–2004</div><h3 class="abt-chrono__title">PhD in Information and Communication Sciences <span class="abc-badge">Paris 8</span></h3><p class="abt-chrono__org">University of Paris 8, France – Supervisor: Prof. Imad Saleh (Paragraphe Laboratory)</p><p class="abt-chrono__detail">Thesis: <em>"Collaborative Information Retrieval: Rethinking the Architecture of Information Retrieval Systems in the Digital Age"</em></p></li>
+<li class="abt-chrono__item"><div class="abt-chrono__date">2001–2002</div><h3 class="abt-chrono__title">Master’s Degree – Engineering of Open Computer Systems <span class="abc-badge">CentraleSupélec</span></h3><p class="abt-chrono__org">École Centrale Paris / CentraleSupélec, France</p><p class="abt-chrono__detail">Professional thesis: <em>"Creation of a Directory of XML Schemas"</em></p></li>
+<li class="abt-chrono__item"><div class="abt-chrono__date">1996–1997</div><h3 class="abt-chrono__title">Master’s Degree (DEA) – Information and Communication Sciences <span class="abc-badge">ENSSIB</span></h3><p class="abt-chrono__org">ENSSIB – École Nationale Supérieure des Sciences de l’Information et des Bibliothèques, Lyon, France</p><p class="abt-chrono__detail">Thesis: <em>"Feasibility Study of Hypertext Systems in the Subject Authority File of the National Library of France"</em></p></li>
+<li class="abt-chrono__item"><div class="abt-chrono__date">1992–1996</div><h3 class="abt-chrono__title">Bachelor’s Degree – Documentation, Libraries and Archives Sciences</h3><p class="abt-chrono__org">Higher Institute of Documentation (ISD), University of Manouba, Tunisia</p><p class="abt-chrono__detail">Graduation Project: <em>Bibliographical and Analytical Study of the Maghreb Journal of Pediatrics</em></p></li>
+</ol>
+</section>
+<section class="abt-chrono">
+<h2 class="abt-chrono__bar">2. Academic Positions</h2>
+<ol class="abt-chrono__list">
+<li class="abt-chrono__item"><div class="abt-chrono__date">2021 – Present</div><h3 class="abt-chrono__title">Assistant Professor <span class="abc-badge">Current</span></h3><p class="abt-chrono__org">Department of Information Studies, College of Arts and Social Sciences, Sultan Qaboos University (SQU), Muscat, Oman</p><p class="abt-chrono__detail">Teaching · Research · PhD/Master supervision · Program Coordinator (Master’s, since 2023)</p></li>
+<li class="abt-chrono__item"><div class="abt-chrono__date">Spring 2020</div><h3 class="abt-chrono__title">Visiting Professor</h3><p class="abt-chrono__org">[ADD VERIFIED INFORMATION]</p></li>
+</ol>
+</section>
 <h2>Collaboration</h2>
 <p>For research collaboration, invited talks, peer review or supervision enquiries, please use the [abc_link page="contact" label="contact page"].</p>',
 		'<h2>Profil</h2>
@@ -196,10 +211,25 @@ $pages['about'] = array(
 <p>Il possède une expérience professionnelle dans des bibliothèques universitaires et patrimoniales, ainsi qu’une expérience dans le développement et la gestion de dépôts numériques institutionnels.</p>
 <h2>Domaines de recherche</h2>
 <ul><li>Bibliothèques numériques et dépôts institutionnels</li><li>Accès ouvert et science ouverte</li><li>Communication scientifique</li><li>Métadonnées et organisation des connaissances</li><li>Gestion des données de la recherche</li><li>Intelligence artificielle et technologies des bibliothèques</li></ul>
-<h2>Formation</h2>
-<p>' . $P . '</p>
-<h2>Poste actuel et affiliation</h2>
-<p>Professeur assistant en sciences de l’information et des bibliothèques. ' . $P . ' (établissement, faculté, ville et pays).</p>
+<section class="abt-chrono">
+<h2 class="abt-chrono__bar">1. Formation &amp; qualifications académiques</h2>
+<ol class="abt-chrono__list">
+<li class="abt-chrono__item"><div class="abt-chrono__date">2024–2025</div><h3 class="abt-chrono__title">Certificat en enseignement et apprentissage dans l’enseignement supérieur (CHETL) <span class="abc-badge">Nouveau</span></h3><p class="abt-chrono__org">Université Sultan Qaboos, Oman – Achevé en octobre 2025</p><p class="abt-chrono__detail">Modules : philosophie de l’éducation · apprentissage par résultats · modèles pédagogiques · pensée critique · évaluation et conception de grilles · conception de cours · enseignement fondé sur la recherche, évaluation par les pairs et portfolio de synthèse</p></li>
+<li class="abt-chrono__item"><div class="abt-chrono__date">2023</div><h3 class="abt-chrono__title">Habilitation à Diriger des Recherches (HDR) <span class="abc-badge">2023</span></h3><p class="abt-chrono__org">Université de la Manouba, Tunisie – 20 juillet 2023</p><p class="abt-chrono__detail">En documentation, bibliothéconomie et gestion des archives</p></li>
+<li class="abt-chrono__item"><div class="abt-chrono__date">2008</div><h3 class="abt-chrono__title">Qualification aux fonctions de maître de conférences en sciences de l’information et de la communication</h3><p class="abt-chrono__org">CNU (Conseil national des universités), France – section 71</p></li>
+<li class="abt-chrono__item"><div class="abt-chrono__date">2002–2004</div><h3 class="abt-chrono__title">Doctorat en sciences de l’information et de la communication <span class="abc-badge">Paris 8</span></h3><p class="abt-chrono__org">Université Paris 8, France – Directeur de thèse : Pr Imad Saleh (laboratoire Paragraphe)</p><p class="abt-chrono__detail">Thèse : <em>"Collaborative Information Retrieval: Rethinking the Architecture of Information Retrieval Systems in the Digital Age"</em></p></li>
+<li class="abt-chrono__item"><div class="abt-chrono__date">2001–2002</div><h3 class="abt-chrono__title">Master – Ingénierie des systèmes informatiques ouverts <span class="abc-badge">CentraleSupélec</span></h3><p class="abt-chrono__org">École Centrale Paris / CentraleSupélec, France</p><p class="abt-chrono__detail">Mémoire professionnel : <em>"Creation of a Directory of XML Schemas"</em></p></li>
+<li class="abt-chrono__item"><div class="abt-chrono__date">1996–1997</div><h3 class="abt-chrono__title">Master (DEA) – Sciences de l’information et de la communication <span class="abc-badge">ENSSIB</span></h3><p class="abt-chrono__org">ENSSIB – École nationale supérieure des sciences de l’information et des bibliothèques, Lyon, France</p><p class="abt-chrono__detail">Mémoire : <em>"Feasibility Study of Hypertext Systems in the Subject Authority File of the National Library of France"</em></p></li>
+<li class="abt-chrono__item"><div class="abt-chrono__date">1992–1996</div><h3 class="abt-chrono__title">Licence – Sciences de la documentation, des bibliothèques et des archives</h3><p class="abt-chrono__org">Institut supérieur de documentation (ISD), Université de la Manouba, Tunisie</p><p class="abt-chrono__detail">Projet de fin d’études : <em>Bibliographical and Analytical Study of the Maghreb Journal of Pediatrics</em></p></li>
+</ol>
+</section>
+<section class="abt-chrono">
+<h2 class="abt-chrono__bar">2. Postes académiques</h2>
+<ol class="abt-chrono__list">
+<li class="abt-chrono__item"><div class="abt-chrono__date">2021 – Aujourd’hui</div><h3 class="abt-chrono__title">Professeur assistant <span class="abc-badge">En poste</span></h3><p class="abt-chrono__org">Département des études de l’information, Faculté des arts et des sciences sociales, Université Sultan Qaboos (SQU), Mascate, Oman</p><p class="abt-chrono__detail">Enseignement · Recherche · Encadrement de doctorat et de master · Coordination du programme de master (depuis 2023)</p></li>
+<li class="abt-chrono__item"><div class="abt-chrono__date">Printemps 2020</div><h3 class="abt-chrono__title">Professeur invité</h3><p class="abt-chrono__org">[ADD VERIFIED INFORMATION]</p></li>
+</ol>
+</section>
 <h2>Collaboration</h2>
 <p>Pour toute collaboration de recherche, invitation, évaluation par les pairs ou demande d’encadrement, veuillez utiliser la [abc_link page="contact" label="page de contact"].</p>',
 		'<h2>الملف التعريفي</h2>
@@ -207,10 +237,25 @@ $pages['about'] = array(
 <p>يتمتع بخبرة مهنية في بيئات المكتبات الأكاديمية ومكتبات التراث الثقافي، وبخبرة في تطوير المستودعات الرقمية المؤسسية وإدارتها.</p>
 <h2>الاهتمامات البحثية</h2>
 <ul><li>المكتبات الرقمية والمستودعات المؤسسية</li><li>الوصول الحر والعلم المفتوح</li><li>الاتصال العلمي</li><li>البيانات الوصفية وتنظيم المعرفة</li><li>إدارة بيانات البحث</li><li>الذكاء الاصطناعي وتقنيات المكتبات</li></ul>
-<h2>التكوين العلمي</h2>
-<p>' . $P . '</p>
-<h2>المنصب الحالي والانتماء</h2>
-<p>أستاذ مساعد في علم المكتبات والمعلومات. ' . $P . ' (المؤسسة والكلية والمدينة والبلد).</p>
+<section class="abt-chrono">
+<h2 class="abt-chrono__bar">1. التكوين العلمي والمؤهلات الأكاديمية</h2>
+<ol class="abt-chrono__list">
+<li class="abt-chrono__item"><div class="abt-chrono__date">2024–2025</div><h3 class="abt-chrono__title">شهادة في التدريس والتعلّم في التعليم العالي (CHETL) <span class="abc-badge">جديد</span></h3><p class="abt-chrono__org">جامعة السلطان قابوس، سلطنة عُمان – أُنجزت في أكتوبر 2025</p><p class="abt-chrono__detail">الوحدات: فلسفة التربية · التعلّم القائم على المخرجات · نماذج التدريس · التفكير الناقد · تصميم التقييم وسلالم التقدير · تصميم المقررات · التدريس القائم على البحث وتقييم الأقران وملف الإنجاز الختامي</p></li>
+<li class="abt-chrono__item"><div class="abt-chrono__date">2023</div><h3 class="abt-chrono__title">التأهيل الجامعي للإشراف على البحوث (HDR) <span class="abc-badge">2023</span></h3><p class="abt-chrono__org">جامعة منوبة، تونس – 20 جويلية 2023</p><p class="abt-chrono__detail">في التوثيق وعلم المكتبات وإدارة الوثائق</p></li>
+<li class="abt-chrono__item"><div class="abt-chrono__date">2008</div><h3 class="abt-chrono__title">التأهيل لرتبة أستاذ محاضر (Maître de Conférences) في علوم الإعلام والاتصال</h3><p class="abt-chrono__org">المجلس الوطني للجامعات (CNU)، فرنسا – القسم 71 (MCF)</p></li>
+<li class="abt-chrono__item"><div class="abt-chrono__date">2002–2004</div><h3 class="abt-chrono__title">دكتوراه في علوم الإعلام والاتصال <span class="abc-badge">باريس 8</span></h3><p class="abt-chrono__org">جامعة باريس 8، فرنسا – المشرف: الأستاذ Imad Saleh (مخبر Paragraphe)</p><p class="abt-chrono__detail">الأطروحة: <em>"Collaborative Information Retrieval: Rethinking the Architecture of Information Retrieval Systems in the Digital Age"</em></p></li>
+<li class="abt-chrono__item"><div class="abt-chrono__date">2001–2002</div><h3 class="abt-chrono__title">ماستر – هندسة النظم المعلوماتية المفتوحة <span class="abc-badge">CentraleSupélec</span></h3><p class="abt-chrono__org">المدرسة المركزية بباريس / CentraleSupélec، فرنسا</p><p class="abt-chrono__detail">مذكرة مهنية: <em>"Creation of a Directory of XML Schemas"</em></p></li>
+<li class="abt-chrono__item"><div class="abt-chrono__date">1996–1997</div><h3 class="abt-chrono__title">ماستر (DEA) – علوم الإعلام والاتصال <span class="abc-badge">ENSSIB</span></h3><p class="abt-chrono__org">ENSSIB – المدرسة الوطنية العليا لعلوم المعلومات والمكتبات، ليون، فرنسا</p><p class="abt-chrono__detail">المذكرة: <em>"Feasibility Study of Hypertext Systems in the Subject Authority File of the National Library of France"</em></p></li>
+<li class="abt-chrono__item"><div class="abt-chrono__date">1992–1996</div><h3 class="abt-chrono__title">إجازة – علوم التوثيق والمكتبات والأرشيف</h3><p class="abt-chrono__org">المعهد الأعلى للتوثيق (ISD)، جامعة منوبة، تونس</p><p class="abt-chrono__detail">مشروع التخرج: <em>Bibliographical and Analytical Study of the Maghreb Journal of Pediatrics</em></p></li>
+</ol>
+</section>
+<section class="abt-chrono">
+<h2 class="abt-chrono__bar">2. المناصب الأكاديمية</h2>
+<ol class="abt-chrono__list">
+<li class="abt-chrono__item"><div class="abt-chrono__date">2021 – الآن</div><h3 class="abt-chrono__title">أستاذ مساعد <span class="abc-badge">الحالي</span></h3><p class="abt-chrono__org">قسم دراسات المعلومات، كلية الآداب والعلوم الاجتماعية، جامعة السلطان قابوس (SQU)، مسقط، سلطنة عُمان</p><p class="abt-chrono__detail">التدريس · البحث · الإشراف على الدكتوراه والماستر · منسّق برنامج الماستر (منذ 2023)</p></li>
+<li class="abt-chrono__item"><div class="abt-chrono__date">ربيع 2020</div><h3 class="abt-chrono__title">أستاذ زائر</h3><p class="abt-chrono__org">[ADD VERIFIED INFORMATION]</p></li>
+</ol>
+</section>
 <h2>التعاون</h2>
 <p>للتعاون البحثي أو الدعوات العلمية أو التحكيم أو طلبات الإشراف، يُرجى استخدام [abc_link page="contact" label="صفحة التواصل"].</p>'
 	),

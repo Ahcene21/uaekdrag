@@ -3,7 +3,7 @@
  * Plugin Name:       Ahcene Babori Core
  * Plugin URI:        https://ahcenebabori.com
  * Description:       Academic data layer for the website of Dr. Ahcene Babori: publications, books, projects, presentations, teaching, academic service, resources, research notes, researcher profile, statistics, SEO/schema, contact form and future import connectors. Content lives here, so it survives a theme change.
- * Version:           1.0.1
+ * Version:           1.0.2
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            Dr. Ahcene Babori
@@ -18,7 +18,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'ABC_VERSION', '1.0.1' );
+define( 'ABC_VERSION', '1.0.2' );
 define( 'ABC_FILE', __FILE__ );
 define( 'ABC_DIR', plugin_dir_path( __FILE__ ) );
 define( 'ABC_URL', plugin_dir_url( __FILE__ ) );
@@ -97,9 +97,38 @@ add_filter(
 add_action(
 	'init',
 	static function () {
-		if ( version_compare( (string) get_option( 'abc_db_version', '0' ), '1.0.1', '>=' ) ) {
+		$done = (string) get_option( 'abc_db_version', '0' );
+		if ( version_compare( $done, '1.0.2', '>=' ) ) {
 			return;
 		}
+		if ( version_compare( $done, '1.0.1', '<' ) ) {
+			abc_core_upgrade_101();
+		}
+		// 1.0.2: About page becomes a chronological timeline (only pages still holding untouched sample text are replaced).
+		$about = get_posts( array( 'post_type' => 'page', 'post_status' => 'any', 'posts_per_page' => -1, 'lang' => '', 'meta_key' => '_abc_page_key', 'meta_value' => 'about' ) ); // phpcs:ignore WordPress.DB.SlowDBQuery
+		if ( $about && file_exists( ABC_DIR . 'demo/demo-data.php' ) ) {
+			$demo = require ABC_DIR . 'demo/demo-data.php';
+			foreach ( $about as $pg ) {
+				if ( false !== strpos( $pg->post_content, 'abt-chrono' ) || false === strpos( $pg->post_content, '[ADD VERIFIED INFORMATION]' ) ) {
+					continue; // Already updated or edited by the owner.
+				}
+				$lang = function_exists( 'pll_get_post_language' ) ? abc_norm_lang( (string) pll_get_post_language( $pg->ID ) ) : 'en';
+				if ( ! empty( $demo['pages']['about']['content'][ $lang ] ) ) {
+					wp_update_post( array( 'ID' => $pg->ID, 'post_content' => $demo['pages']['about']['content'][ $lang ] ) );
+				}
+			}
+		}
+		update_option( 'abc_db_version', '1.0.2', false );
+		update_option( 'abc_needs_flush', 1, false );
+	},
+	100
+);
+
+/**
+ * Upgrade tasks of 1.0.1.
+ */
+function abc_core_upgrade_101() {
+	{
 		// 1.0.1: "Research" removed from the starter primary menus.
 		foreach ( array( 'EN', 'FR', 'AR' ) as $l ) {
 			$menu = wp_get_nav_menu_object( 'Primary menu (' . $l . ')' );
@@ -124,8 +153,5 @@ add_action(
 				}
 			}
 		}
-		update_option( 'abc_db_version', '1.0.1', false );
-		update_option( 'abc_needs_flush', 1, false );
-	},
-	100
-);
+	}
+}

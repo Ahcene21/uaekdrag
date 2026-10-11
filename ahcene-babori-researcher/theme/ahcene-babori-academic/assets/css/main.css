@@ -347,6 +347,23 @@ html[lang="ar"] .abt-details dt{letter-spacing:0;font-size:.85rem}
 .alignwide{max-width:var(--container)}
 .wp-block-image figcaption{font-size:.85rem;color:var(--muted)}
 
+/* ---------- Chronological timeline (About) ---------- */
+.abt-prose:has(.abt-chrono){max-width:960px}
+.abt-chrono{margin:2.4rem 0 0}
+.abt-prose .abt-chrono__bar,.abt-chrono__bar{margin:0 0 1.4rem;padding:.85rem 1.4rem;background:var(--navy);color:#fff;font-size:clamp(1.15rem,1.05rem + .5vw,1.45rem);border-bottom:3px solid var(--teal-light);border-radius:6px 6px 0 0}
+.abt-chrono__list{list-style:none;margin:0;padding:0 0 0 0;position:relative}
+.abt-chrono__list::before{content:"";position:absolute;inset-block:.6rem 0;inset-inline-start:11px;width:2px;background:var(--line)}
+.abt-chrono__item{position:relative;padding-inline-start:2.8rem;padding-bottom:1.7rem;margin:0}
+.abt-chrono__item::before{content:"";position:absolute;inset-inline-start:2px;top:.2rem;width:20px;height:20px;border-radius:50%;background:var(--teal-soft);border:4px solid var(--teal)}
+.abt-chrono__item:first-child::before{background:var(--teal);border-color:var(--navy)}
+.abt-chrono__date{display:block;font-size:.8rem;font-weight:700;letter-spacing:.06em;color:var(--teal-dark);font-variant-numeric:tabular-nums}
+.abt-prose .abt-chrono__title,.abt-chrono__title{margin:.15rem 0 .25rem;font-size:clamp(1.05rem,1rem + .35vw,1.28rem);line-height:1.35}
+.abt-chrono__title .abc-badge{vertical-align:middle;margin-inline-start:.4rem;text-transform:none;letter-spacing:0}
+.abt-chrono__org{margin:0 0 .3rem;font-style:italic;color:var(--muted)}
+.abt-chrono__detail{margin:0;color:var(--charcoal);font-size:.97rem}
+html[lang="ar"] .abt-chrono__org{font-style:normal}
+html[lang="ar"] .abt-chrono__date{letter-spacing:0}
+
 /* ---------- CV page ---------- */
 .abt-cv{display:grid;grid-template-columns:280px minmax(0,1fr);gap:clamp(1.5rem,4vw,3.5rem);align-items:start}
 .abt-cv__side{position:sticky;top:6.5rem;display:flex;flex-direction:column;gap:1.4rem}
