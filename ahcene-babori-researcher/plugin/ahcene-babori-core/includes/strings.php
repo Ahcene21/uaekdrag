@@ -80,6 +80,11 @@ return array(
 		'fr' => 'par',
 		'ar' => 'بقلم',
 	),
+	'categories' => array(
+		'en' => 'Categories',
+		'fr' => 'Catégories',
+		'ar' => 'التصنيفات',
+	),
 	'cf_email' => array(
 		'en' => 'Email',
 		'fr' => 'E-mail',
@@ -480,6 +485,11 @@ return array(
 		'fr' => 'Langue',
 		'ar' => 'اللغة',
 	),
+	'latest' => array(
+		'en' => 'Latest',
+		'fr' => 'Récents',
+		'ar' => 'الأحدث',
+	),
 	'license' => array(
 		'en' => 'Licence',
 		'fr' => 'Licence',
@@ -749,6 +759,11 @@ return array(
 		'en' => 'Buy',
 		'fr' => 'Acheter',
 		'ar' => 'شراء',
+	),
+	'quick_access' => array(
+		'en' => 'Quick access',
+		'fr' => 'Accès rapide',
+		'ar' => 'وصول سريع',
 	),
 	'related_notes' => array(
 		'en' => 'Related blog posts',

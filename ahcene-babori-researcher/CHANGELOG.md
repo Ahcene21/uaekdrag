@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.12 – 2026-10-11
+- **Quick-access tiles**: eight large coloured tiles with icons (Publications, Books, Projects, Presentations, Teaching, Academic Service, Blog, Contact) overlapping the bottom of the hero; they follow the chosen colour scheme. The old three-column teaching/service/presentations row was removed (the tiles replace it).
+- **Mega menu**: Publications, Projects, Presentations, Teaching, Academic Service and Blog open a wide panel with their categories/types/research areas and latest items (automatic, cached 10 min); hover, keyboard focus, touch toggle button and Escape supported; accordion on mobile.
+- **Alternating section bands** on the homepage with a coloured stripe before each title and a gradient edge on tinted bands.
+
 ## 1.0.11 – 2026-10-11
 - **Appearance settings** (*Researcher → Appearance*): six colour schemes (Teal Navy – default, Indigo & Amber, Emerald & Gold, Burgundy & Gold, Ocean Blue & Sky, Slate & Coral) and three main-menu styles (Light, Dark, Accent). Each scheme meets WCAG AA contrast; administrators can preview any choice on the live site before saving. Default look is unchanged.
 

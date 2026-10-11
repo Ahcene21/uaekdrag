@@ -57,6 +57,28 @@ $notes    = ABC_Render::query( 'note', array( 'limit' => 3 ) );
 	</div>
 </section>
 
+<section class="abt-quick" aria-label="<?php echo esc_attr( abc_t( 'quick_access' ) ); ?>">
+	<div class="abt-container">
+		<ul class="abt-quick__grid">
+			<?php
+			$tiles = array(
+				array( 'doc', abc_t( 'publications' ), abc_archive_url( 'abc_publication' ) ),
+				array( 'library', abc_t( 'books' ), abc_archive_url( 'abc_book' ) ),
+				array( 'data', abc_t( 'projects' ), abc_archive_url( 'abc_project' ) ),
+				array( 'slides', abc_t( 'presentations' ), abc_archive_url( 'abc_presentation' ) ),
+				array( 'graduation', abc_t( 'teaching' ), abc_archive_url( 'abc_teaching' ) ),
+				array( 'check', abc_t( 'academic_service' ), abc_archive_url( 'abc_service' ) ),
+				array( 'communication', abc_t( 'research_notes' ), abc_archive_url( 'abc_note' ) ),
+				array( 'mail', abc_t( 'nav_contact' ), abc_contact_url() ),
+			);
+			foreach ( $tiles as $t ) :
+				?>
+				<li><a class="abt-tile" href="<?php echo esc_url( $t[2], array( 'http', 'https', 'mailto' ) ); ?>"><span class="abt-tile__icon"><?php echo abc_icon( $t[0], 28 ); // phpcs:ignore WordPress.Security.EscapeOutput ?></span><span class="abt-tile__label"><?php echo esc_html( $t[1] ); ?></span></a></li>
+			<?php endforeach; ?>
+		</ul>
+	</div>
+</section>
+
 <section class="abt-section abt-bio" aria-label="<?php echo esc_attr( abc_t( 'nav_about' ) ); ?>">
 	<div class="abt-container abt-bio__inner">
 		<p class="abt-bio__text"><?php echo esc_html( abc_ml( 'bio' ) ); ?></p>
@@ -90,25 +112,6 @@ $notes    = ABC_Render::query( 'note', array( 'limit' => 3 ) );
 	</div>
 </section>
 <?php endif; ?>
-
-<section class="abt-section" aria-label="<?php echo esc_attr( abc_t( 'teaching' ) . ', ' . abc_t( 'academic_service' ) . ', ' . abc_t( 'presentations' ) ); ?>">
-	<div class="abt-container abt-trio">
-		<?php
-		$trio = array(
-			array( 'graduation', abc_t( 'teaching' ), abc_t( 'home_teaching_text' ), abc_archive_url( 'abc_teaching' ) ),
-			array( 'check', abc_t( 'academic_service' ), abc_t( 'home_service_text' ), abc_archive_url( 'abc_service' ) ),
-			array( 'slides', abc_t( 'presentations' ), abc_t( 'home_presentations_text' ), abc_archive_url( 'abc_presentation' ) ),
-		);
-		foreach ( $trio as $t ) :
-			?>
-			<article class="abt-trio__item">
-				<div class="abc-area__icon"><?php echo abc_icon( $t[0], 28 ); // phpcs:ignore WordPress.Security.EscapeOutput ?></div>
-				<h3><a href="<?php echo esc_url( $t[3] ); ?>"><?php echo esc_html( $t[1] ); ?></a></h3>
-				<p><?php echo esc_html( $t[2] ); ?></p>
-			</article>
-		<?php endforeach; ?>
-	</div>
-</section>
 
 <?php if ( $notes ) : ?>
 <section class="abt-section abt-section--tint" aria-labelledby="notes-title">

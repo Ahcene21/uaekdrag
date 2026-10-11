@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'ABT_VERSION', '1.0.11' );
+define( 'ABT_VERSION', '1.0.12' );
 define( 'ABT_DIR', get_template_directory() );
 define( 'ABT_URI', get_template_directory_uri() );
 
@@ -68,6 +68,7 @@ if ( ! abt_core_active() ) {
 
 require_once ABT_DIR . '/inc/template-tags.php';
 require_once ABT_DIR . '/inc/palettes.php';
+require_once ABT_DIR . '/inc/mega-menu.php';
 
 /* --------------------------------------------------------------- assets */
 add_action(

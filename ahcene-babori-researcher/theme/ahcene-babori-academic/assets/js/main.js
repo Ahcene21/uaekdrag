@@ -20,6 +20,24 @@
 		});
 	}
 
+	/* Mega menu toggles (touch / keyboard); hover is handled by CSS */
+	document.addEventListener('click', function (e) {
+		var t = e.target.closest ? e.target.closest('.abt-mega-toggle') : null;
+		var open = document.querySelectorAll('.abt-has-mega.is-open');
+		for (var i = 0; i < open.length; i++) {
+			if (!t || open[i] !== t.parentNode) { open[i].classList.remove('is-open'); open[i].querySelector('.abt-mega-toggle').setAttribute('aria-expanded', 'false'); }
+		}
+		if (t) {
+			var li = t.parentNode, on = li.classList.toggle('is-open');
+			t.setAttribute('aria-expanded', on ? 'true' : 'false');
+		}
+	});
+	document.addEventListener('keydown', function (e) {
+		if (e.key !== 'Escape') { return; }
+		var open = document.querySelectorAll('.abt-has-mega.is-open');
+		for (var i = 0; i < open.length; i++) { open[i].classList.remove('is-open'); open[i].querySelector('.abt-mega-toggle').setAttribute('aria-expanded', 'false'); }
+	});
+
 	/* Search bar */
 	var sBtn = $('#abt-search-toggle'), sBar = $('#abt-searchbar');
 	if (sBtn && sBar) {
