@@ -22,7 +22,7 @@
   --shadow-lg:0 2px 4px rgba(11,31,58,.08),0 18px 44px rgba(11,31,58,.14);
   --font:"Inter","Noto Sans Arabic",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   --container:1180px; --narrow:760px; --gutter:clamp(1rem,4vw,2rem);
-  --fs-base:1.0625rem; --lh:1.65;
+  --fs-base:1rem; --lh:1.6;
 }
 html[lang="ar"]{--font:"Almarai","Noto Sans Arabic","Inter",system-ui,"Segoe UI",Tahoma,Arial,sans-serif;--lh:1.9}
 html[lang="ar"] body{font-weight:400}
@@ -448,6 +448,45 @@ html[lang="ar"] .abt-footer__title{letter-spacing:0;font-size:.95rem}
 .abt-footer__bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem 1rem;border-top:1px solid rgba(255,255,255,.14);padding-block:1.2rem;font-size:.85rem}
 .abt-footer__bottom p{margin:0}
 @media (max-width:760px){.abt-footer__grid{grid-template-columns:1fr}}
+
+/* ---------- Compact homepage ---------- */
+.home .abt-section{padding-block:clamp(1.3rem,2.6vw,2rem)}
+.home .abt-section__head{margin-bottom:1rem}
+.home .abt-section__title{font-size:clamp(1.3rem,1.15rem + .6vw,1.65rem)}
+.home .abt-section__intro{font-size:.95rem;margin-top:.25rem}
+.home .abt-bio{padding-block:1.1rem}
+.home .abt-bio__text{font-size:1rem;line-height:1.6}
+.home .abc-grid{gap:.9rem}
+.home .abc-grid--areas{grid-template-columns:repeat(auto-fill,minmax(min(100%,235px),1fr))}
+.home .abc-grid--cards{grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr))}
+.home .abc-area{padding:1rem 1.1rem;gap:.15rem}
+.home .abc-area__icon{width:2.3rem;height:2.3rem;border-radius:10px;margin-bottom:.35rem}
+.home .abc-area__icon .abc-icon{width:22px;height:22px}
+.home .abc-area__title{font-size:1rem;margin-bottom:.2em}
+.home .abc-area__desc{font-size:.86rem;line-height:1.5;margin-bottom:.4rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.home .abc-area__related{padding-top:.5rem;margin-top:.1rem;font-size:.8rem}
+.home .abc-card__body{padding:.9rem 1rem 1rem}
+.home .abc-card__title{font-size:1rem;margin-bottom:.3em}
+.home .abc-card__excerpt{font-size:.88rem;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;flex:0}
+.home .abc-card__media img{aspect-ratio:16/8}
+.home .abc-stat{padding:1rem .9rem}
+.home .abc-stat__value{font-size:clamp(1.15rem,1rem + .5vw,1.5rem)}
+.home .abc-stat__label{font-size:.82rem}
+.home .abt-trio{gap:1rem 2rem}
+.home .abt-trio__item{display:grid;grid-template-columns:auto 1fr;column-gap:.9rem;align-items:start}
+.home .abt-trio__item .abc-area__icon{grid-row:span 2;margin:0}
+.home .abt-trio__item h3{font-size:1.05rem;margin:0 0 .15em}
+.home .abt-trio__item p{font-size:.88rem;margin:0}
+.home .abt-cta{padding-block:1.4rem}
+.home .abt-cta h2{font-size:1.35rem;margin-bottom:.15em}
+.home .abt-cta p{font-size:.95rem}
+.home .abt-footer{padding-top:1.6rem}
+
+/* ---------- Justified text (start-aligned headings) ---------- */
+.abt-prose p,.abt-prose li,.abt-hero__tagline,.abt-bio__text,.abt-section__intro,.abt-page-desc,.abt-abstract,.abt-cta p,.abt-footer__statement,.abt-chrono__detail,.abt-cite__text{text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto;text-align-last:start}
+html[lang="ar"] .abt-prose p,html[lang="ar"] .abt-prose li,html[lang="ar"] .abt-hero__tagline,html[lang="ar"] .abt-bio__text,html[lang="ar"] .abt-section__intro,html[lang="ar"] .abt-page-desc,html[lang="ar"] .abt-chrono__detail,html[lang="ar"] .abt-cta p{hyphens:manual}
+.abt-prose .abt-chrono__org{text-align:start}
+@media (max-width:560px){.abt-prose p,.abt-prose li{text-align:start}}
 
 /* ---------- Print (CV) ---------- */
 @media print{

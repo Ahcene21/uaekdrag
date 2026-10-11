@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.9 – 2026-10-11
+- **Compact homepage** (about one third shorter): tighter sections, smaller cards and research-area tiles, one-line teaching/service/presentations row, slimmer statistics and call-to-action. Base font 16 px.
+- **“Selected publications” block removed** from the homepage (publications stay in their own section).
+- **Justified text** (inter-word justification, start-aligned headings) for body text, introductions, biography and abstracts; narrow cards keep normal alignment to avoid wide gaps.
+
 ## 1.0.8 – 2026-10-11
 - **Fix: *About* link in every language.** Menu links to pages are now resolved through the page’s Polylang translation first, and a link is never replaced by the homepage; the “About me” and “Contact” buttons also find hand-made translations (the page key is now copied when a translation is created, and pages are also found by their usual slug or shortcode).
 - **Fix: *Back to top* in the footer.** The target is no longer the sticky header (browsers cannot scroll to an element that is already stuck at the top).

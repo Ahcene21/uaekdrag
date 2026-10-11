@@ -13,7 +13,6 @@ $res_url = abc_page_url( 'research' );
 if ( $res_url === ( function_exists( 'pll_home_url' ) ? pll_home_url() : home_url( '/' ) ) ) {
 	$res_url = abc_archive_url( 'abc_publication' );
 }
-$pubs     = ABC_Render::query( 'publication', array( 'limit' => 4, 'featured' => 1 ) );
 $projects = ABC_Render::query( 'project', array( 'limit' => 4, 'featured' => 1 ) );
 $notes    = ABC_Render::query( 'note', array( 'limit' => 3 ) );
 ?>
@@ -77,17 +76,6 @@ $notes    = ABC_Render::query( 'note', array( 'limit' => 3 ) );
 	<div class="abt-container">
 		<div class="abt-section__head"><div><h2 class="abt-section__title" id="impact-title"><?php echo esc_html( abc_t( 'home_impact_title' ) ); ?></h2></div></div>
 		<?php echo $stats; // phpcs:ignore WordPress.Security.EscapeOutput ?>
-	</div>
-</section>
-<?php endif; ?>
-
-<?php if ( $pubs ) : ?>
-<section class="abt-section" aria-labelledby="pubs-title">
-	<div class="abt-container">
-		<?php abt_section_head( abc_t( 'home_pubs_title' ), abc_t( 'home_pubs_intro' ), abc_archive_url( 'abc_publication' ), abc_t( 'view_publications' ) ); ?>
-		<div class="abc-publist">
-			<?php foreach ( $pubs as $p ) { echo ABC_Render::publication_item( $p ); } // phpcs:ignore WordPress.Security.EscapeOutput ?>
-		</div>
 	</div>
 </section>
 <?php endif; ?>
