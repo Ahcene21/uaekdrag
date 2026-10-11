@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.3 – 2026-10-11
+- **Almarai (Regular 400, Bold 700) is now the primary typeface of the Arabic interface**, bundled in the theme (SIL OFL); Noto Sans Arabic remains as fallback.
+
 ## 1.0.2 – 2026-10-11
 - **About page is now a chronological timeline** (Education & Academic Qualifications, Academic Positions), in EN / FR / AR, using the owner’s CV details; same navy/teal design. Pages still holding the untouched sample text are updated automatically when the plugin is updated; edited pages are never overwritten.
 

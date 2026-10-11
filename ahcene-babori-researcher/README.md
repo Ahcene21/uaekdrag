@@ -51,4 +51,4 @@ See [`INSTALLATION.md`](INSTALLATION.md). In short: install WordPress → upload
 WordPress 6.0+ (tested on 6.5), PHP 7.4+ (tested on 8.3), MySQL/MariaDB. Polylang (free) for multilingual use. Optional: Yoast SEO or Rank Math.
 
 ## Licence
-Code: GPL-2.0-or-later. Fonts: SIL Open Font Licence 1.1 (licence files are in `theme/ahcene-babori-academic/assets/fonts/`). Personal content © Dr. Ahcene Babori.
+Code: GPL-2.0-or-later. Fonts (Inter, Noto Sans Arabic, Almarai): SIL Open Font Licence 1.1 (licence files are in `theme/ahcene-babori-academic/assets/fonts/`). Personal content © Dr. Ahcene Babori.
