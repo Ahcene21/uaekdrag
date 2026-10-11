@@ -20,6 +20,10 @@ class ABC_Post_Types {
 		add_action( 'abc_research_area_add_form_fields', array( __CLASS__, 'area_add_fields' ) );
 		add_action( 'abc_research_area_edit_form_fields', array( __CLASS__, 'area_edit_fields' ) );
 		add_action( 'created_abc_research_area', array( __CLASS__, 'save_area_fields' ) );
+		add_action( 'abc_career_section_add_form_fields', array( __CLASS__, 'order_add_field' ) );
+		add_action( 'abc_career_section_edit_form_fields', array( __CLASS__, 'order_edit_field' ) );
+		add_action( 'created_abc_career_section', array( __CLASS__, 'save_order_field' ) );
+		add_action( 'edited_abc_career_section', array( __CLASS__, 'save_order_field' ) );
 		add_action( 'edited_abc_research_area', array( __CLASS__, 'save_area_fields' ) );
 		add_filter( 'enter_title_here', array( __CLASS__, 'title_placeholder' ), 10, 2 );
 		add_filter( 'post_updated_messages', array( __CLASS__, 'updated_messages' ) );
@@ -96,6 +100,59 @@ class ABC_Post_Types {
 				)
 			);
 		}
+
+		// About timeline (education, positions, …): managed in the dashboard, shown on the About and CV pages.
+		register_post_type(
+			'abc_career',
+			array(
+				'labels'              => array(
+					'name'               => 'About Timeline',
+					'singular_name'      => 'Timeline entry',
+					'menu_name'          => 'About Timeline',
+					'add_new'            => 'Add timeline entry',
+					'add_new_item'       => 'Add timeline entry',
+					'edit_item'          => 'Edit timeline entry',
+					'all_items'          => 'All timeline entries',
+					'search_items'       => 'Search timeline entries',
+					'not_found'          => 'Nothing yet. Use “Add timeline entry”.',
+					'not_found_in_trash' => 'Nothing in the trash.',
+				),
+				'public'              => false,
+				'publicly_queryable'  => false,
+				'show_ui'             => true,
+				'show_in_menu'        => true,
+				'show_in_rest'        => true,
+				'rest_base'           => 'career',
+				'has_archive'         => false,
+				'rewrite'             => false,
+				'exclude_from_search' => true,
+				'menu_icon'           => 'dashicons-id-alt',
+				'menu_position'       => 25,
+				'supports'            => array( 'title', 'page-attributes', 'revisions' ),
+			)
+		);
+		register_taxonomy(
+			'abc_career_section',
+			array( 'abc_career' ),
+			array(
+				'labels'            => array(
+					'name'          => 'Timeline Sections',
+					'singular_name' => 'Timeline Section',
+					'add_new_item'  => 'Add timeline section',
+					'edit_item'     => 'Edit timeline section',
+					'menu_name'     => 'Timeline Sections',
+					'all_items'     => 'All timeline sections',
+				),
+				'hierarchical'      => true,
+				'public'            => false,
+				'publicly_queryable' => false,
+				'show_ui'           => true,
+				'show_in_menu'      => true,
+				'show_in_rest'      => true,
+				'show_admin_column' => true,
+				'rewrite'           => false,
+			)
+		);
 
 		// Contact messages (private, not public).
 		register_post_type(
@@ -210,6 +267,25 @@ class ABC_Post_Types {
 		echo '<tr class="form-field"><th scope="row"><label for="abc_order">Display order</label></th><td><input type="number" name="abc_order" id="abc_order" value="' . esc_attr( (string) get_term_meta( $term->term_id, 'abc_order', true ) ) . '" min="0" step="1"><p class="description">Lower numbers appear first on the homepage.</p></td></tr>';
 	}
 
+	public static function order_add_field() {
+		wp_nonce_field( 'abc_term_order', 'abc_order_nonce' );
+		echo '<div class="form-field"><label for="abc_order">Display order</label><input type="number" name="abc_order" id="abc_order" value="50" min="0" step="1"><p>Lower numbers appear first on the About page (10, 20, 30…).</p></div>';
+	}
+
+	public static function order_edit_field( $term ) {
+		wp_nonce_field( 'abc_term_order', 'abc_order_nonce' );
+		echo '<tr class="form-field"><th scope="row"><label for="abc_order">Display order</label></th><td><input type="number" name="abc_order" id="abc_order" value="' . esc_attr( (string) get_term_meta( $term->term_id, 'abc_order', true ) ) . '" min="0" step="1"><p class="description">Lower numbers appear first on the About page.</p></td></tr>';
+	}
+
+	public static function save_order_field( $term_id ) {
+		if ( ! isset( $_POST['abc_order_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['abc_order_nonce'] ) ), 'abc_term_order' ) || ! current_user_can( 'manage_categories' ) ) {
+			return;
+		}
+		if ( isset( $_POST['abc_order'] ) && '' !== $_POST['abc_order'] ) {
+			update_term_meta( $term_id, 'abc_order', absint( $_POST['abc_order'] ) );
+		}
+	}
+
 	/**
 	 * Save term icon.
 	 *
@@ -245,6 +321,7 @@ class ABC_Post_Types {
 			'abc_teaching'     => 'Course or teaching entry title',
 			'abc_resource'     => 'Resource title',
 			'abc_note'         => 'Title of the research note',
+			'abc_career'       => 'Degree, position or title, e.g. “Assistant Professor”',
 		);
 		return $map[ $post->post_type ] ?? $text;
 	}
@@ -274,6 +351,7 @@ class ABC_Post_Types {
 			'abc_service'      => array( 'svc_org' => 'Organization', 'svc_from' => 'From' ),
 			'abc_teaching'     => array( 'teach_institution' => 'Institution' ),
 			'abc_resource'     => array( 'res_file_id' => 'File' ),
+			'abc_career'       => array( 'career_period' => 'Period', 'career_org' => 'Institution / place' ),
 		);
 		foreach ( $cols as $pt => $fields ) {
 			add_filter(

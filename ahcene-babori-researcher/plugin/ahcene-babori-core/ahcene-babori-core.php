@@ -3,7 +3,7 @@
  * Plugin Name:       Ahcene Babori Core
  * Plugin URI:        https://ahcenebabori.com
  * Description:       Academic data layer for the website of Dr. Ahcene Babori: publications, books, projects, presentations, teaching, academic service, resources, research notes, researcher profile, statistics, SEO/schema, contact form and future import connectors. Content lives here, so it survives a theme change.
- * Version:           1.0.2
+ * Version:           1.0.6
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            Dr. Ahcene Babori
@@ -18,7 +18,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'ABC_VERSION', '1.0.2' );
+define( 'ABC_VERSION', '1.0.6' );
 define( 'ABC_FILE', __FILE__ );
 define( 'ABC_DIR', plugin_dir_path( __FILE__ ) );
 define( 'ABC_URL', plugin_dir_url( __FILE__ ) );
@@ -98,7 +98,7 @@ add_action(
 	'init',
 	static function () {
 		$done = (string) get_option( 'abc_db_version', '0' );
-		if ( version_compare( $done, '1.0.2', '>=' ) ) {
+		if ( version_compare( $done, '1.0.6', '>=' ) ) {
 			return;
 		}
 		if ( version_compare( $done, '1.0.1', '<' ) ) {
@@ -118,7 +118,25 @@ add_action(
 				}
 			}
 		}
-		update_option( 'abc_db_version', '1.0.2', false );
+		// 1.0.6: About timeline entries become editable posts (About Timeline).
+		if ( version_compare( $done, '1.0.6', '<' ) ) {
+			$has = get_posts( array( 'post_type' => 'abc_career', 'post_status' => 'any', 'posts_per_page' => 1, 'fields' => 'ids', 'lang' => '' ) );
+			if ( ! $has ) {
+				ABC_Demo::install_structure( 'abc_career_section' );
+				ABC_Demo::install_samples( 'abc_career' );
+			}
+			foreach ( get_posts( array( 'post_type' => 'page', 'post_status' => 'any', 'posts_per_page' => -1, 'lang' => '', 'meta_key' => '_abc_page_key', 'meta_value' => 'about' ) ) as $pg ) { // phpcs:ignore WordPress.DB.SlowDBQuery
+				$c = $pg->post_content;
+				if ( false !== strpos( $c, 'abt-chrono' ) && false === strpos( $c, '[abc_career' ) ) {
+					$s0 = strpos( $c, '<section class="abt-chrono">' );
+					$s1 = strrpos( $c, '</section>' );
+					if ( false !== $s0 && false !== $s1 ) {
+						wp_update_post( array( 'ID' => $pg->ID, 'post_content' => substr( $c, 0, $s0 ) . '[abc_career]' . substr( $c, $s1 + 10 ) ) );
+					}
+				}
+			}
+		}
+		update_option( 'abc_db_version', '1.0.6', false );
 		update_option( 'abc_needs_flush', 1, false );
 	},
 	100

@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.6 – 2026-10-11
+- **About timeline is now editable from the dashboard** (*About Timeline* menu): add, edit, reorder and translate entries (start year for sorting, period text, badge, institution, details) grouped in **Timeline Sections** (Education & Academic Qualifications, Academic Positions, Professional Experience, Awards & Honours, Certificates – add your own). The About page and the CV page display them via the `[abc_career]` shortcode; entries are sorted newest first and empty sections are hidden.
+- Existing About pages are migrated automatically (current entries become editable posts; your own text in the page is kept).
+
 ## 1.0.5 – 2026-10-11
 - Hero portrait: orbit design – slowly rotating dashed rings and four floating topic badges (library, open access, AI, repository) around the arch portrait; motion disabled for visitors who prefer reduced motion.
 

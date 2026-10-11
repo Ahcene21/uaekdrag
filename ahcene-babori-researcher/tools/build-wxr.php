@@ -89,7 +89,10 @@ foreach ( $d['posts'] as $p ) {
 foreach ( $d['posts'] as $p ) {
 	$defs = null;
 	foreach ( $langs as $l ) {
-		$meta = array( '_abc_demo' => '1', '_abc_demo_key' => $p['type'] . ':' . $p['key'] . ':' . $l );
+		$meta = array( '_abc_demo_key' => $p['type'] . ':' . $p['key'] . ':' . $l );
+		if ( empty( $p['real'] ) ) {
+			$meta['_abc_demo'] = '1';
+		}
 		foreach ( (array) $p['meta'] as $k => $v ) {
 			$meta[ 'abc_' . $k ] = $pick( $v, $l );
 		}

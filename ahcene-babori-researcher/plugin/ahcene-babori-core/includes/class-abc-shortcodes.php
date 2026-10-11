@@ -371,6 +371,76 @@ class ABC_Render {
 	}
 
 	/**
+	 * About / CV timeline built from "About Timeline" entries.
+	 *
+	 * @param array $args section (term key or slug), heading (bool).
+	 * @return string
+	 */
+	public static function career( $args = array() ) {
+		$args  = wp_parse_args( $args, array( 'section' => '', 'heading' => true ) );
+		$terms = get_terms(
+			array(
+				'taxonomy'   => 'abc_career_section',
+				'hide_empty' => true,
+				'meta_query' => array( // phpcs:ignore WordPress.DB.SlowDBQuery
+					'relation' => 'OR',
+					'o'        => array( 'key' => 'abc_order', 'type' => 'NUMERIC', 'compare' => 'EXISTS' ),
+					array( 'key' => 'abc_order', 'compare' => 'NOT EXISTS' ),
+				),
+				'orderby'    => 'o',
+				'order'      => 'ASC',
+			)
+		);
+		if ( empty( $terms ) || is_wp_error( $terms ) ) {
+			return '';
+		}
+		$out = '';
+		$n   = 0;
+		foreach ( $terms as $t ) {
+			if ( $args['section'] && $t->slug !== $args['section'] && get_term_meta( $t->term_id, 'abc_key', true ) !== $args['section'] ) {
+				continue;
+			}
+			$posts = get_posts(
+				array(
+					'post_type'      => 'abc_career',
+					'post_status'    => 'publish',
+					'posts_per_page' => 100,
+					'lang'           => abc_lang(),
+					'tax_query'      => array( array( 'taxonomy' => 'abc_career_section', 'field' => 'term_id', 'terms' => $t->term_id ) ), // phpcs:ignore WordPress.DB.SlowDBQuery
+					'meta_query'     => array( // phpcs:ignore WordPress.DB.SlowDBQuery
+						'relation' => 'OR',
+						'c'        => array( 'key' => 'abc_career_start', 'type' => 'NUMERIC', 'compare' => 'EXISTS' ),
+						array( 'key' => 'abc_career_start', 'compare' => 'NOT EXISTS' ),
+					),
+					'orderby'        => array( 'c' => 'DESC', 'menu_order' => 'ASC' ),
+				)
+			);
+			if ( ! $posts ) {
+				continue;
+			}
+			$n++;
+			$out .= '<section class="abt-chrono">';
+			if ( $args['heading'] ) {
+				$out .= '<h2 class="abt-chrono__bar">' . (int) $n . '. ' . esc_html( $t->name ) . '</h2>';
+			}
+			$out .= '<ol class="abt-chrono__list">';
+			foreach ( $posts as $p ) {
+				$id     = $p->ID;
+				$period = abc_get( 'career_period', $id );
+				$period = $period ? $period : abc_get( 'career_start', $id );
+				$badge  = abc_get( 'career_badge', $id );
+				$org    = abc_get( 'career_org', $id );
+				$det    = esc_html( abc_get( 'career_detail', $id ) );
+				$det    = preg_replace( '/“([^”]+)”/u', '<em>“$1”</em>', $det );
+				$out   .= '<li class="abt-chrono__item"><div class="abt-chrono__date">' . esc_html( $period ) . '</div><h3 class="abt-chrono__title">' . esc_html( get_the_title( $id ) ) . ( $badge ? ' <span class="abc-badge">' . esc_html( $badge ) . '</span>' : '' ) . '</h3>';
+				$out   .= ( $org ? '<p class="abt-chrono__org">' . esc_html( $org ) . '</p>' : '' ) . ( $det ? '<p class="abt-chrono__detail">' . $det . '</p>' : '' ) . '</li>';
+			}
+			$out .= '</ol></section>';
+		}
+		return $out;
+	}
+
+	/**
 	 * Compact CV list line for a post.
 	 *
 	 * @param WP_Post $p Post.
@@ -462,7 +532,7 @@ class ABC_Shortcodes {
 	 * Register shortcodes.
 	 */
 	public static function init() {
-		$codes = array( 'abc_stats', 'abc_research_areas', 'abc_profiles', 'abc_cv_button', 'abc_publications', 'abc_list', 'abc_contact_card', 'abc_search_form', 'abc_link' );
+		$codes = array( 'abc_stats', 'abc_research_areas', 'abc_profiles', 'abc_cv_button', 'abc_publications', 'abc_list', 'abc_contact_card', 'abc_search_form', 'abc_link', 'abc_career' );
 		foreach ( $codes as $c ) {
 			add_shortcode( $c, array( __CLASS__, str_replace( 'abc_', 'sc_', $c ) ) );
 		}
@@ -500,6 +570,14 @@ class ABC_Shortcodes {
 
 	public static function sc_contact_card() {
 		return ABC_Render::contact_card();
+	}
+
+	/**
+	 * [abc_career section="education" heading="1"] – timeline from the About Timeline entries.
+	 */
+	public static function sc_career( $atts ) {
+		$a = shortcode_atts( array( 'section' => '', 'heading' => '1' ), $atts, 'abc_career' );
+		return ABC_Render::career( array( 'section' => sanitize_title( $a['section'] ), 'heading' => '0' !== $a['heading'] ) );
 	}
 
 	/**

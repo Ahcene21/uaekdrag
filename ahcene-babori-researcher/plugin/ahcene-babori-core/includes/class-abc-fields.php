@@ -151,6 +151,18 @@ class ABC_Fields {
 					),
 				),
 			),
+			'abc_career'       => array(
+				array(
+					'title'  => 'Timeline entry',
+					'fields' => array(
+						'career_start'  => array( 'type' => 'year', 'label' => 'Start year', 'help' => 'Used to sort entries, newest first (e.g. 2021).', 'width' => 'third' ),
+						'career_period' => array( 'type' => 'text', 'label' => 'Period shown', 'help' => 'Free text: 2021 – Present, 2002–2004, Spring 2020…', 'width' => 'third' ),
+						'career_badge'  => array( 'type' => 'text', 'label' => 'Badge (optional)', 'help' => 'Small label next to the title: Current, New, Paris 8…', 'width' => 'third' ),
+						'career_org'    => array( 'type' => 'text', 'label' => 'Institution / place / date detail' ),
+						'career_detail' => array( 'type' => 'textarea', 'label' => 'Details', 'help' => 'Supervisor, modules, thesis title… Text between “curly quotes” is shown in italics.', 'rows' => 4 ),
+					),
+				),
+			),
 			'abc_note'         => array(
 				array(
 					'title'  => 'Connections',
@@ -260,7 +272,7 @@ class ABC_Fields {
 				add_meta_box( "abc_box_{$pt}_{$i}", $g['title'], array( __CLASS__, 'render_box' ), $pt, 'normal', 'high', array( 'group' => $i ) );
 			}
 		}
-		foreach ( array_keys( ABC_Post_Types::definitions() ) as $pt ) {
+		foreach ( array_merge( array_keys( ABC_Post_Types::definitions() ), array( 'abc_career' ) ) as $pt ) {
 			add_meta_box( 'abc_box_demo', 'Sample content label', array( __CLASS__, 'render_demo_box' ), $pt, 'side', 'low' );
 		}
 	}

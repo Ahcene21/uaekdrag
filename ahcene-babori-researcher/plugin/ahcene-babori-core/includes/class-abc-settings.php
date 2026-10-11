@@ -199,6 +199,7 @@ class ABC_Settings {
 			array( 'Add a course', 'Teaching, supervision, materials', $new( 'abc_teaching' ) ),
 			array( 'Add a resource', 'Guide, dataset, template (PDF, DOCX…)', $new( 'abc_resource' ) ),
 			array( 'Publish a research note', 'Short academic blog article', $new( 'abc_note' ) ),
+			array( 'Edit About timeline', 'Education, positions, experience, awards', admin_url( 'edit.php?post_type=abc_career' ) ),
 			array( 'Update photo', 'Portrait shown on the homepage', admin_url( 'admin.php?page=abc-profile' ) ),
 			array( 'Upload CV (PDF)', 'One file per language', admin_url( 'admin.php?page=abc-cv' ) ),
 			array( 'Update ORCID & profiles', 'ORCID, Scholar, Scopus, ResearchGate…', admin_url( 'admin.php?page=abc-identifiers' ) ),

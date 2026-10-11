@@ -101,14 +101,14 @@ class ABC_Demo {
 	/**
 	 * Terms, pages, menus, basic options.
 	 */
-	public static function install_structure() {
+	public static function install_structure( $only_tax = '' ) {
 		$d     = self::data();
 		$langs = self::langs();
 		self::log( 'Languages: ' . implode( ', ', array_map( 'strtoupper', $langs ) ) . ( function_exists( 'pll_languages_list' ) ? '' : ' (Polylang not active – English only)' ) );
 
 		// Terms.
 		foreach ( $d['taxonomies'] as $tax => $items ) {
-			if ( ! taxonomy_exists( $tax ) ) {
+			if ( ! taxonomy_exists( $tax ) || ( $only_tax && $tax !== $only_tax ) ) {
 				continue;
 			}
 			$created = 0;
@@ -146,6 +146,10 @@ class ABC_Demo {
 				}
 			}
 			self::log( "Terms $tax: $created created." );
+		}
+
+		if ( $only_tax ) {
+			return;
 		}
 
 		// Pages.
@@ -271,16 +275,19 @@ class ABC_Demo {
 	/**
 	 * Sample entries.
 	 */
-	public static function install_samples() {
+	public static function install_samples( $only_type = '' ) {
 		$d     = self::data();
 		$langs = self::langs();
-		if ( ! self::find_term( 'abc_research_area', 'digital-libraries', $langs[0] ) ) {
+		if ( ! $only_type && ! self::find_term( 'abc_research_area', 'digital-libraries', $langs[0] ) ) {
 			self::log( 'Install the structure first (research areas are missing).' );
 			return;
 		}
 		$ids = array(); // key => lang => id.
 		foreach ( $d['posts'] as $p ) {
 			$type = $p['type'];
+			if ( $only_type && $type !== $only_type ) {
+				continue;
+			}
 			$defs = ABC_Fields::fields_for( $type );
 			$byl  = array();
 			foreach ( $langs as $l ) {
@@ -306,7 +313,9 @@ class ABC_Demo {
 						continue;
 					}
 					update_post_meta( $id, '_abc_demo_key', $dkey );
-					update_post_meta( $id, '_abc_demo', '1' );
+					if ( empty( $p['real'] ) ) {
+						update_post_meta( $id, '_abc_demo', '1' );
+					}
 					if ( function_exists( 'pll_set_post_language' ) ) {
 						pll_set_post_language( $id, $l );
 						wp_update_post( array( 'ID' => $id, 'post_name' => $slug ) );
@@ -342,6 +351,9 @@ class ABC_Demo {
 		}
 		// Relations (second pass).
 		foreach ( $d['posts'] as $p ) {
+			if ( $only_type && $p['type'] !== $only_type ) {
+				continue;
+			}
 			foreach ( (array) ( $p['rel'] ?? array() ) as $mk => $keys ) {
 				foreach ( $langs as $l ) {
 					if ( empty( $ids[ $p['key'] ][ $l ] ) ) {

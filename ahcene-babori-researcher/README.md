@@ -30,7 +30,7 @@ A real, installable **WordPress** website for *Dr. Ahcene Babori – Assistant P
 - Multilingual EN/FR/AR (Polylang), `dir="rtl"` for Arabic, language switcher `EN | FR | AR`, URLs `/en/ /fr/ /ar/`
 - Homepage: hero + portrait (Media Library), 8 research-area cards, editable impact statistics, featured publications/projects, teaching/service/presentations, latest notes, collaboration call-to-action
 - Publications with authors, DOI, PDF, Open Access, repository, citation + BibTeX, related items, filters (year / type / area / keyword)
-- Books, Projects, Presentations (PDF/PPTX/video), Academic Service timeline, Teaching portfolio, Resources (PDF/DOCX/PPTX/XLSX/CSV downloads), Research Notes (reading time, categories, tags)
+- About Timeline (education, positions, experience, awards – editable), Books, Projects, Presentations (PDF/PPTX/video), Academic Service timeline, Teaching portfolio, Resources (PDF/DOCX/PPTX/XLSX/CSV downloads), Research Notes (reading time, categories, tags)
 - Online CV page with sidebar contents, per-language PDF download, print stylesheet
 - Contact form with nonce, honeypot, time token, rate limit, validation, optional dashboard storage
 - Researcher identifiers (ORCID, Scholar, Scopus, ResearchGate, LinkedIn, institutional) – **empty until you add verified values**

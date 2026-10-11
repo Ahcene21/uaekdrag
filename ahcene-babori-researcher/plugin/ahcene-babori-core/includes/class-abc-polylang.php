@@ -25,7 +25,7 @@ class ABC_Polylang {
 	 * Make our post types translatable.
 	 */
 	public static function post_types( $types, $is_settings ) {
-		foreach ( array_keys( ABC_Post_Types::definitions() ) as $pt ) {
+		foreach ( array_merge( array_keys( ABC_Post_Types::definitions() ), array( 'abc_career' ) ) as $pt ) {
 			$types[ $pt ] = $pt;
 		}
 		return $types;
@@ -35,7 +35,7 @@ class ABC_Polylang {
 	 * Make our taxonomies translatable (the numeric Year taxonomy is language-neutral).
 	 */
 	public static function taxonomies( $taxes, $is_settings ) {
-		foreach ( array( 'abc_pub_type', 'abc_pres_type', 'abc_research_area', 'abc_keyword', 'abc_service_type', 'abc_teaching_section', 'abc_resource_type', 'abc_note_category', 'abc_note_tag' ) as $t ) {
+		foreach ( array( 'abc_pub_type', 'abc_pres_type', 'abc_research_area', 'abc_keyword', 'abc_service_type', 'abc_teaching_section', 'abc_resource_type', 'abc_note_category', 'abc_note_tag', 'abc_career_section' ) as $t ) {
 			$taxes[ $t ] = $t;
 		}
 		return $taxes;
@@ -45,7 +45,7 @@ class ABC_Polylang {
 	 * When a translation is created, pre-fill the language-neutral fields from the source.
 	 */
 	public static function copy_metas( $keys, $sync ) {
-		foreach ( array_keys( ABC_Post_Types::definitions() ) as $pt ) {
+		foreach ( array_merge( array_keys( ABC_Post_Types::definitions() ), array( 'abc_career' ) ) as $pt ) {
 			foreach ( array_keys( ABC_Fields::fields_for( $pt ) ) as $k ) {
 				$keys[] = 'abc_' . $k;
 			}
