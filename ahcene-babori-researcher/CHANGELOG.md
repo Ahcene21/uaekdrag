@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.32 – 2026-10-12
+- Hero video: back to the full-height side panel that dissolves into the green block (right in LTR, left in RTL/Arabic). The video now covers the whole panel (cropped to fit), so nothing is left empty below it.
+
 ## 1.0.31 – 2026-10-12
 - Hero video: replaced the full-height panel with a **landscape (16:9) video card** inside the green block, so the Facebook/uploaded video fills its frame with no empty dark area underneath.
 
