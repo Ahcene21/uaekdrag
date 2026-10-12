@@ -9,7 +9,8 @@ defined( 'ABSPATH' ) || exit;
 get_header();
 $term = get_queried_object();
 $icon = get_term_meta( $term->term_id, 'abc_icon', true );
-abt_page_header( $term->name, wp_strip_all_tags( $term->description ), abc_t( 'research_area' ) );
+$img_id = abc_area_image_id( $term->term_id );
+abt_page_header( $term->name, wp_strip_all_tags( $term->description ), abc_t( 'research_area' ), $img_id ? (string) wp_get_attachment_image_url( $img_id, 'large' ) : '' );
 
 $sections = array(
 	array( 'projects', 'abc_project', abc_t( 'projects' ), 'cards', 12 ),

@@ -439,7 +439,7 @@ class ABC_Fields {
 	 */
 	public static function assets( $hook ) {
 		$screen = get_current_screen();
-		$ours   = $screen && ( strpos( (string) $screen->post_type, 'abc_' ) === 0 || strpos( (string) $screen->id, 'abc-researcher' ) !== false || strpos( (string) $screen->id, 'abc_' ) !== false || strpos( (string) $screen->id, 'researcher_page_' ) === 0 );
+		$ours   = $screen && ( strpos( (string) $screen->post_type, 'abc_' ) === 0 || strpos( (string) $screen->id, 'abc-researcher' ) !== false || strpos( (string) $screen->id, 'abc_' ) !== false || strpos( (string) $screen->id, 'researcher_page_' ) === 0 || 'abc_research_area' === (string) $screen->taxonomy );
 		if ( ! $ours ) {
 			return;
 		}

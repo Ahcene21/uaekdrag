@@ -251,6 +251,7 @@ class ABC_Post_Types {
 		}
 		echo '</select><p>Icon shown on the research-area card.</p></div>';
 		echo '<div class="form-field"><label for="abc_order">Display order</label><input type="number" name="abc_order" id="abc_order" value="50" min="0" step="1"><p>Lower numbers appear first on the homepage.</p></div>';
+		echo '<div class="form-field"><label>Image (optional)</label>' . self::image_picker( 0 ) . '<p>Shown as the card background on the homepage and in the header of the area page. Use a landscape photo or illustration you have the right to use (min. 800 × 500 px).</p></div>';
 	}
 
 	/**
@@ -267,6 +268,7 @@ class ABC_Post_Types {
 		}
 		echo '</select><p class="description">Icon shown on the research-area card. The description above is the card text.</p></td></tr>';
 		echo '<tr class="form-field"><th scope="row"><label for="abc_order">Display order</label></th><td><input type="number" name="abc_order" id="abc_order" value="' . esc_attr( (string) get_term_meta( $term->term_id, 'abc_order', true ) ) . '" min="0" step="1"><p class="description">Lower numbers appear first on the homepage.</p></td></tr>';
+		echo '<tr class="form-field"><th scope="row">Image (optional)</th><td>' . self::image_picker( (int) get_term_meta( $term->term_id, 'abc_image', true ) ) . '<p class="description">Shown as the card background on the homepage and in the header of the area page. Use a landscape photo or illustration you have the right to use (min. 800 × 500 px).</p></td></tr>';
 	}
 
 	public static function order_add_field() {
@@ -289,6 +291,19 @@ class ABC_Post_Types {
 	}
 
 	/**
+	 * Media-library picker markup for the area image.
+	 */
+	public static function image_picker( $id ) {
+		$src = $id ? wp_get_attachment_image_url( $id, 'medium' ) : '';
+		return '<div class="abc-media" data-mime="image">'
+			. '<img class="abc-media__preview" src="' . esc_url( (string) $src ) . '" alt="" style="max-width:220px;height:auto;display:block;margin-bottom:8px;border-radius:6px"' . ( $src ? '' : ' hidden' ) . '>'
+			. '<input type="hidden" name="abc_image" value="' . esc_attr( (string) $id ) . '">'
+			. '<span class="abc-media__name">' . esc_html( $id ? wp_basename( (string) get_attached_file( $id ) ) : 'No image selected' ) . '</span> '
+			. '<button type="button" class="button abc-media__pick">Choose / upload image</button> '
+			. '<button type="button" class="button-link abc-media__clear"' . ( $id ? '' : ' hidden' ) . '>Remove</button></div>';
+	}
+
+	/**
 	 * Save term icon.
 	 *
 	 * @param int $term_id Term.
@@ -303,6 +318,14 @@ class ABC_Post_Types {
 		}
 		if ( isset( $_POST['abc_order'] ) && '' !== $_POST['abc_order'] ) {
 			update_term_meta( $term_id, 'abc_order', absint( $_POST['abc_order'] ) );
+		}
+		if ( isset( $_POST['abc_image'] ) ) {
+			$img = absint( $_POST['abc_image'] );
+			if ( $img && wp_attachment_is_image( $img ) ) {
+				update_term_meta( $term_id, 'abc_image', $img );
+			} else {
+				delete_term_meta( $term_id, 'abc_image' );
+			}
 		}
 	}
 

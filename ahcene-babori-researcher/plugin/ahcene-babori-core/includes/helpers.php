@@ -487,6 +487,25 @@ function abc_reverse_related( $post_id, $post_type, $meta_key, $limit = 12 ) {
 }
 
 /**
+ * Image attachment ID of a research area (own image, else the one of a translation).
+ *
+ * @param int $term_id Term ID.
+ * @return int
+ */
+function abc_area_image_id( $term_id ) {
+	$id = (int) get_term_meta( $term_id, 'abc_image', true );
+	if ( ! $id && function_exists( 'pll_get_term_translations' ) ) {
+		foreach ( (array) pll_get_term_translations( $term_id ) as $tid ) {
+			$id = (int) get_term_meta( (int) $tid, 'abc_image', true );
+			if ( $id ) {
+				break;
+			}
+		}
+	}
+	return ( $id && wp_attachment_is_image( $id ) ) ? $id : 0;
+}
+
+/**
  * Reading time in minutes.
  *
  * @param int|null $post_id Post ID.

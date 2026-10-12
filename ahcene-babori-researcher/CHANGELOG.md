@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.18 – 2026-10-12
+- **Optional image per research area** (*Research Areas → edit → Image*, Media Library picker): shown as a full card background with a dark colour-scheme gradient (text always readable), a glass icon tile and a slow zoom on hover; the area page header gets the same image as a subtle tinted backdrop. Areas without an image keep the numbered icon card. Images are lazy-loaded and decorative (empty alt).
+
 ## 1.0.17 – 2026-10-12
 - **Research areas redesigned** (“knowledge network” cards): large outlined numbers 01–08, gradient icon tile, pill-shaped counters for related publications/projects, a gold-green progress edge, and a hover/focus state that turns the card into a deep green gradient with a gold icon (motion disabled for reduced-motion visitors). Follows the chosen colour scheme.
 

@@ -615,6 +615,22 @@ html[dir="rtl"] .abc-area::after{transform-origin:right center}
 .home .abt-section--tint .abc-area:hover,.home .abt-section--tint .abc-area:focus-within{background:linear-gradient(150deg,var(--navy-2),var(--teal-dark))}
 @media (prefers-reduced-motion:reduce){.abc-area,.abc-area::after,.abc-area__icon{transition:none}.abc-area:hover,.abc-area:focus-within{transform:none}}
 
+/* ---------- Research area with a full background image ---------- */
+.abc-area.abc-area--img,.home .abc-area.abc-area--img{padding-top:6.4rem;color:#fff;justify-content:flex-end;background:var(--navy)}
+.abc-area--img .abc-area__bg{position:absolute;inset:0;z-index:-2;width:100%;height:100%;object-fit:cover;filter:saturate(.8);transition:transform .8s}
+.abc-area--img .abc-area__shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(var(--navy-rgb),.38) 0%,rgba(var(--navy-rgb),.84) 42%,rgba(var(--navy-rgb),.95) 100%)}
+.abc-area--img .abc-area__icon{position:absolute;inset-block-start:1rem;inset-inline-start:1.1rem;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);backdrop-filter:blur(4px);box-shadow:none;color:var(--teal-light)}
+.abc-area--img .abc-area__title a{color:#fff}
+.abc-area--img .abc-area__desc{color:#e3ecf5}
+.abc-area--img::before{-webkit-text-stroke-color:rgba(255,255,255,.35)}
+.abc-area--img .abc-area__related a{background:rgba(255,255,255,.16);color:#fff}
+.abc-area--img:hover,.abc-area--img:focus-within{background:var(--navy)}
+.abc-area--img:hover .abc-area__bg,.abc-area--img:focus-within .abc-area__bg{transform:scale(1.08)}
+.abc-area--img:hover .abc-area__shade,.abc-area--img:focus-within .abc-area__shade{background:linear-gradient(180deg,rgba(var(--navy-rgb),.2) 0%,rgba(var(--navy-rgb),.78) 40%,rgba(var(--navy-rgb),.94) 100%)}
+.abc-area--img:hover .abc-area__icon,.abc-area--img:focus-within .abc-area__icon{background:var(--teal-light);color:var(--navy)}
+.abt-page-header--img::after{content:"";position:absolute;inset:0;z-index:0;background:var(--hdr-img) center/cover;opacity:.28;mix-blend-mode:luminosity;pointer-events:none}
+.abt-page-header--img>.abt-container{z-index:1}
+
 /* ---------- Print (CV) ---------- */
 @media print{
   .abt-header,.abt-footer,.abt-cv__side,.abt-cta,.abc-btn,.abt-breadcrumbs{display:none!important}

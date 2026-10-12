@@ -230,7 +230,9 @@ class ABC_Render {
 		$pubs  = $count( 'abc_publication' );
 		$projs = $count( 'abc_project' );
 		$link  = get_term_link( $term );
-		$html  = '<article class="abc-area"><div class="abc-area__icon">' . abc_icon( $icon, 30 ) . '</div>';
+		$img_id = abc_area_image_id( $term->term_id );
+		$bg     = $img_id ? wp_get_attachment_image( $img_id, 'medium_large', false, array( 'class' => 'abc-area__bg', 'alt' => '', 'loading' => 'lazy', 'decoding' => 'async' ) ) . '<span class="abc-area__shade" aria-hidden="true"></span>' : '';
+		$html   = '<article class="abc-area' . ( $bg ? ' abc-area--img' : '' ) . '">' . $bg . '<div class="abc-area__icon">' . abc_icon( $icon, 30 ) . '</div>';
 		$html .= '<' . self::$level . ' class="abc-area__title"><a href="' . esc_url( $link ) . '">' . esc_html( $term->name ) . '</a></' . self::$level . '>';
 		$html .= '<p class="abc-area__desc">' . esc_html( $term->description ) . '</p><ul class="abc-area__related">';
 		$html .= '<li><a href="' . esc_url( add_query_arg( 'pub_area', $term->slug, abc_archive_url( 'abc_publication' ) ) ) . '"><strong>' . (int) $pubs . '</strong> ' . esc_html( abc_t( 'related_publications' ) ) . '</a></li>';

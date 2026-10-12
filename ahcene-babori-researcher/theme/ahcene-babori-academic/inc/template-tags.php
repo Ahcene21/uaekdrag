@@ -106,8 +106,8 @@ function abt_pagination() {
  * @param string $desc   Description.
  * @param string $kicker Small label above.
  */
-function abt_page_header( $title, $desc = '', $kicker = '' ) {
-	echo '<header class="abt-page-header"><div class="abt-container">';
+function abt_page_header( $title, $desc = '', $kicker = '', $image_url = '' ) {
+	echo '<header class="abt-page-header' . ( $image_url ? ' abt-page-header--img' : '' ) . '"' . ( $image_url ? ' style="--hdr-img:url(' . esc_url( $image_url ) . ')"' : '' ) . '><div class="abt-container">';
 	abt_breadcrumbs();
 	if ( $kicker ) {
 		echo '<p class="abt-eyebrow">' . esc_html( $kicker ) . '</p>';
