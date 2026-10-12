@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.31 – 2026-10-12
+- Hero video: replaced the full-height panel with a **landscape (16:9) video card** inside the green block, so the Facebook/uploaded video fills its frame with no empty dark area underneath.
+
 ## 1.0.30 – 2026-10-12
 - Hero video is now integrated into the green block: it fills the full height of the right-hand side and dissolves into the green background (mirrored in RTL), with a pulsing play button. On mobile it becomes a rounded banner above the text.
 
