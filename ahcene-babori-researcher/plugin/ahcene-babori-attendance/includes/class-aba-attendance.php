@@ -22,6 +22,9 @@ class ABA_Attendance {
 		add_filter( 'abc_card_extra', array( __CLASS__, 'card_extra' ), 10, 2 );
 		add_action( 'abc_teaching_single_actions', array( __CLASS__, 'single_extra' ) );
 		add_shortcode( 'attendance_button', array( __CLASS__, 'shortcode' ) );
+		add_action( 'admin_init', array( __CLASS__, 'activate' ) ); // Creates the phone page after an update too (idempotent).
+		add_shortcode( 'attendance_scanner', array( __CLASS__, 'scanner_shortcode' ) );
+		add_filter( 'wp_robots', array( __CLASS__, 'noindex' ) );
 		add_action( 'rest_api_init', array( __CLASS__, 'routes' ) );
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'assets' ) );
 		add_action( 'wp_footer', array( __CLASS__, 'dialog' ) );
@@ -61,7 +64,64 @@ class ABA_Attendance {
 	/** Is the scanner needed on this request? */
 	private static function needed() {
 		$types = apply_filters( 'aba_post_types', array( 'abc_teaching' ) );
-		return self::can() && ( is_post_type_archive( $types ) || is_singular( $types ) );
+		return self::can() && ( is_post_type_archive( $types ) || is_singular( $types ) || self::is_scanner_page() );
+	}
+
+	/** Is this request the phone scanner page (a page holding [attendance_scanner])? */
+	private static function is_scanner_page() {
+		$p = is_page() ? get_queried_object() : null;
+		return $p instanceof WP_Post && has_shortcode( $p->post_content, 'attendance_scanner' );
+	}
+
+	/** [attendance_scanner]: login for the teacher on a phone, then the list of courses with their scan buttons. */
+	public static function scanner_shortcode() {
+		if ( ! self::can() ) {
+			$out  = '<div class="aba-login"><p>' . esc_html( aba_t( 'att_login' ) ) . '</p>';
+			$out .= wp_login_form( array( 'echo' => false, 'redirect' => get_permalink() ) );
+			return $out . '</div>';
+		}
+		$posts = get_posts( array( 'post_type' => apply_filters( 'aba_post_types', array( 'abc_teaching' ) ), 'post_status' => 'publish', 'posts_per_page' => 200, 'orderby' => 'title', 'order' => 'ASC', 'suppress_filters' => true ) );
+		if ( ! $posts ) {
+			return '<p>' . esc_html( aba_t( 'att_nocourse' ) ) . '</p>';
+		}
+		$out = '<ul class="aba-list">';
+		foreach ( $posts as $p ) {
+			$out .= '<li><span class="aba-list__t">' . esc_html( get_the_title( $p ) ) . '</span>' . self::button( $p->ID ) . '</li>';
+		}
+		return $out . '</ul>';
+	}
+
+	/** Create the private-use scanner page once (not indexed, not in menus). */
+	public static function activate() {
+		if ( get_option( 'aba_page_id' ) && 'page' === get_post_type( (int) get_option( 'aba_page_id' ) ) ) {
+			return;
+		}
+		$id = wp_insert_post(
+			array(
+				'post_type'    => 'page',
+				'post_status'  => 'publish',
+				'post_title'   => 'Attendance',
+				'post_name'    => 'attendance',
+				'post_content' => '[attendance_scanner]',
+			)
+		);
+		if ( $id && ! is_wp_error( $id ) ) {
+			update_option( 'aba_page_id', (int) $id, false );
+		}
+	}
+
+	public static function noindex( $robots ) {
+		if ( self::is_scanner_page() ) {
+			$robots['noindex']  = true;
+			$robots['nofollow'] = true;
+		}
+		return $robots;
+	}
+
+	/** URL of the phone scanner page ('' if missing). */
+	public static function scanner_url() {
+		$id = (int) get_option( 'aba_page_id' );
+		return ( $id && 'publish' === get_post_status( $id ) ) ? get_permalink( $id ) : '';
 	}
 
 	public static function register() {
@@ -308,6 +368,10 @@ class ABA_Attendance {
 		echo '<div class="wrap"><h1>Attendance</h1>';
 		if ( isset( $_GET['done'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
 			echo '<div class="notice notice-success is-dismissible"><p>Done.</p></div>';
+		}
+		$url = self::scanner_url();
+		if ( $url ) {
+			echo '<p><strong>On your phone:</strong> open <a href="' . esc_url( $url ) . '" target="_blank" rel="noopener">' . esc_html( $url ) . '</a>, log in once, then use the browser menu → <em>Add to Home screen</em>. Each course has its own scan button there.</p>';
 		}
 		echo '<p>Attendance is recorded from the public <strong>Teaching</strong> page: while logged in, each course shows a <em>Take attendance</em> button that scans student cards with the phone camera. Records are private (never shown to visitors). Camera access needs HTTPS.</p>';
 		echo '<form method="get" style="margin:12px 0"><input type="hidden" name="page" value="aba-attendance"><select name="module"><option value="0">All modules</option>';

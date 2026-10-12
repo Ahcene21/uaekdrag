@@ -105,6 +105,7 @@ Back up with any WordPress backup tool. Content is in the database, files in `wp
 
 Install and activate `ahcene-babori-attendance-plugin.zip` (needs the core plugin for the Teaching courses).
 
+0. On your phone open `yoursite.com/attendance/`, log in once, then *Add to Home screen* — every course is listed with its scan button. (The button never appears for visitors or when you are not logged in.)
 1. Log in, open the **Teaching** page and press **Take attendance** on the course.
 2. Allow camera access (the site must use HTTPS), choose the session date and point the phone at the QR code/barcode on the student card. Each new card is recorded with a short beep; scanning it again says "Already recorded".
 3. Review, delete or export (CSV) under the **Attendance** menu in the dashboard. Optionally paste a roster (`card code,Full name`) there to see names.

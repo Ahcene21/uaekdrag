@@ -1,5 +1,8 @@
 # Changelog
 
+## Student Attendance 1.1.0 – 2026-10-12
+- New **phone page** `/attendance/` (created automatically, `[attendance_scanner]` shortcode, noindex): the teacher logs in once on the phone and gets every course with its *Take attendance* button, no need to find the Teaching page. Add it to the phone's home screen. The dashboard Attendance screen shows its link.
+
 ## 1.0.41 – 2026-10-12 (core 1.0.26, new plugin Student Attendance 1.0.0)
 - The attendance feature moved out of the core plugin into its own plugin, **Ahcene Babori – Student Attendance** (`ahcene-babori-attendance-plugin.zip`). It adds the *Take attendance* button on every course (Teaching page and course page) through two extension points (`abc_card_extra` filter, `abc_teaching_single_actions` action) added to the core plugin and theme. Records already taken keep working. Own admin menu **Attendance**, own REST namespace `aba/v1`, UI strings in EN/FR/AR.
 

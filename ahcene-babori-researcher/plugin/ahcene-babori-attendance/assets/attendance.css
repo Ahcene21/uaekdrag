@@ -30,3 +30,10 @@
 .aba-btn:focus-visible{outline:3px solid #f2c94c;outline-offset:2px}
 .aba-att__actions .aba-btn,.aba-att__manual .aba-btn{background:#eef2f5;color:#14323a;border-color:#c5ced6}
 .aba-att-open{margin-top:.6rem;align-self:flex-start}
+.aba-list{list-style:none;margin:0;padding:0;display:grid;gap:.8rem}
+.aba-list li{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.6rem;padding:.9rem 1rem;border:1px solid #d7e0dc;border-radius:14px;background:#fff}
+.aba-list__t{font-weight:700;flex:1 1 200px}
+.aba-list .aba-att-open{margin:0}
+.aba-login{max-width:380px}
+.aba-login input[type=text],.aba-login input[type=password]{width:100%;padding:.7rem;border:1px solid #c5ced6;border-radius:8px;font:inherit}
+.aba-login .login-submit input{padding:.7rem 1.2rem;border-radius:999px;border:0;background:var(--teal,#0f6b4f);color:#fff;font:inherit;font-weight:700}

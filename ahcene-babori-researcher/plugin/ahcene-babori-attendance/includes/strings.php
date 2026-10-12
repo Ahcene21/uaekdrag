@@ -17,4 +17,6 @@ return array(
 	'att_count' => array( 'en' => 'Present', 'fr' => 'Présents', 'ar' => 'الحاضرون' ),
 	'att_hint' => array( 'en' => 'Point the camera at the QR code or barcode on the student card.', 'fr' => 'Dirigez la caméra vers le QR code ou le code-barres de la carte étudiante.', 'ar' => 'وجّه الكاميرا نحو رمز QR أو الباركود في بطاقة الطالب.' ),
 	'att_recent' => array( 'en' => 'Latest scans', 'fr' => 'Derniers scans', 'ar' => 'آخر عمليات المسح' ),
+	'att_login' => array( 'en' => 'Teacher login: sign in to take attendance with your phone.', 'fr' => 'Connexion enseignant : connectez-vous pour prendre les présences avec votre téléphone.', 'ar' => 'دخول الأستاذ: سجّل الدخول لتسجيل الحضور بهاتفك.' ),
+	'att_nocourse' => array( 'en' => 'No courses yet.', 'fr' => 'Aucun cours pour le moment.', 'ar' => 'لا توجد مقاييس بعد.' ),
 );
