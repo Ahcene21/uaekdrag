@@ -655,7 +655,7 @@ html[dir="rtl"] .abt-rail__btn--next .abc-icon{transform:scaleX(-1)}
 /* Full-width rail: cards run edge to edge, the first one aligned with the page content */
 .home .abt-section--tint[aria-labelledby="areas-title"]{overflow-x:clip}
 .home .abt-rail{width:100vw;max-width:100vw;margin-inline:calc(50% - 50vw)}
-.home .abt-rail .abc-grid--areas{padding-inline:0;scroll-padding-inline:0;margin-inline:0;gap:.6rem}
+.home .abt-rail .abc-grid--areas{padding-inline:.5rem;scroll-padding-inline:.5rem;margin-inline:0;gap:.6rem}
 .home .abt-rail .abc-area{flex:0 0 clamp(250px,22vw,330px)}
 .abt-rail__btn--prev{inset-inline-start:1rem}
 .abt-rail__btn--next{inset-inline-end:1rem}

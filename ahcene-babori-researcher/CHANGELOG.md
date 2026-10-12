@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.24 – 2026-10-12
+- Research-areas row: a small side margin (0.5 rem) so the first and last cards no longer touch the screen edges.
+
 ## 1.0.23 – 2026-10-12
 - Research-areas row: no side margins any more – the cards run from the very left edge to the very right edge of the screen (the heading stays aligned with the page content).
 
