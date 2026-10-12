@@ -33,6 +33,9 @@ class ABC_Settings {
 			'name'                => 'Dr. Ahcene Babori',
 			'photo_id'            => 0,
 			'photo_alt'           => '',
+			'hero_video_id'       => 0,
+			'hero_video_url'      => 'https://www.facebook.com/reel/260924258978131',
+			'hero_video_start'    => 34,
 			'orcid'               => '',
 			'scholar'             => '',
 			'scopus'              => '',
@@ -268,6 +271,9 @@ class ABC_Settings {
 				echo '<table class="form-table" role="presentation">';
 				self::row_text( 'Display name', 'name', $s['name'] );
 				self::row_media( 'Portrait photo', 'photo_id', 'image', 'Recommended: portrait orientation, at least 800 × 1000 px (JPG/PNG/WebP). Until you upload one, a neutral placeholder is shown.', true );
+				self::row_media( 'Hero video (uploaded file)', 'hero_video_id', 'video', 'Best option: upload an MP4 (H.264) you own, already trimmed or not. It plays from the start second below, with no third-party requests. Takes priority over the link below.' );
+				self::row_text( 'Hero video link (Facebook or YouTube)', 'hero_video_url', $s['hero_video_url'], 'Used only when no file is uploaded. Loaded after the visitor clicks play (nothing is sent to Facebook/YouTube before). Leave empty and no file to show the portrait instead.', 'url' );
+				self::row_text( 'Video start (seconds)', 'hero_video_start', $s['hero_video_start'], 'Start playing from this second (e.g. 34). Facebook may ignore this value; uploaded files and YouTube respect it.', 'number' );
 				self::row_text( 'Photo description (alt text)', 'photo_alt', $s['photo_alt'], 'Short description for screen readers, e.g. “Portrait of Dr. Ahcene Babori”.' );
 				self::row_ml( 'Professional title', 'role' );
 				self::row_ml( 'Positioning statement', 'tagline', true, 'Appears under the title in the homepage hero.' );
@@ -435,6 +441,12 @@ class ABC_Settings {
 				$cur['name']      = sanitize_text_field( $in['name'] ?? '' );
 				$cur['photo_id']  = absint( $in['photo_id'] ?? 0 );
 				$cur['photo_alt'] = sanitize_text_field( $in['photo_alt'] ?? '' );
+				$cur['hero_video_id']    = absint( $in['hero_video_id'] ?? 0 );
+				$cur['hero_video_url']   = esc_url_raw( trim( (string) ( $in['hero_video_url'] ?? '' ) ), array( 'https' ) );
+				$cur['hero_video_start'] = min( 36000, absint( $in['hero_video_start'] ?? 0 ) );
+				if ( $cur['hero_video_id'] && 0 !== strpos( (string) get_post_mime_type( $cur['hero_video_id'] ), 'video/' ) ) {
+					$cur['hero_video_id'] = 0;
+				}
 				foreach ( array( 'role' => false, 'tagline' => true, 'affiliation' => false, 'bio' => true ) as $k => $area ) {
 					foreach ( abc_languages() as $l ) {
 						$v = $in[ "ml_{$k}_{$l}" ] ?? '';

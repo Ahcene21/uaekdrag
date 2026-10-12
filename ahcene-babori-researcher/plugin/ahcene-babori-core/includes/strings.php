@@ -945,6 +945,16 @@ return array(
 		'fr' => 'Vidéo',
 		'ar' => 'الفيديو',
 	),
+	'video_label' => array(
+		'en' => 'Play the introduction video',
+		'fr' => 'Lire la vidéo de présentation',
+		'ar' => 'تشغيل فيديو التعريف',
+	),
+	'video_note' => array(
+		'en' => 'Loads from Facebook when played',
+		'fr' => 'Chargé depuis Facebook à la lecture',
+		'ar' => 'يُحمَّل من فيسبوك عند التشغيل',
+	),
 	'view_all' => array(
 		'en' => 'View all',
 		'fr' => 'Tout voir',

@@ -32,6 +32,12 @@ $notes    = ABC_Render::query( 'note', array( 'limit' => 4 ) );
 			</div>
 			<div class="abt-hero__profiles"><?php echo ABC_Render::profiles( 'icons' ); // phpcs:ignore WordPress.Security.EscapeOutput ?></div>
 		</div>
+		<?php $abt_video = abc_hero_video(); ?>
+		<?php if ( $abt_video ) : ?>
+		<figure class="abt-hero__portrait abt-hero__portrait--video">
+			<?php echo $abt_video; // phpcs:ignore WordPress.Security.EscapeOutput ?>
+		</figure>
+		<?php else : ?>
 		<figure class="abt-hero__portrait">
 			<span class="abt-orbit" aria-hidden="true">
 				<i class="abt-orbit__ring"></i><i class="abt-orbit__ring abt-orbit__ring--2"></i>
@@ -45,6 +51,7 @@ $notes    = ABC_Render::query( 'note', array( 'limit' => 4 ) );
 				<figcaption class="abt-hero__hint"><a href="<?php echo esc_url( admin_url( 'admin.php?page=abc-profile' ) ); ?>">Upload your portrait</a></figcaption>
 			<?php endif; ?>
 		</figure>
+		<?php endif; ?>
 	</div>
 	<div class="abt-container abt-hero__topics" aria-label="<?php echo esc_attr( abc_t( 'topics' ) ); ?>">
 		<ul>

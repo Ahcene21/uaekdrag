@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.29 – 2026-10-12 (plugin 1.0.22)
+- Homepage hero: the personal photo is replaced by a **video**. New settings in Researcher → Profile: uploaded video file (best, respects the start second, no third-party requests), or a Facebook/YouTube link (pre-filled with the requested reel), plus a **start second** (34). Embeds load only after the visitor clicks play. Clear both fields to return to the portrait.
+- Note: Facebook may ignore the start second and can refuse embedding for some reels; use an uploaded MP4 if so.
+
 ## 1.0.28 – 2026-10-12
 - Blog: the homepage block now shows **4** latest posts, and the Blog page (and its category/tag pages) lists **4 posts per page** (was 3 and 9).
 

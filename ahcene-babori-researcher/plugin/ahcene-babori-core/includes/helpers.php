@@ -901,3 +901,64 @@ function abc_kses_svg() {
 		'text'    => array( 'x' => true, 'y' => true, 'text-anchor' => true, 'font-size' => true, 'font-weight' => true, 'fill' => true, 'stroke' => true, 'font-family' => true ),
 	);
 }
+
+
+/**
+ * Hero video markup (uploaded file, or Facebook/YouTube click-to-load embed).
+ * Returns an empty string when no video is configured.
+ *
+ * @return string
+ */
+function abc_hero_video() {
+	$id    = absint( abc_setting( 'hero_video_id', 0 ) );
+	$url   = (string) abc_setting( 'hero_video_url', '' );
+	$start = absint( abc_setting( 'hero_video_start', 0 ) );
+	$pid   = absint( abc_setting( 'photo_id', 0 ) );
+	$poster = $pid ? (string) wp_get_attachment_image_url( $pid, 'large' ) : '';
+	$label = abc_t( 'video_label' );
+
+	if ( $id && 0 === strpos( (string) get_post_mime_type( $id ), 'video/' ) ) {
+		$src = wp_get_attachment_url( $id );
+		if ( $src ) {
+			return sprintf(
+				'<video class="abt-hero__video" controls playsinline preload="metadata" data-start="%1$d" aria-label="%2$s"%3$s><source src="%4$s#t=%1$d" type="%5$s"></video>',
+				$start,
+				esc_attr( $label ),
+				$poster ? ' poster="' . esc_url( $poster ) . '"' : '',
+				esc_url( $src ),
+				esc_attr( (string) get_post_mime_type( $id ) )
+			);
+		}
+	}
+
+	if ( '' === $url ) {
+		return '';
+	}
+	$host = (string) wp_parse_url( $url, PHP_URL_HOST );
+	$embed = '';
+	if ( preg_match( '/(^|\.)facebook\.com$|(^|\.)fb\.watch$/', $host ) ) {
+		$embed = add_query_arg(
+			array(
+				'href'      => $url,
+				'show_text' => 'false',
+				'width'     => 267,
+				't'         => $start,
+				'autoplay'  => 'true',
+			),
+			'https://www.facebook.com/plugins/video.php'
+		);
+	} elseif ( preg_match( '#(?:youtube\.com/(?:watch\?v=|shorts/|embed/)|youtu\.be/)([\w-]{11})#', $url, $m ) ) {
+		$embed = add_query_arg( array( 'start' => $start, 'autoplay' => 1, 'rel' => 0 ), 'https://www.youtube-nocookie.com/embed/' . $m[1] );
+	}
+	if ( ! $embed ) {
+		return '';
+	}
+	$bg = $poster ? ' style="background-image:url(' . esc_url( $poster ) . ')"' : '';
+	return sprintf(
+		'<div class="abt-hero__video abt-vframe" data-embed="%1$s"%2$s><button type="button" class="abt-vframe__play" aria-label="%3$s"><svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5v14l11-7z"/></svg></button><span class="abt-vframe__note">%4$s</span></div>',
+		esc_url( $embed ),
+		$bg,
+		esc_attr( $label ),
+		esc_html( abc_t( 'video_note' ) )
+	);
+}
