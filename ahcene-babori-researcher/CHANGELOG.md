@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.19 – 2026-10-12
+- Research-area images now use the **top-image layout**: a short image band with a unified colour-scheme tint (greyscale + gradient), icon and number over it, text below on white. The card still turns into the deep gradient on hover.
+
 ## 1.0.18 – 2026-10-12
 - **Optional image per research area** (*Research Areas → edit → Image*, Media Library picker): shown as a full card background with a dark colour-scheme gradient (text always readable), a glass icon tile and a slow zoom on hover; the area page header gets the same image as a subtle tinted backdrop. Areas without an image keep the numbered icon card. Images are lazy-loaded and decorative (empty alt).
 
