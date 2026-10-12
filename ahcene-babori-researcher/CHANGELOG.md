@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.21 – 2026-10-12
+- **Research areas in a single scrollable row** on the homepage (about 3½ cards visible, scroll-snap, round arrow buttons on desktop, swipe on phones; works in RTL). The Research page keeps the full grid.
+
 ## 1.0.20 – 2026-10-12
 - **Research-area cards: coloured title ribbon + prominent image.** The area name now sits in a gold ribbon at the top (dark navy text, icon tile and outlined number), followed by a larger image with a light colour-scheme tint, then the description and counters. Same structure with or without an image; the ribbon has a fixed height so images line up across the row.
 

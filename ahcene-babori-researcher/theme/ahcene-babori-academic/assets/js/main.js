@@ -20,6 +20,17 @@
 		});
 	}
 
+	/* Horizontal rail (research areas): arrow buttons scroll one card */
+	document.addEventListener('click', function (e) {
+		var b = e.target.closest ? e.target.closest('[data-rail-dir]') : null;
+		if (!b) { return; }
+		var rail = b.parentNode.querySelector('.abc-grid');
+		if (!rail) { return; }
+		var card = rail.querySelector('.abc-area'), step = card ? card.getBoundingClientRect().width + 16 : 300;
+		var rtl = getComputedStyle(document.documentElement).direction === 'rtl';
+		rail.scrollBy({ left: parseInt(b.getAttribute('data-rail-dir'), 10) * (rtl ? -1 : 1) * step, behavior: 'smooth' });
+	});
+
 	/* Mega menu toggles (touch / keyboard); hover is handled by CSS */
 	document.addEventListener('click', function (e) {
 		var t = e.target.closest ? e.target.closest('.abt-mega-toggle') : null;

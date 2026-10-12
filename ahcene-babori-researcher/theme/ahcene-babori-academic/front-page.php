@@ -89,7 +89,11 @@ $notes    = ABC_Render::query( 'note', array( 'limit' => 3 ) );
 <section class="abt-section abt-section--tint" aria-labelledby="areas-title">
 	<div class="abt-container">
 		<?php abt_section_head( abc_t( 'home_areas_title' ), abc_t( 'home_areas_intro' ), $res_url, abc_t( 'nav_research' ) ); ?>
-		<?php echo ABC_Render::research_areas( 8 ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+		<div class="abt-rail" data-rail>
+			<button type="button" class="abt-rail__btn abt-rail__btn--prev" data-rail-dir="-1" aria-label="<?php echo esc_attr( abc_t( 'previous' ) ); ?>"><?php echo abc_icon( 'arrow', 20 ); // phpcs:ignore WordPress.Security.EscapeOutput ?></button>
+			<?php echo ABC_Render::research_areas( 8 ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
+			<button type="button" class="abt-rail__btn abt-rail__btn--next" data-rail-dir="1" aria-label="<?php echo esc_attr( abc_t( 'next' ) ); ?>"><?php echo abc_icon( 'arrow', 20 ); // phpcs:ignore WordPress.Security.EscapeOutput ?></button>
+		</div>
 	</div>
 </section>
 
