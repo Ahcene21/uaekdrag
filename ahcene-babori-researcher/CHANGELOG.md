@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.16 – 2026-10-12
+- **Simple footer**: name and title (from Researcher → Profile), contact e-mail, and the social/academic profile icons only; slim bottom bar with the copyright and a round “Back to top” button.
+
 ## 1.0.15 – 2026-10-11
 - Homepage: the biography strip and the research-areas block now use tints of the chosen colour scheme (soft green / pale green with white cards) instead of white; bands alternate tinted → dark → white → tinted down the page.
 

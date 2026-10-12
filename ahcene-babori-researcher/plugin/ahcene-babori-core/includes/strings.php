@@ -765,6 +765,11 @@ return array(
 		'fr' => 'Accès rapide',
 		'ar' => 'وصول سريع',
 	),
+	'quick_links' => array(
+		'en' => 'Quick links',
+		'fr' => 'Liens rapides',
+		'ar' => 'روابط سريعة',
+	),
 	'related_notes' => array(
 		'en' => 'Related blog posts',
 		'fr' => 'Articles du blog associés',
@@ -849,6 +854,16 @@ return array(
 		'en' => 'Search results for “%s”',
 		'fr' => 'Résultats pour « %s »',
 		'ar' => 'نتائج البحث عن «%s»',
+	),
+	'sections' => array(
+		'en' => 'Sections',
+		'fr' => 'Rubriques',
+		'ar' => 'الأقسام',
+	),
+	'send_message' => array(
+		'en' => 'Send a message',
+		'fr' => 'Envoyer un message',
+		'ar' => 'أرسل رسالة',
 	),
 	'skip_to_content' => array(
 		'en' => 'Skip to content',

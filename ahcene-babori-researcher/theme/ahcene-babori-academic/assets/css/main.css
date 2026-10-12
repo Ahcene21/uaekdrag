@@ -528,21 +528,33 @@ html[lang="ar"] .abt-chrono__date{letter-spacing:0}
 @media (max-width:600px){.abt-result .abc-card{flex-direction:column}.abt-result .abc-card__media{flex-basis:auto}}
 
 /* ---------- Footer ---------- */
-.abt-footer{background:var(--navy);color:#c9d5e3;padding-top:clamp(2.2rem,5vw,3.5rem);font-size:.95rem}
-.abt-footer a{color:#e3edf7}
-.abt-footer a:hover{color:var(--teal-light)}
-.abt-footer__grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2rem 3rem;padding-bottom:2rem}
-.abt-footer__name{color:#fff;font-weight:800;font-size:1.25rem;margin:0}
-.abt-footer__role{color:var(--teal-light);margin:0 0 .8rem;font-weight:600}
-.abt-footer__statement{max-width:38ch;line-height:1.55}
-.abt-footer__title{color:#fff;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.78rem;margin-bottom:.8rem}
+.abt-footer{background:var(--navy);color:#c9d5e3;font-size:.95rem;border-top:4px solid var(--teal-light)}
+.abt-footer a{color:#e3edf7;text-decoration:none}
+.abt-footer a:hover{color:var(--teal-light);text-decoration:underline}
+.abt-footer__grid{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:1.6rem 3rem;padding-block:clamp(1.5rem,3vw,2.2rem)}
+.abt-footer__name{color:#fff;font-weight:800;font-size:1.25rem;margin:0 0 .15rem}
+.abt-footer__role{color:var(--teal-light);margin:0;font-weight:600;line-height:1.4}
+.abt-footer__title{color:#fff;font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:.78rem;margin:0 0 1rem;padding-bottom:.6rem;position:relative}
+.abt-footer__title::after{content:"";position:absolute;inset-inline-start:0;bottom:0;width:2.2rem;height:3px;border-radius:2px;background:var(--teal-light)}
 html[lang="ar"] .abt-footer__title{letter-spacing:0;font-size:.95rem}
-.abt-footer__menu{list-style:none;margin:0;padding:0;display:grid;gap:.4rem}
+.abt-footer__menu{list-style:none;margin:0;padding:0;display:grid;gap:.55rem}
+.abt-footer__menu a{display:inline-block;padding-inline-start:.9rem;position:relative}
+.abt-footer__menu a::before{content:"";position:absolute;inset-inline-start:0;top:.62em;width:.4rem;height:.4rem;border-radius:50%;background:var(--teal-light);opacity:.7}
+.abt-footer__mail{display:flex;align-items:center;gap:.5rem;margin:0;overflow-wrap:anywhere}
+.abt-footer__mail .abc-icon{color:var(--teal-light)}
 .abt-footer .abc-profiles a{color:#fff;border-color:rgba(255,255,255,.3)}
-.abt-footer .abc-profiles a:hover{background:rgba(255,255,255,.12);color:#fff}
-.abt-footer__bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem 1rem;border-top:1px solid rgba(255,255,255,.14);padding-block:1.2rem;font-size:.85rem}
+.abt-footer .abc-profiles a:hover{background:rgba(255,255,255,.12);color:#fff;text-decoration:none}
+.abt-footer .abc-btn--accent{color:var(--navy)}
+.abt-footer .abc-btn--accent:hover{color:var(--navy);background:#fff;text-decoration:none}
+.abt-footer__bar{background:rgba(0,0,0,.2);border-top:1px solid rgba(255,255,255,.1)}
+.abt-footer__bottom{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:.6rem 1rem;padding-block:.9rem;font-size:.85rem}
 .abt-footer__bottom p{margin:0}
-@media (max-width:760px){.abt-footer__grid{grid-template-columns:1fr}}
+.abt-totop{display:inline-flex;align-items:center;gap:.6rem;font-weight:600}
+.abt-totop i{display:grid;place-items:center;width:2rem;height:2rem;border-radius:50%;border:1.5px solid rgba(255,255,255,.4);font-style:normal}
+.abt-totop i .abc-icon{transform:rotate(-90deg)}
+html[dir="rtl"] .abt-totop i .abc-icon{transform:rotate(-90deg) scaleY(-1)}
+.abt-totop:hover i{background:var(--teal-light);border-color:var(--teal-light);color:var(--navy)}
+@media (max-width:700px){.abt-footer__grid{flex-direction:column}}
 
 /* ---------- Compact homepage ---------- */
 .home .abt-section{padding-block:clamp(1.3rem,2.6vw,2rem)}
@@ -575,7 +587,6 @@ html[lang="ar"] .abt-footer__title{letter-spacing:0;font-size:.95rem}
 .home .abt-cta{padding-block:1.4rem}
 .home .abt-cta h2{font-size:1.35rem;margin-bottom:.15em}
 .home .abt-cta p{font-size:.95rem}
-.home .abt-footer{padding-top:1.6rem}
 
 /* ---------- Justified text (start-aligned headings) ---------- */
 .abt-prose p,.abt-prose li,.abt-hero__tagline,.abt-bio__text,.abt-section__intro,.abt-page-desc,.abt-abstract,.abt-cta p,.abt-footer__statement,.abt-chrono__detail,.abt-cite__text{text-align:justify;text-justify:inter-word;hyphens:auto;-webkit-hyphens:auto;text-align-last:start}
