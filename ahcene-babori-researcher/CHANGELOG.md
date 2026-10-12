@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.27 – 2026-10-12
+- Homepage: the **Research impact** (statistics) block and the **Collaborate with me** call-to-action were removed. The statistics settings stay available and can still be shown anywhere with the `[abc_stats]` shortcode.
+
 ## 1.0.26 – 2026-10-12
 - Homepage research-area tiles: icons removed – the area image and title carry the tile; the image area is slightly taller.
 

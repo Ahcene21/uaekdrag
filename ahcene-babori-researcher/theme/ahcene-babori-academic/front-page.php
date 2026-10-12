@@ -95,15 +95,6 @@ $notes    = ABC_Render::query( 'note', array( 'limit' => 3 ) );
 	</div>
 </section>
 
-<?php $stats = ABC_Render::stats(); if ( $stats ) : ?>
-<section class="abt-section abt-section--dark" aria-labelledby="impact-title">
-	<div class="abt-container">
-		<div class="abt-section__head"><div><h2 class="abt-section__title" id="impact-title"><?php echo esc_html( abc_t( 'home_impact_title' ) ); ?></h2></div></div>
-		<?php echo $stats; // phpcs:ignore WordPress.Security.EscapeOutput ?>
-	</div>
-</section>
-<?php endif; ?>
-
 <?php if ( $projects ) : ?>
 <section class="abt-section" aria-labelledby="projects-title">
 	<div class="abt-container">
@@ -125,19 +116,6 @@ $notes    = ABC_Render::query( 'note', array( 'limit' => 3 ) );
 	</div>
 </section>
 <?php endif; ?>
-
-<section class="abt-cta" aria-labelledby="collab-title">
-	<div class="abt-container abt-cta__inner">
-		<div>
-			<h2 id="collab-title"><?php echo esc_html( abc_t( 'home_collab_title' ) ); ?></h2>
-			<p><?php echo esc_html( abc_t( 'home_collab_text' ) ); ?></p>
-		</div>
-		<div class="abt-cta__actions">
-			<a class="abc-btn abc-btn--accent" href="<?php echo esc_url( abc_contact_url(), array( 'http', 'https', 'mailto' ) ); ?>"><?php echo abc_icon( 'mail', 18 ); // phpcs:ignore WordPress.Security.EscapeOutput ?><span><?php echo esc_html( abc_t( 'nav_contact' ) ); ?></span></a>
-			<a class="abc-btn abc-btn--outline-light" href="<?php echo esc_url( $cv['url'] ); ?>"<?php echo $cv['is_file'] ? ' download' : ''; ?>><span><?php echo esc_html( abc_t( 'download_cv' ) ); ?></span></a>
-		</div>
-	</div>
-</section>
 
 <?php
 get_footer();
