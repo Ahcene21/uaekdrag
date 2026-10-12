@@ -14,7 +14,7 @@ if ( $res_url === ( function_exists( 'pll_home_url' ) ? pll_home_url() : home_ur
 	$res_url = abc_archive_url( 'abc_publication' );
 }
 $projects = ABC_Render::query( 'project', array( 'limit' => 4, 'featured' => 1 ) );
-$notes    = ABC_Render::query( 'note', array( 'limit' => 3 ) );
+$notes    = ABC_Render::query( 'note', array( 'limit' => 4 ) );
 ?>
 
 <section class="abt-hero" aria-labelledby="hero-title">

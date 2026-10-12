@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.28 – 2026-10-12
+- Blog: the homepage block now shows **4** latest posts, and the Blog page (and its category/tag pages) lists **4 posts per page** (was 3 and 9).
+
 ## 1.0.27 – 2026-10-12
 - Homepage: the **Research impact** (statistics) block and the **Collaborate with me** call-to-action were removed. The statistics settings stay available and can still be shown anywhere with the `[abc_stats]` shortcode.
 

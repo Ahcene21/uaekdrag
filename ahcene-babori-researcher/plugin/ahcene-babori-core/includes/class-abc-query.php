@@ -81,7 +81,7 @@ class ABC_Query {
 			$q->set( 'posts_per_page', 24 );
 			$q->set( 'orderby', array( 'menu_order' => 'ASC', 'date' => 'DESC' ) );
 		} elseif ( $q->is_post_type_archive( 'abc_note' ) || $q->is_tax( 'abc_note_category' ) || $q->is_tax( 'abc_note_tag' ) ) {
-			$q->set( 'posts_per_page', 9 );
+			$q->set( 'posts_per_page', 4 );
 		} elseif ( $q->is_tax( 'abc_research_area' ) ) {
 			$q->set( 'posts_per_page', 50 );
 		}
