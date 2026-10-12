@@ -594,6 +594,27 @@ html[lang="ar"] .abt-prose p,html[lang="ar"] .abt-prose li,html[lang="ar"] .abt-
 .abt-prose .abt-chrono__org{text-align:start}
 @media (max-width:560px){.abt-prose p,.abt-prose li{text-align:start}}
 
+/* ---------- Research areas: numbered "knowledge network" cards ---------- */
+.abc-grid--areas{counter-reset:area}
+.abc-area{counter-increment:area;position:relative;overflow:hidden;isolation:isolate;border:0;border-radius:18px;background:#fff;box-shadow:0 1px 0 rgba(var(--navy-rgb),.05),0 10px 24px rgba(var(--navy-rgb),.08);transition:transform .25s,box-shadow .25s,background .25s,color .25s}
+.abc-area::before{content:counter(area,decimal-leading-zero);position:absolute;inset-block-start:.35rem;inset-inline-end:.9rem;z-index:-1;font-size:3rem;font-weight:800;line-height:1;color:transparent;-webkit-text-stroke:1.5px rgba(var(--navy-rgb),.13);transition:-webkit-text-stroke-color .25s}
+.abc-area::after{content:"";position:absolute;inset-inline:0;inset-block-end:0;height:4px;background:linear-gradient(90deg,var(--teal),var(--teal-light));transform:scaleX(.22);transform-origin:left center;transition:transform .35s}
+html[dir="rtl"] .abc-area::after{transform-origin:right center}
+.abc-area__icon{width:2.7rem;height:2.7rem;border-radius:14px;background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:#fff;box-shadow:0 6px 14px rgba(var(--navy-rgb),.22);transition:background .25s,color .25s,transform .25s}
+.abc-area__related{border-top:0;padding-top:.2rem;gap:.4rem}
+.abc-area__related a{display:inline-flex;align-items:center;gap:.35rem;padding:.22rem .7rem;border-radius:999px;background:var(--teal-soft);color:var(--teal-dark);font-weight:600;transition:background .25s,color .25s}
+.abc-area__related strong{color:inherit}
+.abc-area:hover,.abc-area:focus-within{transform:translateY(-5px);background:linear-gradient(150deg,var(--navy-2),var(--teal-dark));box-shadow:0 18px 36px rgba(var(--navy-rgb),.3)}
+.abc-area:hover::after,.abc-area:focus-within::after{transform:scaleX(1)}
+.abc-area:hover::before,.abc-area:focus-within::before{-webkit-text-stroke-color:rgba(255,255,255,.28)}
+.abc-area:hover .abc-area__icon,.abc-area:focus-within .abc-area__icon{background:var(--teal-light);color:var(--navy);transform:rotate(-6deg) scale(1.05)}
+.abc-area:hover .abc-area__title a,.abc-area:focus-within .abc-area__title a{color:#fff}
+.abc-area:hover .abc-area__desc,.abc-area:focus-within .abc-area__desc{color:#d9e6f0}
+.abc-area:hover .abc-area__related a,.abc-area:focus-within .abc-area__related a{background:rgba(255,255,255,.14);color:#fff}
+.home .abt-section--tint .abc-area{background:#fff;border:0}
+.home .abt-section--tint .abc-area:hover,.home .abt-section--tint .abc-area:focus-within{background:linear-gradient(150deg,var(--navy-2),var(--teal-dark))}
+@media (prefers-reduced-motion:reduce){.abc-area,.abc-area::after,.abc-area__icon{transition:none}.abc-area:hover,.abc-area:focus-within{transform:none}}
+
 /* ---------- Print (CV) ---------- */
 @media print{
   .abt-header,.abt-footer,.abt-cv__side,.abt-cta,.abc-btn,.abt-breadcrumbs{display:none!important}

@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.17 – 2026-10-12
+- **Research areas redesigned** (“knowledge network” cards): large outlined numbers 01–08, gradient icon tile, pill-shaped counters for related publications/projects, a gold-green progress edge, and a hover/focus state that turns the card into a deep green gradient with a gold icon (motion disabled for reduced-motion visitors). Follows the chosen colour scheme.
+
 ## 1.0.16 – 2026-10-12
 - **Simple footer**: name and title (from Researcher → Profile), contact e-mail, and the social/academic profile icons only; slim bottom bar with the copyright and a round “Back to top” button.
 
