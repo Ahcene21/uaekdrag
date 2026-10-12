@@ -90,6 +90,7 @@
 			i.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
 			i.allowFullscreen = true;
 			i.title = b.getAttribute('aria-label') || '';
+			var fig = f.closest('.abt-hero__portrait'); if (fig) { fig.classList.add('is-playing'); }
 			f.textContent = '';
 			f.appendChild(i);
 		});
