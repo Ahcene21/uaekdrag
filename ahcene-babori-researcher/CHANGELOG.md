@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.23 – 2026-10-12
+- Research-areas row: no side margins any more – the cards run from the very left edge to the very right edge of the screen (the heading stays aligned with the page content).
+
 ## 1.0.22 – 2026-10-12
 - **Research-areas row now spans the full page width** (edge to edge): the first card stays aligned with the page content, the cards continue to the screen edge, arrows sit at the screen edges; no horizontal page scroll at any width.
 
