@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.22 – 2026-10-12
+- **Research-areas row now spans the full page width** (edge to edge): the first card stays aligned with the page content, the cards continue to the screen edge, arrows sit at the screen edges; no horizontal page scroll at any width.
+
 ## 1.0.21 – 2026-10-12
 - **Research areas in a single scrollable row** on the homepage (about 3½ cards visible, scroll-snap, round arrow buttons on desktop, swipe on phones; works in RTL). The Research page keeps the full grid.
 
