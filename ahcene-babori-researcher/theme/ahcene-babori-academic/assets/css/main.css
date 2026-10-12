@@ -783,17 +783,3 @@ html[dir="rtl"] .abt-vframe__play{translate:50% -50%}
   .abt-hero__portrait--video,.abt-hero__portrait--video.is-playing{-webkit-mask-image:linear-gradient(to right,transparent 0,#000 11%);mask-image:linear-gradient(to right,transparent 0,#000 11%)}
   html[dir="rtl"] .abt-hero__portrait--video,html[dir="rtl"] .abt-hero__portrait--video.is-playing{-webkit-mask-image:linear-gradient(to left,transparent 0,#000 11%);mask-image:linear-gradient(to left,transparent 0,#000 11%)}
 }
-
-/* Hero video v7: capsule-shaped window that bleeds off the page edge, gold contour, green tint – one visual language with the block */
-@media (min-width:861px){
-  .abt-hero__portrait--video,.abt-hero__portrait--video.is-playing,html[dir="rtl"] .abt-hero__portrait--video,html[dir="rtl"] .abt-hero__portrait--video.is-playing{-webkit-mask-image:none;mask-image:none;overflow:visible;width:40%;inset-block:0}
-  .abt-hero__portrait--video::before{display:block;content:"";position:absolute;inset-block:calc(1.5rem - 12px) calc(5rem - 12px);inset-inline:-12px 0;border:2px solid var(--teal-light);border-inline-end:0;border-start-start-radius:999px;border-end-start-radius:999px;opacity:.55;transform:none;z-index:0}
-  .abt-hero__portrait--video::after{display:block;content:"";position:absolute;inset-block-end:calc(5rem - 38px);inset-inline-start:-30px;width:84px;height:84px;border-radius:50%;background:radial-gradient(var(--teal-light) 1.6px,transparent 2px) 0 0/10px 10px;opacity:.7;z-index:2}
-  .abt-hero__portrait--video .abt-hero__video{inset-block:1.5rem 5rem;inset-inline:0;width:auto;height:auto;border:0;border-start-start-radius:999px;border-end-start-radius:999px;border-start-end-radius:0;border-end-end-radius:0;box-shadow:-18px 0 50px rgba(0,0,0,.28);z-index:1}
-  html[dir="rtl"] .abt-hero__portrait--video .abt-hero__video{box-shadow:18px 0 50px rgba(0,0,0,.28)}
-  .abt-hero__portrait--video .abt-vframe::after{display:block;content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(to right,rgba(var(--accent-rgb),.28),transparent 38%);z-index:1}
-  html[dir="rtl"] .abt-hero__portrait--video .abt-vframe::after{background:linear-gradient(to left,rgba(var(--accent-rgb),.28),transparent 38%)}
-  .abt-hero__portrait--video .abt-vframe:has(iframe)::after{display:none}
-}
-@media (min-width:861px){.abt-hero__grid:has(.abt-hero__portrait--video) .abt-hero__text{max-width:min(100%,calc(100% - 480px))}}
-@media (min-width:861px) and (max-width:1180px){.abt-hero__grid:has(.abt-hero__portrait--video) .abt-hero__text{max-width:min(100%,calc(100% - 400px))}.abt-hero__portrait--video,.abt-hero__portrait--video.is-playing{width:36%}}

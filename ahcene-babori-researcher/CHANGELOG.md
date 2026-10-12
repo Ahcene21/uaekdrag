@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.38 – 2026-10-12
+- Hero video: reverted the capsule window (1.0.37); the layout is back to the 1.0.36 design (full-height side panel, caption visible).
+
 ## 1.0.37 – 2026-10-12
 - Hero video integrated into the green block's design language: capsule-shaped window that bleeds off the page edge, a gold contour and dotted accent echoing the old portrait frame, a soft green tint on the seam, and the text column kept clear of it (mirrored in RTL).
 
