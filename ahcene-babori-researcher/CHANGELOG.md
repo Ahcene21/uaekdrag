@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.35 – 2026-10-12
+- Hero: the text now always sits above the video's fade zone (it was partly covered by the video), the video panel is slightly narrower and the text column stays clear of it.
+
 ## 1.0.34 – 2026-10-12 (plugin 1.0.24)
 - Hero: the keyword pills (Digital libraries, Open science…) were removed from the green block, and the "Loads from Facebook…" caption over the video was removed.
 
