@@ -662,6 +662,33 @@ html[dir="rtl"] .abt-rail__btn--next .abc-icon{transform:scaleX(-1)}
 @media (max-width:1100px){.home .abt-rail .abc-area{flex-basis:clamp(250px,40vw,330px)}}
 @media (max-width:700px){.home .abt-rail .abc-area{flex-basis:78vw}}
 
+/* ---------- Research areas as colour tiles (homepage) – same family as the quick-access tiles ---------- */
+.home .abt-tiles .abc-grid--areas{display:grid;grid-template-columns:repeat(8,1fr);gap:.55rem;counter-reset:none}
+.home .abt-tiles .abc-area{--tile:var(--teal);position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:0;min-height:230px;padding:0 .5rem 1rem;border-radius:12px;text-align:center;color:#fff;background:var(--tile);box-shadow:none;overflow:hidden;isolation:isolate;transition:transform .2s,filter .2s}
+.home .abt-tiles .abc-grid--areas>.abc-area:nth-child(4n+2){--tile:var(--navy-2)}
+.home .abt-tiles .abc-grid--areas>.abc-area:nth-child(4n+3){--tile:var(--teal-dark)}
+.home .abt-tiles .abc-grid--areas>.abc-area:nth-child(4n+4){--tile:var(--navy-3)}
+.home .abt-tiles .abc-area::before,.home .abt-tiles .abc-area::after{display:none}
+.home .abt-tiles .abc-area:hover,.home .abt-tiles .abc-area:focus-within{transform:translateY(-4px);background:var(--tile);box-shadow:0 16px 30px rgba(var(--navy-rgb),.3);filter:brightness(1.05)}
+.home .abt-tiles .abc-area__head{display:contents}
+.home .abt-tiles .abc-area__media{position:absolute;inset:0 0 40% 0;height:auto;z-index:-1;background:transparent;-webkit-mask-image:linear-gradient(180deg,#000 40%,transparent 100%);mask-image:linear-gradient(180deg,#000 40%,transparent 100%)}
+.home .abt-tiles .abc-area__media .abc-area__bg{opacity:.78;filter:saturate(.9)}
+.home .abt-tiles .abc-area__media .abc-area__shade{display:none}
+.home .abt-tiles .abc-area__icon{order:1;position:absolute;inset-block-start:.9rem;inset-inline-start:50%;translate:-50% 0;width:46px;height:46px;border-radius:50%;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);backdrop-filter:blur(4px);color:var(--teal-light);box-shadow:none}
+html[dir="rtl"] .home .abt-tiles .abc-area__icon{translate:50% 0}
+.home .abt-tiles .abc-area:hover .abc-area__icon,.home .abt-tiles .abc-area:focus-within .abc-area__icon{background:var(--teal-light);color:var(--navy);transform:none}
+.home .abt-tiles .abc-area__title{order:2;margin:0;padding:0;font-size:.86rem;line-height:1.3;max-width:100%}
+.home .abt-tiles .abc-area__title a,.home .abt-tiles .abc-area:hover .abc-area__title a,.home .abt-tiles .abc-area:focus-within .abc-area__title a{color:#fff;font-weight:700;text-decoration:none}
+.home .abt-tiles .abc-area__title a::after{content:"";position:absolute;inset:0;z-index:2}
+.home .abt-tiles .abc-area__desc,.home .abt-tiles .abc-area__related{position:absolute;inset-inline:0;z-index:3;margin:0;opacity:0;visibility:hidden;transition:opacity .2s}
+.home .abt-tiles .abc-area__desc{inset-block-start:0;padding:1rem .7rem 0;height:100%;background:rgb(var(--navy-rgb));color:#e3ecf5;font-size:.74rem;line-height:1.45;display:-webkit-box;-webkit-line-clamp:7;-webkit-box-orient:vertical;overflow:hidden;text-align:center;padding-bottom:4.8rem}
+.home .abt-tiles .abc-area__related{inset-block-end:0;padding:0 .6rem .8rem;display:flex;flex-direction:column;align-items:center;gap:.3rem;pointer-events:none}
+.home .abt-tiles .abc-area__related a{background:rgba(255,255,255,.16);color:#fff;font-size:.72rem;padding:.15rem .6rem;white-space:nowrap}
+.home .abt-tiles .abc-area:hover .abc-area__desc,.home .abt-tiles .abc-area:focus-within .abc-area__desc,.home .abt-tiles .abc-area:hover .abc-area__related,.home .abt-tiles .abc-area:focus-within .abc-area__related{opacity:1;visibility:visible}
+@media (max-width:1100px){.home .abt-tiles .abc-grid--areas{grid-template-columns:repeat(4,1fr)}}
+@media (max-width:520px){.home .abt-tiles .abc-grid--areas{grid-template-columns:repeat(2,1fr)}.home .abt-tiles .abc-area{min-height:200px}}
+@media (hover:none){.home .abt-tiles .abc-area__desc,.home .abt-tiles .abc-area__related{display:none}}
+
 /* ---------- Print (CV) ---------- */
 @media print{
   .abt-header,.abt-footer,.abt-cv__side,.abt-cta,.abc-btn,.abt-breadcrumbs{display:none!important}
