@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.26 – 2026-10-12
+- Homepage research-area tiles: icons removed – the area image and title carry the tile; the image area is slightly taller.
+
 ## 1.0.25 – 2026-10-12
 - **Homepage research areas as colour tiles** (same family as the quick-access tiles): eight tiles in one row (4 on tablets, 2 on phones) in alternating scheme colours, icon in a glass circle, the area title at the bottom and the area image fading from the top of the tile into its colour. On hover/keyboard focus a tile shows the description and the publication/project counters. The Research page keeps the detailed cards.
 
