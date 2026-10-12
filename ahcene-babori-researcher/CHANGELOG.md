@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.34 – 2026-10-12 (plugin 1.0.24)
+- Hero: the keyword pills (Digital libraries, Open science…) were removed from the green block, and the "Loads from Facebook…" caption over the video was removed.
+
 ## 1.0.33 – 2026-10-12 (plugin 1.0.23)
 - Hero video **autoplays when the homepage opens** (muted, as browsers require; visitors unmute with the player controls). New Researcher → Profile checkbox "Autoplay" (on by default). Skipped for visitors who prefer reduced motion; uploaded files loop back to the start second.
 

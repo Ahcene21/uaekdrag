@@ -53,15 +53,6 @@ $notes    = ABC_Render::query( 'note', array( 'limit' => 4 ) );
 		</figure>
 		<?php endif; ?>
 	</div>
-	<div class="abt-container abt-hero__topics" aria-label="<?php echo esc_attr( abc_t( 'topics' ) ); ?>">
-		<ul>
-			<li><?php echo esc_html( abc_t( 'topic_dl' ) ); ?></li>
-			<li><?php echo esc_html( abc_t( 'topic_os' ) ); ?></li>
-			<li><?php echo esc_html( abc_t( 'topic_ir' ) ); ?></li>
-			<li><?php echo esc_html( abc_t( 'topic_sc' ) ); ?></li>
-			<li><?php echo esc_html( abc_t( 'topic_ai' ) ); ?></li>
-		</ul>
-	</div>
 </section>
 
 <section class="abt-quick" aria-label="<?php echo esc_attr( abc_t( 'quick_access' ) ); ?>">

@@ -957,11 +957,10 @@ function abc_hero_video() {
 	}
 	$bg = $poster ? ' style="background-image:url(' . esc_url( $poster ) . ')"' : '';
 	return sprintf(
-		'<div class="abt-hero__video abt-vframe" data-embed="%1$s" data-autoplay="%5$d"%2$s><button type="button" class="abt-vframe__play" aria-label="%3$s"><svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5v14l11-7z"/></svg></button><span class="abt-vframe__note">%4$s</span></div>',
+		'<div class="abt-hero__video abt-vframe" data-embed="%1$s" data-autoplay="%4$d"%2$s><button type="button" class="abt-vframe__play" aria-label="%3$s"><svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M8 5v14l11-7z"/></svg></button></div>',
 		esc_url( $embed ),
 		$bg,
 		esc_attr( $label ),
-		esc_html( abc_t( 'video_note' ) ),
 		$auto
 	);
 }
