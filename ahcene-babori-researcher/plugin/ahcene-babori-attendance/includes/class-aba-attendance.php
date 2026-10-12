@@ -4,12 +4,12 @@
  * Teacher-only: nothing is public. Records live in a private post type and are managed
  * under Researcher → Attendance (filter, CSV export, delete).
  *
- * @package AhceneBaboriCore
+ * @package AhceneBaboriAttendance
  */
 
 defined( 'ABSPATH' ) || exit;
 
-class ABC_Attendance {
+class ABA_Attendance {
 
 	const CPT = 'abc_attendance';
 
@@ -18,6 +18,10 @@ class ABC_Attendance {
 	 */
 	public static function init() {
 		add_action( 'init', array( __CLASS__, 'register' ) );
+		// Attach the button to the course cards and course pages of the Researcher theme/plugin.
+		add_filter( 'abc_card_extra', array( __CLASS__, 'card_extra' ), 10, 2 );
+		add_action( 'abc_teaching_single_actions', array( __CLASS__, 'single_extra' ) );
+		add_shortcode( 'attendance_button', array( __CLASS__, 'shortcode' ) );
 		add_action( 'rest_api_init', array( __CLASS__, 'routes' ) );
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'assets' ) );
 		add_action( 'wp_footer', array( __CLASS__, 'dialog' ) );
@@ -27,6 +31,28 @@ class ABC_Attendance {
 		add_action( 'admin_post_abc_att_roster', array( __CLASS__, 'save_roster' ) );
 	}
 
+	/** Filter: append the button to a teaching card. */
+	public static function card_extra( $html, $post ) {
+		if ( $post && 'abc_teaching' === $post->post_type ) {
+			$html .= self::button( $post->ID );
+		}
+		return $html;
+	}
+
+	/** Action: button on a single course page. */
+	public static function single_extra( $post_id ) {
+		$b = self::button( $post_id );
+		if ( $b ) {
+			echo '<p>' . $b . '</p>'; // phpcs:ignore WordPress.Security.EscapeOutput
+		}
+	}
+
+	/** [attendance_button id="123"] for any other page. Needs the scanner assets, so the page must be a course page. */
+	public static function shortcode( $atts ) {
+		$a = shortcode_atts( array( 'id' => get_the_ID() ), $atts );
+		return self::button( absint( $a['id'] ) );
+	}
+
 	/** Only the site owner/teacher may take or read attendance. */
 	public static function can() {
 		return current_user_can( 'manage_options' );
@@ -34,7 +60,8 @@ class ABC_Attendance {
 
 	/** Is the scanner needed on this request? */
 	private static function needed() {
-		return self::can() && ( is_post_type_archive( 'abc_teaching' ) || is_singular( 'abc_teaching' ) );
+		$types = apply_filters( 'aba_post_types', array( 'abc_teaching' ) );
+		return self::can() && ( is_post_type_archive( $types ) || is_singular( $types ) );
 	}
 
 	public static function register() {
@@ -112,7 +139,7 @@ class ABC_Attendance {
 	public static function routes() {
 		$perm = array( __CLASS__, 'can' );
 		register_rest_route(
-			'abc/v1',
+			'aba/v1',
 			'/attendance',
 			array(
 				array(
@@ -150,7 +177,7 @@ class ABC_Attendance {
 		$code   = self::clean_code( $r->get_param( 'code' ) );
 		$date   = self::valid_date( $r->get_param( 'date' ) );
 		$date   = $date ? $date : wp_date( 'Y-m-d' );
-		if ( ! $module || 'abc_teaching' !== get_post_type( $module ) || '' === $code ) {
+		if ( ! $module || ! in_array( get_post_type( $module ), apply_filters( 'aba_post_types', array( 'abc_teaching' ) ), true ) || '' === $code ) {
 			return new WP_Error( 'abc_att_bad', 'Invalid request.', array( 'status' => 400 ) );
 		}
 		$key = md5( $module . '|' . $date . '|' . $code );
@@ -193,19 +220,19 @@ class ABC_Attendance {
 		if ( ! self::needed() ) {
 			return;
 		}
-		wp_enqueue_style( 'abc-attendance', ABC_URL . 'assets/attendance.css', array(), ABC_VERSION );
-		wp_enqueue_script( 'abc-jsqr', ABC_URL . 'assets/vendor/jsQR.js', array(), '1.4.0', true );
-		wp_enqueue_script( 'abc-attendance', ABC_URL . 'assets/attendance.js', array( 'abc-jsqr' ), ABC_VERSION, true );
+		wp_enqueue_style( 'aba-attendance', ABA_URL . 'assets/attendance.css', array(), ABA_VERSION );
+		wp_enqueue_script( 'abc-jsqr', ABA_URL . 'assets/vendor/jsQR.js', array(), '1.4.0', true );
+		wp_enqueue_script( 'aba-attendance', ABA_URL . 'assets/attendance.js', array( 'abc-jsqr' ), ABA_VERSION, true );
 		$keys = array( 'att_title', 'att_date', 'att_start', 'att_stop', 'att_close', 'att_manual', 'att_add', 'att_ok', 'att_dup', 'att_err', 'att_nocam', 'att_count', 'att_hint', 'att_recent' );
 		$i18n = array();
 		foreach ( $keys as $k ) {
-			$i18n[ $k ] = abc_t( $k );
+			$i18n[ $k ] = aba_t( $k );
 		}
 		wp_localize_script(
-			'abc-attendance',
-			'abcAtt',
+			'aba-attendance',
+			'abaAtt',
 			array(
-				'endpoint' => esc_url_raw( rest_url( 'abc/v1/attendance' ) ),
+				'endpoint' => esc_url_raw( rest_url( 'aba/v1/attendance' ) ),
 				'nonce'    => wp_create_nonce( 'wp_rest' ),
 				'today'    => wp_date( 'Y-m-d' ),
 				'i18n'     => $i18n,
@@ -219,10 +246,10 @@ class ABC_Attendance {
 			return '';
 		}
 		return sprintf(
-			'<button type="button" class="abc-btn abc-btn--sm abc-att-open" data-module="%d" data-title="%s"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3M4 12h16"/></svg> %s</button>',
+			'<button type="button" class="aba-btn aba-att-open" data-module="%d" data-title="%s"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3M4 12h16"/></svg> %s</button>',
 			(int) $post_id,
 			esc_attr( get_the_title( $post_id ) ),
-			esc_html( abc_t( 'att_take' ) )
+			esc_html( aba_t( 'att_take' ) )
 		);
 	}
 
@@ -231,31 +258,31 @@ class ABC_Attendance {
 			return;
 		}
 		?>
-		<dialog id="abc-att" class="abc-att" aria-labelledby="abc-att-title">
-			<div class="abc-att__head">
-				<h2 id="abc-att-title"><?php echo esc_html( abc_t( 'att_title' ) ); ?></h2>
-				<button type="button" class="abc-att__x" data-att-close aria-label="<?php echo esc_attr( abc_t( 'att_close' ) ); ?>">&times;</button>
+		<dialog id="aba-att" class="aba-att" aria-labelledby="aba-att-title">
+			<div class="aba-att__head">
+				<h2 id="aba-att-title"><?php echo esc_html( aba_t( 'att_title' ) ); ?></h2>
+				<button type="button" class="aba-att__x" data-att-close aria-label="<?php echo esc_attr( aba_t( 'att_close' ) ); ?>">&times;</button>
 			</div>
-			<p class="abc-att__module" id="abc-att-module"></p>
-			<label class="abc-att__date"><?php echo esc_html( abc_t( 'att_date' ) ); ?>
-				<input type="date" id="abc-att-date">
+			<p class="aba-att__module" id="aba-att-module"></p>
+			<label class="aba-att__date"><?php echo esc_html( aba_t( 'att_date' ) ); ?>
+				<input type="date" id="aba-att-date">
 			</label>
-			<div class="abc-att__cam">
-				<video id="abc-att-video" playsinline muted></video>
-				<span class="abc-att__frame" aria-hidden="true"></span>
+			<div class="aba-att__cam">
+				<video id="aba-att-video" playsinline muted></video>
+				<span class="aba-att__frame" aria-hidden="true"></span>
 			</div>
-			<p class="abc-att__hint"><?php echo esc_html( abc_t( 'att_hint' ) ); ?></p>
-			<div class="abc-att__actions">
-				<button type="button" class="abc-btn abc-btn--sm" id="abc-att-toggle"><?php echo esc_html( abc_t( 'att_start' ) ); ?></button>
+			<p class="aba-att__hint"><?php echo esc_html( aba_t( 'att_hint' ) ); ?></p>
+			<div class="aba-att__actions">
+				<button type="button" class="aba-btn" id="aba-att-toggle"><?php echo esc_html( aba_t( 'att_start' ) ); ?></button>
 			</div>
-			<p class="abc-att__status" id="abc-att-status" role="status" aria-live="polite"></p>
-			<form class="abc-att__manual" id="abc-att-form" autocomplete="off">
-				<label for="abc-att-code"><?php echo esc_html( abc_t( 'att_manual' ) ); ?></label>
-				<span><input type="text" id="abc-att-code" inputmode="text" maxlength="100"><button type="submit" class="abc-btn abc-btn--sm"><?php echo esc_html( abc_t( 'att_add' ) ); ?></button></span>
+			<p class="aba-att__status" id="aba-att-status" role="status" aria-live="polite"></p>
+			<form class="aba-att__manual" id="aba-att-form" autocomplete="off">
+				<label for="aba-att-code"><?php echo esc_html( aba_t( 'att_manual' ) ); ?></label>
+				<span><input type="text" id="aba-att-code" inputmode="text" maxlength="100"><button type="submit" class="aba-btn"><?php echo esc_html( aba_t( 'att_add' ) ); ?></button></span>
 			</form>
-			<p class="abc-att__count"><?php echo esc_html( abc_t( 'att_count' ) ); ?>: <strong id="abc-att-count">0</strong></p>
-			<h3 class="abc-att__sub"><?php echo esc_html( abc_t( 'att_recent' ) ); ?></h3>
-			<ol class="abc-att__recent" id="abc-att-recent"></ol>
+			<p class="aba-att__count"><?php echo esc_html( aba_t( 'att_count' ) ); ?>: <strong id="aba-att-count">0</strong></p>
+			<h3 class="aba-att__sub"><?php echo esc_html( aba_t( 'att_recent' ) ); ?></h3>
+			<ol class="aba-att__recent" id="aba-att-recent"></ol>
 		</dialog>
 		<?php
 	}
@@ -263,7 +290,7 @@ class ABC_Attendance {
 	/* --------------------------------------------------------------- admin */
 
 	public static function menu() {
-		add_submenu_page( 'abc-researcher', 'Attendance', 'Attendance', ABC_Settings::CAP, 'abc-attendance', array( __CLASS__, 'render_page' ) );
+		add_menu_page( 'Attendance', 'Attendance', 'manage_options', 'abc-attendance', array( __CLASS__, 'render_page' ), 'dashicons-id', 4 );
 	}
 
 	private static function teaching_posts() {
@@ -282,8 +309,8 @@ class ABC_Attendance {
 		if ( isset( $_GET['done'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification
 			echo '<div class="notice notice-success is-dismissible"><p>Done.</p></div>';
 		}
-		echo '<p>Attendance is recorded from the public <strong>Teaching</strong> page: while logged in, each module shows a <em>Take attendance</em> button that scans student cards with the phone camera. Records are private (never shown to visitors). Camera access needs HTTPS.</p>';
-		echo '<form method="get" style="margin:12px 0"><input type="hidden" name="page" value="abc-attendance"><select name="module"><option value="0">All modules</option>';
+		echo '<p>Attendance is recorded from the public <strong>Teaching</strong> page: while logged in, each course shows a <em>Take attendance</em> button that scans student cards with the phone camera. Records are private (never shown to visitors). Camera access needs HTTPS.</p>';
+		echo '<form method="get" style="margin:12px 0"><input type="hidden" name="page" value="aba-attendance"><select name="module"><option value="0">All modules</option>';
 		foreach ( $mods as $m ) {
 			printf( '<option value="%d"%s>%s</option>', (int) $m->ID, selected( $module, $m->ID, false ), esc_html( get_the_title( $m ) ) );
 		}
@@ -314,7 +341,7 @@ class ABC_Attendance {
 		check_admin_referer( 'abc_att_roster' );
 		$txt = isset( $_POST['roster'] ) ? sanitize_textarea_field( wp_unslash( $_POST['roster'] ) ) : '';
 		update_option( 'abc_roster', $txt, false );
-		wp_safe_redirect( admin_url( 'admin.php?page=abc-attendance&done=1' ) );
+		wp_safe_redirect( admin_url( 'admin.php?page=aba-attendance&done=1' ) );
 		exit;
 	}
 
@@ -327,7 +354,7 @@ class ABC_Attendance {
 		if ( $id && self::CPT === get_post_type( $id ) ) {
 			wp_delete_post( $id, true );
 		}
-		wp_safe_redirect( admin_url( 'admin.php?page=abc-attendance&done=1' ) );
+		wp_safe_redirect( admin_url( 'admin.php?page=aba-attendance&done=1' ) );
 		exit;
 	}
 
@@ -358,7 +385,3 @@ class ABC_Attendance {
 	}
 }
 
-/** Template helper: attendance button (empty for visitors). */
-function abc_attendance_button( $post_id ) {
-	return ABC_Attendance::button( $post_id );
-}

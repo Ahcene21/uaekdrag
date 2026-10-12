@@ -1,14 +1,14 @@
 /* Teacher-only attendance scanner: camera -> QR/barcode -> REST record. No external services. */
 (function () {
 	'use strict';
-	var C = window.abcAtt;
-	var dlg = document.getElementById('abc-att');
+	var C = window.abaAtt;
+	var dlg = document.getElementById('aba-att');
 	if (!C || !dlg) { return; }
 	var t = C.i18n;
 	var $ = function (id) { return document.getElementById(id); };
-	var video = $('abc-att-video'), toggle = $('abc-att-toggle'), statusEl = $('abc-att-status');
-	var dateEl = $('abc-att-date'), form = $('abc-att-form'), codeEl = $('abc-att-code');
-	var countEl = $('abc-att-count'), recentEl = $('abc-att-recent');
+	var video = $('aba-att-video'), toggle = $('aba-att-toggle'), statusEl = $('aba-att-status');
+	var dateEl = $('aba-att-date'), form = $('aba-att-form'), codeEl = $('aba-att-code');
+	var countEl = $('aba-att-count'), recentEl = $('aba-att-recent');
 	var module = 0, stream = null, timer = 0, busy = false, last = '', lastAt = 0, detector = null;
 	var canvas = document.createElement('canvas'), ctx = canvas.getContext('2d', { willReadFrequently: true });
 
@@ -94,10 +94,10 @@
 	dateEl.addEventListener('change', refresh);
 	dlg.querySelectorAll('[data-att-close]').forEach(function (b) { b.addEventListener('click', function () { dlg.close(); }); });
 	dlg.addEventListener('close', stop);
-	document.querySelectorAll('.abc-att-open').forEach(function (b) {
+	document.querySelectorAll('.aba-att-open').forEach(function (b) {
 		b.addEventListener('click', function () {
 			module = parseInt(b.getAttribute('data-module'), 10) || 0;
-			$('abc-att-module').textContent = b.getAttribute('data-title') || '';
+			$('aba-att-module').textContent = b.getAttribute('data-title') || '';
 			if (!dateEl.value) { dateEl.value = C.today; }
 			say('', ''); last = '';
 			if (typeof dlg.showModal === 'function') { dlg.showModal(); } else { dlg.setAttribute('open', ''); }

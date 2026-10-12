@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.41 – 2026-10-12 (core 1.0.26, new plugin Student Attendance 1.0.0)
+- The attendance feature moved out of the core plugin into its own plugin, **Ahcene Babori – Student Attendance** (`ahcene-babori-attendance-plugin.zip`). It adds the *Take attendance* button on every course (Teaching page and course page) through two extension points (`abc_card_extra` filter, `abc_teaching_single_actions` action) added to the core plugin and theme. Records already taken keep working. Own admin menu **Attendance**, own REST namespace `aba/v1`, UI strings in EN/FR/AR.
+
 ## 1.0.40 – 2026-10-12 (plugin 1.0.25)
 - **Student attendance by card scan.** When you are logged in, every course on the Teaching page (and each course page) shows a *Take attendance* button. It opens a scanner that uses the phone camera to read the QR code / barcode on the student card, records the student for that course and session date, beeps/vibrates, and flags duplicates. A manual-entry field is the fallback.
 - New **Researcher → Attendance** screen: filter by course and date, delete records, export CSV (spreadsheet-safe), optional private roster (`card code,Full name`) to show names.

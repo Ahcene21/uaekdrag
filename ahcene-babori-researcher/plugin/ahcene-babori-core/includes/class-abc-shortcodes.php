@@ -201,9 +201,8 @@ class ABC_Render {
 			$html .= '<p class="abc-card__excerpt">' . esc_html( wp_trim_words( $excerpt, 28 ) ) . '</p>';
 		}
 		$html .= '<p class="abc-card__meta">' . wp_kses_post( $meta ) . self::demo_badge( $id ) . '</p>';
-		if ( 'abc_teaching' === $pt ) {
-			$html .= abc_attendance_button( $id ); // Empty unless the teacher is logged in.
-		}
+		// Extension point (e.g. the Student Attendance plugin adds a teacher-only button on courses).
+		$html .= apply_filters( 'abc_card_extra', '', $post ); // phpcs:ignore WordPress.Security.EscapeOutput
 		$html .= '</div></article>';
 		return $html;
 	}

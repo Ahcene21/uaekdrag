@@ -3,7 +3,7 @@
  * Plugin Name:       Ahcene Babori Core
  * Plugin URI:        https://ahcenebabori.com
  * Description:       Academic data layer for the website of Dr. Ahcene Babori: publications, books, projects, presentations, teaching, academic service, resources, research notes, researcher profile, statistics, SEO/schema, contact form and future import connectors. Content lives here, so it survives a theme change.
- * Version:           1.0.25
+ * Version:           1.0.26
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            Dr. Ahcene Babori
@@ -18,7 +18,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'ABC_VERSION', '1.0.25' );
+define( 'ABC_VERSION', '1.0.26' );
 define( 'ABC_FILE', __FILE__ );
 define( 'ABC_DIR', plugin_dir_path( __FILE__ ) );
 define( 'ABC_URL', plugin_dir_url( __FILE__ ) );
@@ -35,7 +35,6 @@ require_once ABC_DIR . 'includes/class-abc-polylang.php';
 require_once ABC_DIR . 'includes/class-abc-rest.php';
 require_once ABC_DIR . 'includes/class-abc-import.php';
 require_once ABC_DIR . 'includes/class-abc-demo.php';
-require_once ABC_DIR . 'includes/class-abc-attendance.php';
 
 /**
  * Boot all modules.
@@ -54,7 +53,6 @@ function abc_core_boot() {
 	ABC_REST::init();
 	ABC_Import::init();
 	ABC_Demo::init();
-	ABC_Attendance::init();
 }
 add_action( 'plugins_loaded', 'abc_core_boot' );
 
