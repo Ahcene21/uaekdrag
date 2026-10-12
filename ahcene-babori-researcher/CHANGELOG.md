@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.39 – 2026-10-12
+- Hero video: same side-panel design, but wider and dissolved into the green block with a long, soft gradient so no hard seam is visible between the video and the block.
+
 ## 1.0.38 – 2026-10-12
 - Hero video: reverted the capsule window (1.0.37); the layout is back to the 1.0.36 design (full-height side panel, caption visible).
 

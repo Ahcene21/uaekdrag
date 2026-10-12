@@ -783,3 +783,11 @@ html[dir="rtl"] .abt-vframe__play{translate:50% -50%}
   .abt-hero__portrait--video,.abt-hero__portrait--video.is-playing{-webkit-mask-image:linear-gradient(to right,transparent 0,#000 11%);mask-image:linear-gradient(to right,transparent 0,#000 11%)}
   html[dir="rtl"] .abt-hero__portrait--video,html[dir="rtl"] .abt-hero__portrait--video.is-playing{-webkit-mask-image:linear-gradient(to left,transparent 0,#000 11%);mask-image:linear-gradient(to left,transparent 0,#000 11%)}
 }
+
+/* Hero video v8: same panel, but dissolved into the green with a long soft gradient + green wash so there is no visible seam */
+@media (min-width:861px){
+  .abt-hero__portrait--video,.abt-hero__portrait--video.is-playing{width:48%;-webkit-mask-image:linear-gradient(to right,transparent 0,rgba(0,0,0,.35) 9%,rgba(0,0,0,.8) 20%,#000 30%);mask-image:linear-gradient(to right,transparent 0,rgba(0,0,0,.35) 9%,rgba(0,0,0,.8) 20%,#000 30%)}
+  html[dir="rtl"] .abt-hero__portrait--video,html[dir="rtl"] .abt-hero__portrait--video.is-playing{-webkit-mask-image:linear-gradient(to left,transparent 0,rgba(0,0,0,.35) 9%,rgba(0,0,0,.8) 20%,#000 30%);mask-image:linear-gradient(to left,transparent 0,rgba(0,0,0,.35) 9%,rgba(0,0,0,.8) 20%,#000 30%)}
+  .abt-hero__grid:has(.abt-hero__portrait--video) .abt-hero__text{max-width:min(100%,calc(100% - 470px))}
+}
+@media (min-width:861px) and (max-width:1180px){.abt-hero__portrait--video,.abt-hero__portrait--video.is-playing{width:44%}.abt-hero__grid:has(.abt-hero__portrait--video) .abt-hero__text{max-width:min(100%,calc(100% - 380px))}}
