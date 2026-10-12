@@ -79,12 +79,14 @@
 	});
 })();
 
-/* Hero video: click-to-load embeds; seek uploaded files to the start second. */
+/* Hero video: embeds load on click or, when enabled, automatically (muted); uploaded files seek to the start second. */
 (function () {
+	var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 	document.querySelectorAll('.abt-vframe').forEach(function (f) {
 		var b = f.querySelector('.abt-vframe__play');
 		if (!b) { return; }
-		b.addEventListener('click', function () {
+		var load = function () {
+			if (f.querySelector('iframe')) { return; }
 			var i = document.createElement('iframe');
 			i.src = f.getAttribute('data-embed');
 			i.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
@@ -93,10 +95,14 @@
 			var fig = f.closest('.abt-hero__portrait'); if (fig) { fig.classList.add('is-playing'); }
 			f.textContent = '';
 			f.appendChild(i);
-		});
+		};
+		b.addEventListener('click', load);
+		if (f.getAttribute('data-autoplay') === '1' && !calm) { load(); }
 	});
 	document.querySelectorAll('video.abt-hero__video[data-start]').forEach(function (v) {
 		var s = parseInt(v.getAttribute('data-start'), 10) || 0;
 		if (s) { v.addEventListener('loadedmetadata', function () { if (v.currentTime < s) { v.currentTime = s; } }, { once: true }); }
+		v.addEventListener('ended', function () { v.currentTime = s; if (v.dataset.autoplay === '1' && !calm) { v.play().catch(function () {}); } });
+		if (v.dataset.autoplay === '1' && !calm) { v.muted = true; v.play().catch(function () {}); }
 	});
 })();

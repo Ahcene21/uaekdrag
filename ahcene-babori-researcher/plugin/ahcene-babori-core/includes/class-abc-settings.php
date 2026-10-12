@@ -36,6 +36,7 @@ class ABC_Settings {
 			'hero_video_id'       => 0,
 			'hero_video_url'      => 'https://www.facebook.com/reel/260924258978131',
 			'hero_video_start'    => 34,
+			'hero_video_autoplay' => 1,
 			'orcid'               => '',
 			'scholar'             => '',
 			'scopus'              => '',
@@ -274,6 +275,7 @@ class ABC_Settings {
 				self::row_media( 'Hero video (uploaded file)', 'hero_video_id', 'video', 'Best option: upload an MP4 (H.264) you own, already trimmed or not. It plays from the start second below, with no third-party requests. Takes priority over the link below.' );
 				self::row_text( 'Hero video link (Facebook or YouTube)', 'hero_video_url', $s['hero_video_url'], 'Used only when no file is uploaded. Loaded after the visitor clicks play (nothing is sent to Facebook/YouTube before). Leave empty and no file to show the portrait instead.', 'url' );
 				self::row_text( 'Video start (seconds)', 'hero_video_start', $s['hero_video_start'], 'Start playing from this second (e.g. 34). Facebook may ignore this value; uploaded files and YouTube respect it.', 'number' );
+				echo '<tr><th scope="row">Autoplay</th><td><label><input type="checkbox" name="abc[hero_video_autoplay]" value="1"' . checked( ! empty( $s['hero_video_autoplay'] ), true, false ) . '> Start the hero video automatically (muted) when the homepage opens</label><p class="description">Browsers only allow muted autoplay; visitors unmute with the player controls. Not applied for visitors who prefer reduced motion. With a Facebook/YouTube link, enabling this contacts that service on page load.</p></td></tr>';
 				self::row_text( 'Photo description (alt text)', 'photo_alt', $s['photo_alt'], 'Short description for screen readers, e.g. “Portrait of Dr. Ahcene Babori”.' );
 				self::row_ml( 'Professional title', 'role' );
 				self::row_ml( 'Positioning statement', 'tagline', true, 'Appears under the title in the homepage hero.' );
@@ -443,6 +445,7 @@ class ABC_Settings {
 				$cur['photo_alt'] = sanitize_text_field( $in['photo_alt'] ?? '' );
 				$cur['hero_video_id']    = absint( $in['hero_video_id'] ?? 0 );
 				$cur['hero_video_url']   = esc_url_raw( trim( (string) ( $in['hero_video_url'] ?? '' ) ), array( 'https' ) );
+				$cur['hero_video_autoplay'] = empty( $in['hero_video_autoplay'] ) ? 0 : 1;
 				$cur['hero_video_start'] = min( 36000, absint( $in['hero_video_start'] ?? 0 ) );
 				if ( $cur['hero_video_id'] && 0 !== strpos( (string) get_post_mime_type( $cur['hero_video_id'] ), 'video/' ) ) {
 					$cur['hero_video_id'] = 0;

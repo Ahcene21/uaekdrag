@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.33 – 2026-10-12 (plugin 1.0.23)
+- Hero video **autoplays when the homepage opens** (muted, as browsers require; visitors unmute with the player controls). New Researcher → Profile checkbox "Autoplay" (on by default). Skipped for visitors who prefer reduced motion; uploaded files loop back to the start second.
+
 ## 1.0.32 – 2026-10-12
 - Hero video: back to the full-height side panel that dissolves into the green block (right in LTR, left in RTL/Arabic). The video now covers the whole panel (cropped to fit), so nothing is left empty below it.
 
