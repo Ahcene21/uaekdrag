@@ -9,7 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'ABT_VERSION', '1.0.36' );
+define( 'ABT_VERSION', '1.0.37' );
 define( 'ABT_DIR', get_template_directory() );
 define( 'ABT_URI', get_template_directory_uri() );
 
