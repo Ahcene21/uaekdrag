@@ -30,6 +30,9 @@ while ( have_posts() ) :
 		if ( 'abc_teaching' === $pt ) {
 			$mat = abc_file_or_url( 'teach_materials_id', 'teach_materials_url' );
 			echo $mat ? '<p>' . ABC_Render::button( $mat, abc_t( 'download' ), 'download', 'abc-btn abc-btn--primary' ) . '</p>' : ''; // phpcs:ignore WordPress.Security.EscapeOutput
+			if ( function_exists( 'abc_attendance_button' ) && abc_attendance_button( get_the_ID() ) ) {
+				echo '<p>' . abc_attendance_button( get_the_ID() ) . '</p>'; // phpcs:ignore WordPress.Security.EscapeOutput
+			}
 		}
 		?>
 	</article>

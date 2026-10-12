@@ -201,6 +201,9 @@ class ABC_Render {
 			$html .= '<p class="abc-card__excerpt">' . esc_html( wp_trim_words( $excerpt, 28 ) ) . '</p>';
 		}
 		$html .= '<p class="abc-card__meta">' . wp_kses_post( $meta ) . self::demo_badge( $id ) . '</p>';
+		if ( 'abc_teaching' === $pt ) {
+			$html .= abc_attendance_button( $id ); // Empty unless the teacher is logged in.
+		}
 		$html .= '</div></article>';
 		return $html;
 	}

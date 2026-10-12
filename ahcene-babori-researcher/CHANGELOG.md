@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.40 – 2026-10-12 (plugin 1.0.25)
+- **Student attendance by card scan.** When you are logged in, every course on the Teaching page (and each course page) shows a *Take attendance* button. It opens a scanner that uses the phone camera to read the QR code / barcode on the student card, records the student for that course and session date, beeps/vibrates, and flags duplicates. A manual-entry field is the fallback.
+- New **Researcher → Attendance** screen: filter by course and date, delete records, export CSV (spreadsheet-safe), optional private roster (`card code,Full name`) to show names.
+- Privacy/security: records are private posts, never public; the REST endpoint (`abc/v1/attendance`) requires a logged-in administrator and a nonce; no external services (QR decoding uses the bundled jsQR 1.4.0, Apache-2.0, plus the browser's built-in BarcodeDetector when available).
+- Needs HTTPS for camera access. Reading 1-D barcodes needs a browser with BarcodeDetector (Chrome/Android); QR works everywhere.
+
 ## 1.0.39 – 2026-10-12
 - Hero video: same side-panel design, but wider and dissolved into the green block with a long, soft gradient so no hard seam is visible between the video and the block.
 

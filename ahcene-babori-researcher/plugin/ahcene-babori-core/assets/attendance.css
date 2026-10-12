@@ -1,0 +1,27 @@
+.abc-att{border:0;border-radius:18px;padding:1.2rem 1.3rem 1.4rem;width:min(94vw,460px);max-height:94vh;overflow:auto;box-shadow:0 24px 70px rgba(0,0,0,.4);color:#1b2733;background:#fff}
+.abc-att::backdrop{background:rgba(8,24,18,.62)}
+.abc-att__head{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.abc-att__head h2{font-size:1.15rem;margin:0}
+.abc-att__x{border:0;background:none;font-size:1.8rem;line-height:1;cursor:pointer;color:inherit;padding:.2rem .5rem}
+.abc-att__module{font-weight:700;color:var(--teal,#0f6b4f);margin:.3rem 0 .7rem}
+.abc-att__date{display:flex;flex-direction:column;gap:.25rem;font-size:.85rem;margin-bottom:.7rem}
+.abc-att__date input,.abc-att__manual input{padding:.5rem .6rem;border:1px solid #c5ced6;border-radius:8px;font:inherit}
+.abc-att__cam{position:relative;aspect-ratio:4/3;background:#0b1b2b;border-radius:14px;overflow:hidden}
+.abc-att__cam video{width:100%;height:100%;object-fit:cover;display:block}
+.abc-att__frame{position:absolute;inset:18% 22%;border:3px solid rgba(255,255,255,.85);border-radius:14px;box-shadow:0 0 0 999px rgba(0,0,0,.28);pointer-events:none;opacity:0;transition:opacity .2s}
+.abc-att.is-scanning .abc-att__frame{opacity:1}
+.abc-att__hint{font-size:.85rem;color:#5a6773;margin:.6rem 0}
+.abc-att__actions{margin-bottom:.4rem}
+.abc-att__status{min-height:1.6em;font-weight:700;margin:.3rem 0}
+.abc-att__status[data-kind="recorded"]{color:#0a7a45}
+.abc-att__status[data-kind="duplicate"]{color:#9a6a00}
+.abc-att__status[data-kind="error"]{color:#b3261e}
+.abc-att__manual label{display:block;font-size:.85rem;margin-bottom:.25rem}
+.abc-att__manual span{display:flex;gap:.5rem}
+.abc-att__manual input{flex:1;min-width:0}
+.abc-att__count{margin:.8rem 0 .2rem}
+.abc-att__sub{font-size:.9rem;margin:.6rem 0 .3rem}
+.abc-att__recent{margin:0;padding-inline-start:1.2rem;font-size:.85rem;max-height:9em;overflow:auto}
+.abc-att-open{margin-top:.6rem}
+.abc-card .abc-att-open{align-self:flex-start;background:var(--teal,#0f6b4f);color:#fff;border-color:var(--teal,#0f6b4f)}
+.abc-card .abc-att-open:hover{filter:brightness(1.1)}

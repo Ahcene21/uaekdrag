@@ -100,3 +100,10 @@ Back up with any WordPress backup tool. Content is in the database, files in `wp
 | Menu shows only English | Assign each language’s menu in *Polylang → Settings → Menus* |
 | Arabic page is left-to-right | Language “العربية” must have **Text direction: RTL** in *Languages → Languages* |
 | No CV button file | Upload the PDF in *Researcher → CV files* (otherwise the button opens the online CV) |
+
+## Student attendance (card scan)
+
+1. Log in, open the **Teaching** page and press **Take attendance** on the course.
+2. Allow camera access (the site must use HTTPS), choose the session date and point the phone at the QR code/barcode on the student card. Each new card is recorded with a short beep; scanning it again says "Already recorded".
+3. Review, delete or export (CSV) under **Researcher → Attendance**. Optionally paste a roster (`card code,Full name`) there to see names.
+Records are stored privately on your site and are never shown to visitors. Collect student data only as permitted by your institution's rules and delete it when no longer needed.
