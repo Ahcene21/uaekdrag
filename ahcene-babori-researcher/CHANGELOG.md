@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.20 – 2026-10-12
+- **Research-area cards: coloured title ribbon + prominent image.** The area name now sits in a gold ribbon at the top (dark navy text, icon tile and outlined number), followed by a larger image with a light colour-scheme tint, then the description and counters. Same structure with or without an image; the ribbon has a fixed height so images line up across the row.
+
 ## 1.0.19 – 2026-10-12
 - Research-area images now use the **top-image layout**: a short image band with a unified colour-scheme tint (greyscale + gradient), icon and number over it, text below on white. The card still turns into the deep gradient on hover.
 
