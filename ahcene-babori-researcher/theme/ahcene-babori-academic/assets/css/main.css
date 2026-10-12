@@ -775,3 +775,11 @@ html[dir="rtl"] .abt-vframe__play{translate:50% -50%}
   .abt-hero__grid:has(.abt-hero__portrait--video) .abt-hero__text{max-width:min(100%,calc(100% - 330px))}
   .abt-hero__portrait--video,.abt-hero__portrait--video.is-playing{width:34%}
 }
+
+/* Hero video v6: crop from the left so the on-screen name/caption (right side of the frame) stays visible; softer edge fade */
+@media (min-width:861px){
+  .abt-hero__portrait--video .abt-vframe iframe{left:auto;right:0;translate:none}
+  .abt-hero__portrait--video video.abt-hero__video{object-position:right center}
+  .abt-hero__portrait--video,.abt-hero__portrait--video.is-playing{-webkit-mask-image:linear-gradient(to right,transparent 0,#000 11%);mask-image:linear-gradient(to right,transparent 0,#000 11%)}
+  html[dir="rtl"] .abt-hero__portrait--video,html[dir="rtl"] .abt-hero__portrait--video.is-playing{-webkit-mask-image:linear-gradient(to left,transparent 0,#000 11%);mask-image:linear-gradient(to left,transparent 0,#000 11%)}
+}

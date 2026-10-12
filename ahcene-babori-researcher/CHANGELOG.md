@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.36 – 2026-10-12
+- Hero video: the frame is now cropped from the left, so the name/caption shown inside the video (lower right of the frame) is no longer cut off, and the edge fade is much narrower.
+
 ## 1.0.35 – 2026-10-12
 - Hero: the text now always sits above the video's fade zone (it was partly covered by the video), the video panel is slightly narrower and the text column stays clear of it.
 
