@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>المحاضرة 2 – التطور التاريخي للبرمجيات الحرة</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f4f6fb;--card:#fff;--ink:#1c2340;--muted:#5d6682;--brand:#2b5fd9;--brand2:#7a3fe0;--ok:#16a34a;--bad:#dc2626;--line:#dde2ef;--soft:#eaf0ff}
+:root[data-theme=dark]{--bg:#0f1426;--card:#18203a;--ink:#eef1fb;--muted:#a3adcb;--brand:#6c97ff;--brand2:#a97cff;--line:#2a3459;--soft:#1f2a50}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%}
+body{font-family:Cairo,Tahoma,sans-serif;background:var(--bg);color:var(--ink);overflow:hidden}
+#bar{position:fixed;top:0;right:0;height:5px;background:linear-gradient(90deg,var(--brand),var(--brand2));transition:width .3s;z-index:9}
+header{position:fixed;top:5px;inset-inline:0;display:flex;justify-content:space-between;padding:10px 24px;font-size:.85rem;color:var(--muted);z-index:5}
+header .tools button{margin-inline-start:6px}
+button{font-family:inherit;cursor:pointer}
+.ib{background:var(--card);border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:4px 10px;font-size:.85rem}
+main{height:100%;position:relative}
+.slide{position:absolute;inset:0;padding:64px clamp(20px,7vw,110px) 78px;display:flex;flex-direction:column;justify-content:center;opacity:0;visibility:hidden;transform:translateX(-40px);transition:.4s;overflow-y:auto}
+.slide.active{opacity:1;visibility:visible;transform:none}
+.slide.prev{transform:translateX(40px)}
+h1{font-size:clamp(1.9rem,4.6vw,3.4rem);font-weight:900;line-height:1.35}
+h2{font-size:clamp(1.5rem,3.3vw,2.4rem);font-weight:800;margin-bottom:24px;display:flex;align-items:center;gap:14px}
+h2 .n{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;border-radius:12px;min-width:46px;height:46px;display:grid;place-items:center;font-size:1.1rem}
+p,li{font-size:clamp(1.05rem,2vw,1.4rem);line-height:2}
+.cover{align-items:center;text-align:center;background:radial-gradient(circle at 20% 20%,var(--soft),transparent 60%)}
+.cover .tag{color:var(--brand);font-weight:700;font-size:1.3rem;margin-bottom:10px}
+.cover .sub{color:var(--muted);margin-top:22px;font-size:1.15rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px 28px;box-shadow:0 6px 24px #0000000d}
+.card p+p{margin-top:8px}
+.quote{font-size:clamp(1.5rem,3.4vw,2.5rem);font-weight:800;line-height:1.7;text-align:center;border-inline:6px solid var(--brand);padding:10px 26px;max-width:900px;margin:auto;background:var(--card);border-radius:14px}
+.list{list-style:none;padding:0;display:grid;gap:12px;max-width:900px}
+.list li{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 20px;display:flex;gap:14px;align-items:center}
+.list b.num{color:#fff;background:var(--brand);border-radius:50%;min-width:34px;height:34px;display:grid;place-items:center;font-size:.95rem}
+.agenda li{cursor:pointer;transition:.2s}.agenda li:hover{transform:translateX(-6px);border-color:var(--brand)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.vs{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:stretch}
+.vs .mid{align-self:center;font-weight:900;color:var(--muted)}
+.vs .card h3{color:var(--brand);margin-bottom:8px;font-size:1.25rem}
+.vs ul{padding-inline-start:20px}.vs li{font-size:1.1rem;line-height:1.9}
+table{width:100%;border-collapse:collapse;background:var(--card);border-radius:14px;overflow:hidden;font-size:clamp(1rem,1.8vw,1.25rem)}
+th{background:var(--brand);color:#fff}th,td{padding:9px 16px;text-align:start;border-bottom:1px solid var(--line)}
+td.y{font-weight:700;color:var(--brand);width:110px}
+.tl{display:flex;gap:0;overflow-x:auto;padding:34px 4px 14px;position:relative}
+.tl::before{content:"";position:absolute;top:56px;inset-inline:0;height:4px;background:var(--line)}
+.tl .st{flex:1;min-width:150px;text-align:center;position:relative;cursor:pointer}
+.tl .dot{width:46px;height:46px;border-radius:50%;background:var(--card);border:4px solid var(--brand);margin:0 auto 10px;display:grid;place-items:center;font-weight:800;font-size:.95rem;position:relative;z-index:1;transition:.2s}
+.tl .st:hover .dot,.tl .st.on .dot{background:var(--brand);color:#fff;transform:scale(1.15)}
+.tl .yr{font-weight:900;color:var(--brand);font-size:1.3rem}
+.tl .tx{font-size:.98rem;line-height:1.6;padding:0 6px}
+.badge{display:inline-block;background:var(--soft);color:var(--brand);border-radius:999px;padding:2px 14px;font-weight:700;font-size:.9rem;margin-bottom:12px}
+.flip{perspective:900px;cursor:pointer;min-height:170px}
+.flip>div{position:relative;height:100%;min-height:170px;transition:transform .5s;transform-style:preserve-3d}
+.flip.on>div{transform:rotateY(180deg)}
+.flip .f,.flip .b{position:absolute;inset:0;backface-visibility:hidden;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:16px;border:1px solid var(--line)}
+.flip .f{background:var(--card)}.flip .f b{font-size:1.5rem;color:var(--brand)}.flip .f small{color:var(--muted)}
+.flip .b{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;transform:rotateY(180deg);font-size:1.05rem;line-height:1.7}
+.mt{width:100%}.mt td:first-child{color:var(--bad);width:48%}.mt td:last-child{color:var(--ok);font-weight:600}
+.reveal{cursor:pointer;position:relative}
+.reveal .hide{filter:blur(7px);transition:.3s;user-select:none}.reveal.on .hide{filter:none;user-select:auto}
+.q{margin-bottom:18px}.q h3{font-size:1.25rem;margin-bottom:8px}
+.opt{display:block;width:100%;text-align:start;background:var(--card);border:2px solid var(--line);border-radius:12px;padding:8px 16px;margin:6px 0;color:var(--ink);font-size:1.1rem;transition:.2s}
+.opt:hover:not(:disabled){border-color:var(--brand)}
+.opt.ok{border-color:var(--ok);background:#16a34a22}.opt.bad{border-color:var(--bad);background:#dc262622}
+#score{font-weight:800;color:var(--brand);margin-top:6px}
+.sumi{display:flex;gap:16px;align-items:flex-start}
+.ico{font-size:1.6rem}
+a{color:var(--brand)}
+.refs li{direction:ltr;text-align:left;font-size:1.05rem;line-height:1.8;margin-bottom:8px}
+.timer{font-size:2.4rem;font-weight:900;color:var(--brand);text-align:center;margin:14px 0}
+nav{position:fixed;bottom:0;inset-inline:0;display:flex;justify-content:center;align-items:center;gap:16px;padding:14px;z-index:5}
+nav button{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;border:0;border-radius:12px;width:52px;height:42px;font-size:1.3rem}
+nav button:disabled{opacity:.35;cursor:default}
+#cnt{min-width:70px;text-align:center;color:var(--muted);font-weight:700;direction:ltr}
+@media(max-width:700px){.grid2,.vs{grid-template-columns:1fr}.vs .mid{text-align:center}header{padding:10px 14px}}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<header><span>مقياس البرامج الحرة والمصادر المفتوحة</span><span class="tools"><button class="ib" id="th">🌓</button><button class="ib" id="fs">⛶</button></span></header>
+<main id="deck">
+
+<section class="slide cover">
+  <div class="tag">المحاضرة الثانية</div>
+  <h1>التطور التاريخي لحركة البرمجيات الحرة والمصادر المفتوحة</h1>
+  <div class="sub">مقياس البرامج الحرة والمصادر المفتوحة<br>د. أحسن بابوري — جامعة تامنغست</div>
+  <div class="sub" style="font-size:.9rem">استخدم الأسهم ← → أو المس الأزرار للتنقل</div>
+</section>
+
+<section class="slide">
+  <h2>أهداف المحاضرة</h2>
+  <ul class="list">
+    <li><b class="num">1</b><p>تتبع مراحل انتقال البرمجيات من ثقافة المشاركة إلى الاحتكار ثم إلى الحركة الحرة.</p></li>
+    <li><b class="num">2</b><p>التعرف على الشخصيات والمؤسسات المؤسِّسة (ستولمان، تورفالدز، FSF، OSI).</p></li>
+    <li><b class="num">3</b><p>فهم أسباب ظهور مصطلح «المصدر المفتوح» سنة 1998.</p></li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>محاور المحاضرة <small style="font-size:.9rem;color:var(--muted);font-weight:400">(اضغط على محور للانتقال إليه)</small></h2>
+  <ul class="list agenda">
+    <li data-go="4"><b class="num">01</b><p>عصر المشاركة (الخمسينيات – السبعينيات)</p></li>
+    <li data-go="5"><b class="num">02</b><p>صعود النموذج الاحتكاري (السبعينيات – الثمانينيات)</p></li>
+    <li data-go="6"><b class="num">03</b><p>ريتشارد ستولمان ومشروع GNU</p></li>
+    <li data-go="7"><b class="num">04</b><p>لينوس تورفالدز ونواة Linux</p></li>
+    <li data-go="8"><b class="num">05</b><p>ميلاد مصطلح «المصدر المفتوح» (1998)</p></li>
+    <li data-go="9"><b class="num">06</b><p>خط زمني مختصر</p></li>
+  </ul>
+</section>
+
+<section class="slide">
+  <div class="quote">لم تولد البرمجيات مغلقة؛ فالمشاركة كانت الأصل، والحركة الحرة جاءت لاستعادة هذا الأصل.</div>
+</section>
+
+<section class="slide">
+  <h2><span class="n">01</span>عصر المشاركة (الخمسينيات – السبعينيات)</h2>
+  <div class="card">
+    <p>في بدايات الحوسبة كانت البرمجيات تُعدّ ملحقًا بالعتاد، وكان المستخدمون – ومعظمهم باحثون وجامعات – يتبادلون الشفرات بحرية.</p>
+    <p>ومن أبرز الأمثلة مجموعة مستخدمي حواسيب IBM المعروفة بـ <b>SHARE (1955)</b>، ومختبر الذكاء الاصطناعي في معهد MIT حيث نشأت ثقافة «الهاكرز» بمعناها الأصلي: مبرمجون شغوفون يتقاسمون المعرفة.</p>
+    <p>وفي عام <b>1969</b> طُوّر نظام <b>Unix</b> في مختبرات Bell، ثم وُزّع على الجامعات مع شفرته، فنشأت منه نسخة <b>BSD</b> في جامعة بيركلي.</p>
+  </div>
+</section>
+
+<section class="slide">
+  <h2><span class="n">02</span>صعود النموذج الاحتكاري (السبعينيات – الثمانينيات)</h2>
+  <div class="grid2">
+    <div class="card"><span class="badge">1969</span><p>بدأت البرمجيات تتحول إلى سلعة مستقلة حين قررت <b>IBM</b> بيع البرمجيات منفصلة عن العتاد.</p></div>
+    <div class="card"><span class="badge">1976</span><p>ومع انتشار الحواسيب الشخصية، أصبحت الشركات تُوزّع الملفات التنفيذية فقط وتفرض اتفاقيات عدم الإفصاح، وعبّر <b>بيل غيتس</b> عن هذا التوجه في «رسالته المفتوحة إلى الهواة» التي انتقد فيها نسخ البرمجيات دون دفع.</p></div>
+  </div>
+</section>
+
+<section class="slide">
+  <h2><span class="n">03</span>ريتشارد ستولمان ومشروع GNU</h2>
+  <div class="card">
+    <p>ردًّا على هذا التحول أعلن ريتشارد ستولمان في سبتمبر <b>1983</b> عن مشروع <b>GNU</b> (اختصار تكراري لـ <i>GNU's Not Unix</i>) بهدف بناء نظام تشغيل كامل حرّ.</p>
+    <p>ونشر «بيان GNU» سنة <b>1985</b>، وأسس في العام نفسه مؤسسة البرمجيات الحرة (<b>FSF</b>).</p>
+    <p>ثم صاغ رخصة جنو العمومية <b>GPL</b> سنة <b>1989</b> التي أرست مبدأ «الحقوق المتروكة» (<b>Copyleft</b>).</p>
+    <p>وبحلول بداية التسعينيات كان المشروع قد أنجز معظم مكوّنات النظام (المترجم GCC، المحرر Emacs، المكتبات والأدوات) باستثناء <b>النواة</b>.</p>
+  </div>
+</section>
+
+<section class="slide">
+  <h2><span class="n">04</span>لينوس تورفالدز ونواة Linux</h2>
+  <ul class="list" style="max-width:1000px">
+    <li><span class="ico">👨‍🎓</span><p>في أوت <b>1991</b> أعلن الطالب الفنلندي لينوس تورفالدز عن نواة نظام تشغيل كتبها كهواية، ثم أصدرها تحت رخصة GPL سنة <b>1992</b>.</p></li>
+    <li><span class="ico">🧩</span><p>التقت النواة Linux بأدوات GNU فولد نظام تشغيل حر كامل، يُسمّى تقنيًا <b>GNU/Linux</b>.</p></li>
+    <li><span class="ico">🌐</span><p>اعتمد تطوير Linux على الإنترنت وعلى مساهمة آلاف المتطوعين، ما أثبت فعالية نموذج التطوير الموزّع.</p></li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2><span class="n">05</span>ميلاد مصطلح «المصدر المفتوح» (1998)</h2>
+  <ul class="list" style="max-width:1000px;gap:8px">
+    <li><p>نشر <b>إريك ريموند</b> مقالته «الكاتدرائية والبازار» (1997) التي حلّل فيها نجاح نموذج Linux.</p></li>
+    <li><p>وتأثرت بها شركة <b>Netscape</b> فقررت في جانفي 1998 فتح شفرة متصفحها، ومنه وُلد مشروع Mozilla ثم Firefox.</p></li>
+    <li><p>وفي فيفري 1998 اقتُرح مصطلح <b>Open Source</b> لتقديم الفكرة لعالم الأعمال بلغة عملية بعيدًا عن الخطاب الأخلاقي، وتأسست مبادرة المصدر المفتوح (<b>OSI</b>).</p></li>
+    <li><p>ومنذ ذلك الحين يتعايش تياران: «البرمجيات الحرة» التي تركّز على الحرية كقيمة أخلاقية، و«المصدر المفتوح» الذي يركّز على جودة منهجية التطوير. ويُستعمل المصطلح الجامع <b>FLOSS</b> أو <b>FOSS</b> للإشارة إليهما معًا.</p></li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2><span class="n">06</span>خط زمني مختصر</h2>
+  <table>
+    <tr><th>السنة</th><th>الحدث</th></tr>
+    <tr><td class="y">1969</td><td>ظهور Unix في مختبرات Bell</td></tr>
+    <tr><td class="y">1983</td><td>إعلان مشروع GNU</td></tr>
+    <tr><td class="y">1985</td><td>تأسيس مؤسسة البرمجيات الحرة FSF</td></tr>
+    <tr><td class="y">1989</td><td>الإصدار الأول لرخصة GPL</td></tr>
+    <tr><td class="y">1991</td><td>إعلان نواة Linux</td></tr>
+    <tr><td class="y">1995</td><td>ظهور خادم الويب Apache</td></tr>
+    <tr><td class="y">1998</td><td>فتح شفرة Netscape وتأسيس OSI</td></tr>
+  </table>
+</section>
+
+<section class="slide">
+  <h2>خط زمني مختصر (تابع)</h2>
+  <table>
+    <tr><th>السنة</th><th>الحدث</th></tr>
+    <tr><td class="y">2004</td><td>الإصدار 1.0 من متصفح Firefox، وظهور توزيعة Ubuntu</td></tr>
+    <tr><td class="y">2005</td><td>إنشاء نظام إدارة الإصدارات Git</td></tr>
+    <tr><td class="y">2008</td><td>إطلاق Android ومنصة GitHub</td></tr>
+    <tr><td class="y">2010</td><td>انشقاق LibreOffice عن OpenOffice.org</td></tr>
+    <tr><td class="y">2018</td><td>استحواذ Microsoft على GitHub</td></tr>
+    <tr><td class="y">2019</td><td>استحواذ IBM على Red Hat</td></tr>
+    <tr><td class="y">2024</td><td>نشر OSI لتعريف الذكاء الاصطناعي مفتوح المصدر (الإصدار 1.0)</td></tr>
+  </table>
+</section>
+
+<section class="slide">
+  <h2>محطات كبرى في مسار الحركة <small style="font-size:.9rem;color:var(--muted);font-weight:400">(اضغط على محطة)</small></h2>
+  <div class="tl" id="tl">
+    <div class="st" data-t="Unix"><div class="dot">1</div><div class="yr">1969</div><div class="tx">ظهور Unix في مختبرات Bell</div></div>
+    <div class="st" data-t="GNU"><div class="dot">2</div><div class="yr">1983</div><div class="tx">إعلان مشروع GNU</div></div>
+    <div class="st" data-t="Linux"><div class="dot">3</div><div class="yr">1991</div><div class="tx">إعلان نواة Linux</div></div>
+    <div class="st" data-t="OSI"><div class="dot">4</div><div class="yr">1998</div><div class="tx">فتح شفرة Netscape وتأسيس OSI</div></div>
+    <div class="st" data-t="Git"><div class="dot">5</div><div class="yr">2005</div><div class="tx">إنشاء Git</div></div>
+  </div>
+  <div class="card" id="tlinfo" style="margin-top:18px;min-height:90px"><p>اختر محطة من الخط الزمني لعرض تفاصيلها.</p></div>
+</section>
+
+<section class="slide">
+  <h2>رؤيتان لحركة واحدة</h2>
+  <div class="vs">
+    <div class="card"><h3>ريتشارد ستولمان: البرمجيات الحرة</h3><ul><li>الحرية قيمة أخلاقية وحق للمستخدم</li><li>مؤسس مشروع GNU ومؤسسة FSF</li><li>صاحب رخصة GPL ومبدأ Copyleft</li><li>خطاب موجّه للمجتمع والمستخدمين</li></ul></div>
+    <div class="mid">مقابل</div>
+    <div class="card"><h3>إريك ريموند: المصدر المفتوح</h3><ul><li>الانفتاح منهجية تطوير أكثر كفاءة</li><li>صاحب مقالة «الكاتدرائية والبازار»</li><li>من مؤسسي مبادرة OSI سنة 1998</li><li>خطاب موجّه للشركات والمطورين</li></ul></div>
+  </div>
+</section>
+
+<section class="slide">
+  <span class="badge" style="width:fit-content">حالة ومثال – للتحليل والنقاش</span>
+  <h2>قصة الطابعة في معهد MIT (1980)</h2>
+  <div class="card"><p>حصل مختبر الذكاء الاصطناعي في MIT على طابعة ليزر من Xerox، وأراد ستولمان تعديل برنامجها ليُنبّه المستخدمين عند انحشار الورق كما فعل مع الطابعة السابقة، لكن الشركة رفضت إعطاءه الشفرة بسبب اتفاقية عدم إفصاح.</p></div>
+  <ul class="list" style="margin-top:16px">
+    <li><span class="ico">🔒</span><p>كشفت الحادثة كيف تمنع الشفرة المغلقة حل مشكلات بسيطة</p></li>
+    <li><span class="ico">🔄</span><p>أصبحت رمزًا لتحول ثقافة المشاركة إلى الاحتكار</p></li>
+    <li><span class="ico">🚩</span><p>مهّدت لإعلان مشروع GNU بعد ثلاث سنوات</p></li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>أخطاء شائعة وتصحيحها <small style="font-size:.9rem;color:var(--muted);font-weight:400">(اضغط على الصف لكشف التصحيح)</small></h2>
+  <table class="mt" id="mt">
+    <tr><th>الاعتقاد الخاطئ</th><th>التصحيح</th></tr>
+    <tr class="reveal"><td>Linux نظام تشغيل كامل بمفرده</td><td><span class="hide">Linux نواة، والنظام الكامل يجمعها مع أدوات GNU وغيرها</span></td></tr>
+    <tr class="reveal"><td>حركة المصادر المفتوحة ضد الربح</td><td><span class="hide">مصطلح Open Source ظهر أصلًا لجذب الشركات</span></td></tr>
+    <tr class="reveal"><td>مشاركة البرمجيات ظاهرة حديثة</td><td><span class="hide">كانت المشاركة هي القاعدة منذ الخمسينيات</span></td></tr>
+  </table>
+</section>
+
+<section class="slide cover">
+  <div class="tag">سؤال للنقاش 💬</div>
+  <h1 style="font-size:clamp(1.6rem,3.8vw,2.8rem)">لو لم يُطلق مشروع GNU، كيف كان سيبدو عالم البرمجيات اليوم؟</h1>
+  <p class="sub">ناقش مع زملائك في مجموعات صغيرة (5 دقائق)، ثم قدّم خلاصة مجموعتك.</p>
+  <div class="timer" id="timer">05:00</div>
+  <div><button class="ib" id="tstart">▶ ابدأ المؤقت</button> <button class="ib" id="treset">↺ إعادة</button></div>
+</section>
+
+<section class="slide">
+  <h2>مصطلحات مفتاحية <small style="font-size:.9rem;color:var(--muted);font-weight:400">(اضغط على البطاقة لقلبها)</small></h2>
+  <div class="grid2">
+    <div class="flip"><div><div class="f"><b>مشروع GNU</b><small>GNU Project</small></div><div class="b">مشروع أطلقه ستولمان سنة 1983 لبناء نظام تشغيل حر كامل</div></div></div>
+    <div class="flip"><div><div class="f"><b>FSF</b><small>Free Software Foundation</small></div><div class="b">مؤسسة البرمجيات الحرة (1985)</div></div></div>
+    <div class="flip"><div><div class="f"><b>OSI</b><small>Open Source Initiative</small></div><div class="b">مبادرة المصدر المفتوح (1998)</div></div></div>
+    <div class="flip"><div><div class="f"><b>FLOSS</b><small>Free/Libre and Open Source Software</small></div><div class="b">مصطلح جامع للتيارين الحر والمفتوح</div></div></div>
+  </div>
+</section>
+
+<section class="slide">
+  <h2>خلاصات المحاضرة</h2>
+  <ul class="list" style="max-width:1000px">
+    <li><span class="ico">✅</span><p>انتقلت البرمجيات من ثقافة المشاركة إلى الاحتكار مع تحولها إلى سلعة مستقلة.</p></li>
+    <li><span class="ico">✅</span><p>أسس ستولمان الإطار الفلسفي والقانوني (GNU، FSF، GPL).</p></li>
+    <li><span class="ico">✅</span><p>أثبتت نواة Linux فعالية التطوير الموزع عبر الإنترنت.</p></li>
+    <li><span class="ico">✅</span><p>مصطلح «المصدر المفتوح» قدّم الفكرة نفسها لعالم الأعمال بلغة عملية.</p></li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>اختبار سريع</h2>
+  <div id="quiz"></div>
+  <div id="score"></div>
+</section>
+
+<section class="slide">
+  <h2>نشاط تطبيقي</h2>
+  <div class="card" style="text-align:center"><span class="badge">تعلّم بالممارسة</span>
+    <p>🎬 <b>عرض ونقاش:</b> مشاهدة مقتطف من الفيلم الوثائقي <b>Revolution OS (2001)</b>، ثم تحرير فقرة تحليلية حول الفرق بين رؤية ستولمان ورؤية ريموند.</p></div>
+</section>
+
+<section class="slide">
+  <h2>أسئلة التقويم</h2>
+  <ul class="list" style="max-width:1000px">
+    <li><b class="num">1</b><p>ما العوامل التي أدت إلى تحول البرمجيات إلى سلعة احتكارية؟</p></li>
+    <li><b class="num">2</b><p>لماذا يُفضَّل تسمية GNU/Linux على تسمية Linux وحدها؟</p></li>
+    <li><b class="num">3</b><p>ما دواعي ظهور مصطلح «المصدر المفتوح» سنة 1998؟</p></li>
+  </ul>
+</section>
+
+<section class="slide">
+  <h2>مراجع للاستزادة</h2>
+  <ul class="list refs" style="max-width:1000px;display:block">
+    <li>Raymond, E. S. (1999). <i>The Cathedral and the Bazaar</i>. O'Reilly Media.</li>
+    <li>Moody, G. (2001). <i>Rebel Code: Linux and the Open Source Revolution</i>. Perseus.</li>
+    <li>GNU Project. <i>The GNU Manifesto</i>. <a href="https://www.gnu.org/gnu/manifesto.html" target="_blank" rel="noopener">https://www.gnu.org/gnu/manifesto.html</a></li>
+  </ul>
+  <div class="card" style="margin-top:20px"><p>📌 <b>المحاضرة القادمة:</b> الحريات الأربع وتعريف المصدر المفتوح</p></div>
+</section>
+
+</main>
+<nav>
+  <button id="nx" aria-label="التالي">→</button>
+  <span id="cnt"></span>
+  <button id="pv" aria-label="السابق">←</button>
+</nav>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const slides=$$('.slide');let cur=0;
+function show(i){
+  cur=Math.max(0,Math.min(slides.length-1,i));
+  slides.forEach((s,k)=>{s.classList.toggle('active',k===cur);s.classList.toggle('prev',k<cur)});
+  $('#bar').style.width=((cur+1)/slides.length*100)+'%';
+  $('#cnt').textContent=(cur+1)+' / '+slides.length;
+  $('#pv').disabled=cur===0;$('#nx').disabled=cur===slides.length-1;
+  try{location.hash=cur+1}catch(e){}
+}
+$('#nx').onclick=()=>show(cur+1);$('#pv').onclick=()=>show(cur-1);
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowLeft'||e.key==='PageDown')show(cur+1);
+  else if(e.key==='ArrowRight'||e.key==='PageUp')show(cur-1);
+  else if(e.key==='Home')show(0);else if(e.key==='End')show(slides.length-1);
+  else if(e.key==='f')toggleFs();
+});
+let tx=null;
+document.addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});
+document.addEventListener('touchend',e=>{if(tx===null)return;const d=e.changedTouches[0].clientX-tx;if(Math.abs(d)>70)show(cur+(d<0?1:-1));tx=null});
+$$('.agenda li').forEach(l=>l.onclick=()=>show(+l.dataset.go));
+function toggleFs(){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen?.()}
+$('#fs').onclick=toggleFs;
+$('#th').onclick=()=>{const r=document.documentElement;r.dataset.theme=r.dataset.theme==='dark'?'light':'dark'};
+if(matchMedia('(prefers-color-scheme: dark)').matches)document.documentElement.dataset.theme='dark';
+// timeline
+const info={Unix:'طُوّر Unix في مختبرات Bell سنة 1969 ثم وُزّع على الجامعات مع شفرته، فنشأت منه نسخة BSD في بيركلي.',
+GNU:'أعلن ستولمان مشروع GNU في سبتمبر 1983 لبناء نظام تشغيل كامل حرّ.',
+Linux:'أعلن لينوس تورفالدز نواة Linux في أوت 1991 وأصدرها تحت GPL سنة 1992.',
+OSI:'فتحت Netscape شفرة متصفحها في جانفي 1998، واقتُرح مصطلح Open Source وتأسست OSI في فيفري.',
+Git:'أُنشئ Git سنة 2005 كنظام لإدارة الإصدارات يدعم التطوير الموزّع.'};
+$$('#tl .st').forEach(s=>s.onclick=()=>{$$('#tl .st').forEach(x=>x.classList.remove('on'));s.classList.add('on');
+  $('#tlinfo').innerHTML='<p><b>'+s.querySelector('.yr').textContent+' – '+s.querySelector('.tx').textContent+':</b> '+info[s.dataset.t]+'</p>'});
+// reveal
+$$('.reveal').forEach(r=>r.onclick=()=>r.classList.toggle('on'));
+$$('.flip').forEach(f=>f.onclick=()=>f.classList.toggle('on'));
+// timer
+let t=300,iv=null;const fmt=()=>$('#timer').textContent=String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0');
+$('#tstart').onclick=()=>{if(iv)return;iv=setInterval(()=>{t--;fmt();if(t<=0){clearInterval(iv);iv=null}},1000)};
+$('#treset').onclick=()=>{clearInterval(iv);iv=null;t=300;fmt()};
+// quiz
+const Q=[['من أطلق مشروع GNU؟',['لينوس تورفالدز','ريتشارد ستولمان','إريك ريموند'],1],
+['في أي سنة أُعلنت نواة Linux؟',['1983','1991','1998'],1],
+['أي حدث سبق مباشرة تأسيس OSI سنة 1998؟',['فتح شفرة Netscape','ظهور Android','إنشاء Git'],0]];
+let done=0,right=0;
+Q.forEach((q,i)=>{const d=document.createElement('div');d.className='q';
+  d.innerHTML='<h3>س'+(i+1)+'. '+q[0]+'</h3>';
+  q[1].forEach((o,j)=>{const b=document.createElement('button');b.className='opt';b.textContent=['أ','ب','ج'][j]+'. '+o;
+    b.onclick=()=>{[...d.querySelectorAll('.opt')].forEach((x,k)=>{x.disabled=true;if(k===q[2])x.classList.add('ok')});
+      if(j===q[2])right++;else b.classList.add('bad');
+      if(++done===Q.length)$('#score').textContent='النتيجة: '+right+' / '+Q.length+(right===Q.length?' 🎉 ممتاز!':'')};
+    d.appendChild(b)});
+  $('#quiz').appendChild(d)});
+const h=parseInt(location.hash.slice(1));show(h>0?h-1:0);fmt();
+</script>
+</body>
+</html>
