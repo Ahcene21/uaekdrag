@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.42 – 2026-10-14 (core 1.0.27, Student Attendance 1.1.1) – security review
+- Code audit of theme and plugins (see `documentation/SECURITY-AUDIT.md`): no critical vulnerability found. Hardening added: safe response headers, no WordPress version leak, blocked user enumeration (`?author=` and REST users) for anonymous visitors, `abc_client_ip` filter for the contact rate-limit behind proxies/CDN, referrer policy on the Facebook embed, uninstall clean-up for attendance data.
+
 ## Student Attendance 1.1.0 – 2026-10-12
 - New **phone page** `/attendance/` (created automatically, `[attendance_scanner]` shortcode, noindex): the teacher logs in once on the phone and gets every course with its *Take attendance* button, no need to find the Teaching page. Add it to the phone's home screen. The dashboard Attendance screen shows its link.
 

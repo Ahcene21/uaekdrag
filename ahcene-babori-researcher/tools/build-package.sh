@@ -13,7 +13,7 @@ S=build/ahcene-babori-researcher
 mkdir -p "$S/source"
 cp dist/*.zip "$S/"
 cp README.md INSTALLATION.md CHANGELOG.md "$S/"
-cp documentation/installation-guide.md documentation/language-setup.md documentation/QA-REPORT.md "$S/"
+cp documentation/installation-guide.md documentation/language-setup.md documentation/QA-REPORT.md documentation/SECURITY-AUDIT.md "$S/"
 cp demo-content/demo-content.xml "$S/"
 cp -r theme plugin documentation demo-content tools "$S/source/"
 ( cd build && zip -qr -X "$ROOT/dist/ahcene-babori-researcher-complete.zip" ahcene-babori-researcher )

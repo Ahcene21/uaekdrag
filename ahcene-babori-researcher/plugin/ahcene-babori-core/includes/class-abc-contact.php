@@ -257,6 +257,8 @@ class ABC_Contact {
 		}
 		// 4. Rate limit.
 		$ip  = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '';
+		// Behind a CDN/proxy REMOTE_ADDR is the proxy for everyone: let the site map the real visitor IP.
+		$ip  = (string) apply_filters( 'abc_client_ip', $ip );
 		$rl  = 'abc_rl_' . md5( $ip . wp_salt( 'auth' ) );
 		$cnt = (int) get_transient( $rl );
 		if ( $cnt >= self::RATE_LIMIT ) {

@@ -3,7 +3,7 @@
  * Plugin Name:       Ahcene Babori – Student Attendance
  * Plugin URI:        https://ahcenebabori.com
  * Description:       Take student attendance by scanning the student card (QR code / barcode) with the phone camera, from each course on the Teaching page. Teacher-only, private records, CSV export. No external services.
- * Version:           1.1.0
+ * Version:           1.1.1
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            Dr. Ahcene Babori
@@ -15,7 +15,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'ABA_VERSION', '1.1.0' );
+define( 'ABA_VERSION', '1.1.1' );
 define( 'ABA_DIR', plugin_dir_path( __FILE__ ) );
 define( 'ABA_URL', plugin_dir_url( __FILE__ ) );
 

@@ -91,6 +91,7 @@
 			i.src = f.getAttribute('data-embed');
 			i.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
 			i.allowFullscreen = true;
+			i.referrerPolicy = 'strict-origin-when-cross-origin';
 			i.title = b.getAttribute('aria-label') || '';
 			var fig = f.closest('.abt-hero__portrait'); if (fig) { fig.classList.add('is-playing'); }
 			f.textContent = '';
