@@ -49,6 +49,7 @@ class ABC_Settings {
 			'store_messages'      => '1',
 			'palette'             => 'emerald',
 			'menu_style'          => 'light',
+			'ar_font'             => 'tajawal',
 			'page_about'          => 0,
 			'page_contact'        => 0,
 			'page_cv'             => 0,
@@ -390,6 +391,13 @@ class ABC_Settings {
 					echo '<label style="display:block;margin:6px 0"><input type="radio" name="abc[menu_style]" value="' . esc_attr( $id ) . '" ' . checked( $s['menu_style'], $id, false ) . '> ' . esc_html( $label ) . ' — <a href="' . esc_url( add_query_arg( array( 'abc_palette' => $s['palette'], 'abc_menu' => $id ), home_url( '/' ) ) ) . '" target="_blank" rel="noopener">preview</a></label>';
 				}
 				echo '</p>';
+				if ( function_exists( 'abt_ar_fonts' ) ) {
+					echo '<h2>Arabic font</h2><p class="description">Used on the Arabic pages. Click “preview” to see it on the site (administrators only) before saving.</p><p>';
+					foreach ( abt_ar_fonts() as $id => $f ) {
+						echo '<label style="display:block;margin:6px 0"><input type="radio" name="abc[ar_font]" value="' . esc_attr( $id ) . '" ' . checked( $s['ar_font'], $id, false ) . '> ' . esc_html( $f['label'] ) . ' — <a href="' . esc_url( add_query_arg( array( 'abc_font' => $id, 'lang' => 'ar' ), home_url( '/' ) ) ) . '" target="_blank" rel="noopener">preview</a></label>';
+					}
+					echo '</p>';
+				}
 			}
 		);
 	}
@@ -508,6 +516,10 @@ class ABC_Settings {
 				$men = isset( $in['menu_style'] ) ? sanitize_key( $in['menu_style'] ) : 'light';
 				$cur['palette']    = array_key_exists( $pal, (array) apply_filters( 'abc_palettes', array() ) ) ? $pal : 'emerald';
 				$cur['menu_style'] = array_key_exists( $men, (array) apply_filters( 'abc_menu_styles', array() ) ) ? $men : 'light';
+				if ( function_exists( 'abt_ar_fonts' ) ) {
+					$fnt            = isset( $in['ar_font'] ) ? sanitize_key( $in['ar_font'] ) : 'tajawal';
+					$cur['ar_font'] = array_key_exists( $fnt, abt_ar_fonts() ) ? $fnt : 'tajawal';
+				}
 				break;
 			case 'contact':
 				$to                    = sanitize_email( $in['contact_to'] ?? '' );

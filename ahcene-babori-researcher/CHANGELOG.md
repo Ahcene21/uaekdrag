@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.43 – 2026-10-14 (core 1.0.28)
+- **Arabic font choice.** New bundled fonts (no external requests): Tajawal (new default for Arabic pages), Cairo, IBM Plex Sans Arabic, plus the existing Almarai. Choose under Researcher → Appearance → Arabic font, with a preview link per font (administrators can also use `?abc_font=cairo`). All fonts are SIL OFL (licences in `assets/fonts`).
+
 ## 1.0.42 – 2026-10-14 (core 1.0.27, Student Attendance 1.1.1) – security review
 - Code audit of theme and plugins (see `documentation/SECURITY-AUDIT.md`): no critical vulnerability found. Hardening added: safe response headers, no WordPress version leak, blocked user enumeration (`?author=` and REST users) for anonymous visitors, `abc_client_ip` filter for the contact rate-limit behind proxies/CDN, referrer policy on the Facebook embed, uninstall clean-up for attendance data.
 
