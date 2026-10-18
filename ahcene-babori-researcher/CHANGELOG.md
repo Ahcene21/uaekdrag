@@ -1,5 +1,9 @@
 # Changelog
 
+## Core 1.0.35 – 2026-10-18 – About / other page links never fall back to the English page
+- Cause of "À propos / نبذة عني opens the English page": when no French or Arabic page existed, the page lookup used the page chosen in the settings (the English one) as is. Page links now never return a page of another language: if the page has no translation in the visitor's language, the About page is created for that language (as before), and other links use the language's homepage instead of the English page.
+- Every About link on the site (menu, "More about me" button…) goes through the same language-aware resolver.
+
 ## Core 1.0.34 – 2026-10-18 – About link in Arabic
 - The About page is now resolved **per language**: if the site has no About page in the visitor's language (typically Arabic), the page is created automatically and linked as a translation of the existing one, so the Arabic menu link always opens an Arabic About page instead of a missing page or the wrong-language one. Pages created this way get an ASCII address (`/about/`, `/a-propos/`, `/nubdha-anni/`) to avoid problems with Arabic addresses on some servers.
 - More Arabic labels recognised ("نبذة عن الباحث", "عن الباحث", "من نحن" …).

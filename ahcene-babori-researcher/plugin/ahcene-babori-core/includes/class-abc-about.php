@@ -124,7 +124,10 @@ class ABC_About {
 		if ( $id ) {
 			return (string) get_permalink( $id );
 		}
-		return (string) abc_find_page( 'about' ); // Legacy lookup (slug / title) as the last resort.
+		$GLOBALS['abc_about_busy'] = 1;
+		$legacy                    = (string) abc_find_page( 'about' ); // Legacy lookup (slug / title) as the last resort.
+		unset( $GLOBALS['abc_about_busy'] );
+		return $legacy;
 	}
 
 	/** Is this menu item an "About me" entry (by label, address or target)? */

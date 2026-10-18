@@ -251,20 +251,33 @@ function abc_cv_page_url() {
  * @return string
  */
 function abc_find_page( $key ) {
-	$key  = sanitize_key( $key );
+	$key = sanitize_key( $key );
+	if ( 'about' === $key && class_exists( 'ABC_About' ) && empty( $GLOBALS['abc_about_busy'] ) ) {
+		$GLOBALS['abc_about_busy'] = 1; // The About page of the current language (created when missing).
+		$aid                       = ABC_About::page_id();
+		unset( $GLOBALS['abc_about_busy'] );
+		if ( $aid ) {
+			return (string) get_permalink( $aid );
+		}
+	}
 	$lang = abc_lang();
 	$base = array( 'post_type' => 'page', 'post_status' => 'publish', 'posts_per_page' => 1, 'fields' => 'ids' );
 	$meta = array( 'meta_key' => '_abc_page_key', 'meta_value' => $key ); // phpcs:ignore WordPress.DB.SlowDBQuery
 	// 0. Page chosen by the administrator (Researcher → Profile & Photo → page links).
 	$chosen = absint( abc_setting( 'page_' . $key, 0 ) );
 	if ( $chosen && 'publish' === get_post_status( $chosen ) ) {
+		$use = true;
 		if ( function_exists( 'pll_get_post' ) ) {
 			$t = pll_get_post( $chosen, $lang );
 			if ( $t ) {
 				$chosen = (int) $t;
+			} elseif ( function_exists( 'pll_get_post_language' ) && abc_norm_lang( (string) pll_get_post_language( $chosen ) ) !== $lang ) {
+				$use = false; // Never send an Arabic/French visitor to the English page: look for a page in this language instead.
 			}
 		}
-		return (string) get_permalink( $chosen );
+		if ( $use ) {
+			return (string) get_permalink( $chosen );
+		}
 	}
 	$ids  = get_posts( $base + $meta + array( 'lang' => $lang ) );
 	if ( $ids ) {
