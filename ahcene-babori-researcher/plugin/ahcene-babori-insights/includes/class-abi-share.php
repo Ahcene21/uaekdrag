@@ -11,6 +11,8 @@ class ABI_Share {
 
 	public static function init() {
 		add_action( 'abc_after_note_content', array( __CLASS__, 'echo_block' ) );
+		// Safety net: any blog article whose template does not call the hook (other templates, translated or imported posts, block themes) still gets the buttons.
+		add_filter( 'the_content', array( __CLASS__, 'append_block' ), 30 );
 		add_action( 'abc_note_meta', array( __CLASS__, 'echo_views' ) );
 		add_action( 'abc_footer_stats', array( __CLASS__, 'echo_visits' ) );
 		add_filter( 'abc_card_extra', array( __CLASS__, 'card_views' ), 20, 2 );
@@ -88,8 +90,29 @@ class ABI_Share {
 		return $out . '</ul><span class="abi-share__msg" role="status" aria-live="polite"></span></div>';
 	}
 
+	/** Posts that already show the block in this request. */
+	private static $printed = array();
+
 	public static function echo_block( $id = 0 ) {
+		$id = $id ? $id : get_the_ID();
+		if ( isset( self::$printed[ $id ] ) ) {
+			return;
+		}
+		self::$printed[ $id ] = true;
 		echo self::html( $id ); // phpcs:ignore WordPress.Security.EscapeOutput
+	}
+
+	public static function append_block( $content ) {
+		if ( is_admin() || is_feed() || ! is_singular() || ! in_the_loop() || ! is_main_query() ) {
+			return $content;
+		}
+		$id    = get_the_ID();
+		$types = (array) apply_filters( 'abi_share_types', array( 'abc_note', 'post' ) );
+		if ( ! $id || isset( self::$printed[ $id ] ) || ! in_array( get_post_type( $id ), $types, true ) || post_password_required( $id ) ) {
+			return $content;
+		}
+		self::$printed[ $id ] = true;
+		return $content . self::html( $id );
 	}
 
 	public static function shortcode( $atts ) {

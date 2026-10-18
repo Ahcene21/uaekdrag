@@ -1,5 +1,8 @@
 # Changelog
 
+## Share & Statistics 1.1.1 – 2026-10-18
+- Fix: some blog articles showed no share buttons (posts not rendered by the blog-article template, e.g. standard posts, translated or imported ones). The buttons are now also appended to the article content itself, once per article, for blog articles and standard posts (filter `abi_share_types` to change the types).
+
 ## 1.0.45 – 2026-10-18 (Share & Statistics 1.1.0)
 - **Site visit counter in the footer** ("Site visits: N", total page views since the plugin was activated; can be switched off; `[abi_visits]` shortcode for the number).
 - **View counters for blog articles** on each article (under the title, also shown at 0) and on every article card in the blog lists.

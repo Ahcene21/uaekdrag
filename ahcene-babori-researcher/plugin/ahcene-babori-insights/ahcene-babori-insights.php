@@ -3,7 +3,7 @@
  * Plugin Name:       Ahcene Babori – Share & Statistics
  * Plugin URI:        https://ahcenebabori.com
  * Description:       Social-sharing buttons for blog articles and privacy-friendly first-party statistics (page views, visitors, top articles, referrers, shares) for each article and for the whole site. No cookies, no IP addresses stored, no external services.
- * Version:           1.1.0
+ * Version:           1.1.1
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            Dr. Ahcene Babori
@@ -15,7 +15,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'ABI_VERSION', '1.1.0' );
+define( 'ABI_VERSION', '1.1.1' );
 define( 'ABI_DIR', plugin_dir_path( __FILE__ ) );
 define( 'ABI_URL', plugin_dir_url( __FILE__ ) );
 
