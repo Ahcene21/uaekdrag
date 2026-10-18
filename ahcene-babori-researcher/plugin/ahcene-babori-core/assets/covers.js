@@ -6,7 +6,7 @@
 	pdfjs.GlobalWorkerOptions.workerSrc = C.worker;
 
 	function render(url) {
-		return pdfjs.getDocument({ url: url }).promise.then(function (pdf) {
+		return pdfjs.getDocument({ url: url, httpHeaders: { 'X-WP-Nonce': C.nonce }, withCredentials: true }).promise.then(function (pdf) {
 			return pdf.getPage(1);
 		}).then(function (page) {
 			var base = page.getViewport({ scale: 1 }), scale = 720 / base.width, vp = page.getViewport({ scale: scale });
@@ -34,6 +34,22 @@
 		return fetch(C.media + '/' + id, { credentials: 'same-origin', headers: { 'X-WP-Nonce': C.nonce } }).then(function (r) { return r.json(); }).then(function (m) { return m.source_url; });
 	}
 
+	/* ---- Auto mode (owner on the public publications page) ---- */
+	if (C.mode === 'auto') {
+		var note = document.createElement('div');
+		note.setAttribute('role', 'status');
+		note.style.cssText = 'position:fixed;inset-block-end:16px;inset-inline-start:16px;z-index:99999;background:#0f6b4f;color:#fff;padding:10px 16px;border-radius:999px;font:600 14px sans-serif;box-shadow:0 6px 24px rgba(0,0,0,.3)';
+		document.body.appendChild(note);
+		var queue = C.items.slice(), total = queue.length, ok = 0;
+		(function step() {
+			var it = queue.shift();
+			if (!it) { note.textContent = ok ? 'Covers ready – refreshing…' : 'Could not create covers'; if (ok) { setTimeout(function () { location.reload(); }, 600); } else { setTimeout(function () { note.remove(); }, 4000); } return; }
+			note.textContent = 'Creating publication covers (' + (total - queue.length) + '/' + total + ')…';
+			render(it.pdf).then(function (b) { return upload(b, it.id); }).then(function (m) { return saveCover(it.id, m.id); }).then(function () { ok++; }).catch(function () {}).then(step);
+		})();
+		return;
+	}
+
 	/* ---- Bulk page ---- */
 	if (C.mode === 'bulk') {
 		var tbody = document.querySelector('#abc-covers-table tbody'), status = document.getElementById('abc-covers-status');
@@ -42,7 +58,7 @@
 			var tr = document.createElement('tr');
 			tr.innerHTML = '<td class="c"></td><td></td><td></td><td class="s"></td>';
 			tr.children[1].textContent = it.title;
-			tr.children[2].textContent = it.hasPdf ? 'uploaded PDF' : '— (no uploaded PDF)';
+			tr.children[2].textContent = it.hasPdf ? 'PDF available' : '— (no PDF)';
 			tr.children[3].textContent = it.cover ? 'has cover' : (it.hasPdf ? 'missing' : '—');
 			if (it.cover) { var im = document.createElement('img'); im.src = it.cover; im.style.cssText = 'width:44px;height:auto'; tr.children[0].appendChild(im); }
 			tbody.appendChild(tr); rows[it.id] = tr;
@@ -77,9 +93,13 @@
 	var wrap = document.createElement('p'); wrap.appendChild(btn); wrap.appendChild(msg); host.parentNode.insertBefore(wrap, host.nextSibling);
 	btn.addEventListener('click', function () {
 		var pdfId = parseInt(pdfInput.value, 10), postId = parseInt(document.getElementById('post_ID').value, 10);
-		if (!pdfId) { msg.textContent = 'Choose an uploaded PDF first.'; return; }
+		var extInput = document.querySelector('input[name$="[pub_pdf_url]"]');
+		var source;
+		if (pdfId) { source = pdfUrlOf(pdfId); }
+		else if (extInput && extInput.value.trim() && postId) { source = Promise.resolve(C.proxy + (C.proxy.indexOf('?') > -1 ? '&' : '?') + 'post=' + postId); }
+		else { msg.textContent = 'Choose an uploaded PDF (or save the publication with an external PDF link) first.'; return; }
 		btn.disabled = true; msg.textContent = 'Reading the PDF…';
-		pdfUrlOf(pdfId).then(render).then(function (b) { msg.textContent = 'Saving…'; return upload(b, postId); }).then(function (m) {
+		source.then(render).then(function (b) { msg.textContent = 'Saving…'; return upload(b, postId); }).then(function (m) {
 			coverInput.value = m.id;
 			var wrapC = coverInput.closest('.abc-media');
 			wrapC.querySelector('.abc-media__name').textContent = (m.slug || 'cover') + '.jpg';

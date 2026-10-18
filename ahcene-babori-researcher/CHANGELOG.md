@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.47 – 2026-10-18 (core 1.0.30)
+- **Covers appear automatically on /publications/**: when you (logged in) open the publications page, every publication that has a PDF but no cover gets its cover created in the background from the PDF's first page, then the page refreshes. Visitors only see the finished covers (nothing extra is loaded for them).
+- **External PDF links are supported**: for publications whose PDF is a link (not an uploaded file) the site downloads that PDF once through a protected, editors-only route (the address is read from the saved publication, never from the request) to render page 1. Links must be public direct PDF files.
+
 ## 1.0.46 – 2026-10-18 (core 1.0.29)
 - **New publications page design**: cards with the **cover of the article – the first page of its PDF** – on top, year badge, Open-Access ribbon, then type, title, authors, journal and PDF / DOI / repository buttons. Publications without a cover show a neutral placeholder. The cover also appears beside the title on the publication page.
 - **Cover generation**: *Researcher → Publication covers* creates the covers of all uploaded PDFs in one click; each publication also has a *Generate cover from the PDF* button (and a manual cover image field). The first page is rendered in the browser with the bundled PDF.js (Apache-2.0), so no server software is needed and nothing leaves your site. Only PDFs uploaded to the Media Library can be processed (not external links).
