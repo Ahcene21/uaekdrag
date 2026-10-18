@@ -1,0 +1,18 @@
+.abi-share{margin:2rem 0;padding:1.1rem 1.2rem;border:1px solid var(--line,#d7e0dc);border-radius:16px;background:var(--tint,#f1f6f3)}
+.abi-share__t{margin:0 0 .7rem;font-weight:700}
+.abi-share__list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:.5rem}
+.abi-btn{display:inline-flex;align-items:center;padding:.45rem .95rem;border-radius:999px;border:2px solid var(--teal,#0f6b4f);background:#fff;color:var(--teal,#0f6b4f);font:inherit;font-weight:600;font-size:.88rem;line-height:1.2;text-decoration:none;cursor:pointer;transition:background-color .15s,color .15s}
+.abi-btn:hover,.abi-btn:focus-visible{background:var(--teal,#0f6b4f);color:#fff}
+.abi-btn:focus-visible{outline:3px solid #f2c94c;outline-offset:2px}
+.abi-share__msg{display:block;min-height:1.3em;margin-top:.5rem;font-size:.85rem;color:var(--teal,#0f6b4f);font-weight:600}
+.abi-views{white-space:nowrap}
+/* Icon buttons (brand logos) */
+.abi-share__list{gap:.6rem}
+.abi-btn{--c:var(--teal,#0f6b4f);width:46px;height:46px;padding:0;justify-content:center;border:2px solid var(--c);color:var(--c);background:#fff;border-radius:50%}
+.abi-btn:hover,.abi-btn:focus-visible{background:var(--c);color:#fff;border-color:var(--c)}
+.abi-btn[hidden]{display:none}
+.abi-ico{display:block}
+@media (prefers-reduced-motion:no-preference){.abi-btn:hover{transform:translateY(-2px)}.abi-btn{transition:background-color .15s,color .15s,transform .15s}}
+.abi-visits{margin:0;display:inline-flex;align-items:center;gap:.4rem}
+.abi-visits svg{opacity:.85}
+.abi-card-views{display:flex;align-items:center;gap:.35rem;margin:.5rem 0 0;font-size:.82rem;color:var(--muted,#5a6773)}
