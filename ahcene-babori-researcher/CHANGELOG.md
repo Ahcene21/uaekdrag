@@ -1,5 +1,9 @@
 # Changelog
 
+## Core 1.0.32 – 2026-10-18 – About Timeline and the About link
+- Menu items that point to the **About Timeline** (its entries, sections, or addresses such as `/about-timeline/`, `/abc_career/…`, or labels like "Timeline / Parcours / الجدول الزمني") now lead to the About page, because the timeline has no page of its own.
+- The About page **always shows the About Timeline entries**: if the page text does not contain the timeline (old content, a page created by hand), the timeline is appended automatically.
+
 ## Core 1.0.31 – 2026-10-18 – "About me" menu link, definitive fix
 - The About entry of the main menu now works whatever it is: a page, a **custom link** (wrong address, "#", an old URL), a draft/deleted page, in any language. Any menu item titled like "About / About me / À propos / نبذة عني / من أنا / Mon profil" that points inside the site (or nowhere) is sent to the real About page (the page chosen under Researcher → Profile, the page with the About key, or a page with a usual slug).
 - If the site has **no About page at all** it is created automatically (it shows the About timeline) the first time it is needed.

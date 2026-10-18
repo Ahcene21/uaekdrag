@@ -14,6 +14,8 @@ class ABC_About {
 	public static function init() {
 		add_filter( 'wp_setup_nav_menu_item', array( __CLASS__, 'menu_item' ), 20 );
 		add_action( 'template_redirect', array( __CLASS__, 'alias_redirect' ), 5 );
+		add_filter( 'the_content', array( __CLASS__, 'ensure_timeline' ), 25 );
+		add_action( 'template_redirect', array( __CLASS__, 'timeline_urls' ), 4 );
 	}
 
 	/** Lower-case, tag-free, diacritic-light form of a label for comparison. */
@@ -31,7 +33,7 @@ class ABC_About {
 		static $set = null;
 		if ( null === $set ) {
 			$set = array();
-			foreach ( array( 'about', 'about me', 'about us', 'my profile', 'profile', 'a propos', 'a propos de moi', 'mon profil', 'qui suis je', 'نبذه عني', 'نبذه', 'من انا', 'عني', 'نبذه تعريفيه', 'الملف الشخصي' ) as $l ) {
+			foreach ( array( 'about', 'about me', 'about us', 'my profile', 'profile', 'a propos', 'a propos de moi', 'mon profil', 'qui suis je', 'نبذه عني', 'نبذه', 'من انا', 'عني', 'نبذه تعريفيه', 'الملف الشخصي', 'about timeline', 'timeline', 'career', 'parcours', 'chronologie', 'الجدول الزمني', 'المسار الاكاديمي', 'المسار المهني', 'المسار' ) as $l ) {
 				$set[ self::norm( $l ) ] = true;
 			}
 			foreach ( array( 'nav_about' ) as $k ) {
@@ -48,7 +50,7 @@ class ABC_About {
 
 	/** First path segment(s) that identify an About address. */
 	private static function alias_slugs() {
-		return array( 'about', 'about-me', 'aboutme', 'about-us', 'my-profile', 'profile', 'a-propos', 'apropos', 'mon-profil', 'nubdha-anni', 'nabdha-anni', 'nubdha', 'who-am-i', 'عني', 'نبذة', 'نبذة-عني', 'نبذه-عني', 'من-أنا', 'من-انا' );
+		return array( 'about', 'about-me', 'aboutme', 'about-us', 'my-profile', 'profile', 'a-propos', 'apropos', 'mon-profil', 'nubdha-anni', 'nabdha-anni', 'nubdha', 'who-am-i', 'about-timeline', 'abouttimeline', 'timeline', 'career', 'abc-career', 'abc_career', 'about_timeline', 'الجدول-الزمني', 'المسار', 'عني', 'نبذة', 'نبذة-عني', 'نبذه-عني', 'من-أنا', 'من-انا' );
 	}
 
 	/** URL of the About page, creating the page if the site has none. */
@@ -93,7 +95,9 @@ class ABC_About {
 		$is_alias_path = $path && in_array( strtolower( $path ), array_map( 'strtolower', self::alias_slugs() ), true );
 
 		$candidate = false;
-		if ( 'custom' === $type ) {
+		if ( in_array( (string) ( $item->object ?? '' ), array( 'abc_career', 'abc_career_section' ), true ) ) {
+			$candidate = true; // "About Timeline" has no page of its own: its place is the About page.
+		} elseif ( 'custom' === $type ) {
 			$internal  = ( '' === $host || $host === $own || '#' === trim( (string) $item->url ) );
 			$candidate = $internal && ( self::is_about_label( $item->title ) || $is_alias_path );
 		} elseif ( 'post_type' === $type && 'page' === ( $item->object ?? '' ) ) {
@@ -126,6 +130,46 @@ class ABC_About {
 		if ( $path && in_array( $path, array_map( 'strtolower', self::alias_slugs() ), true ) ) {
 			$url = self::url();
 			if ( $url && trailingslashit( $url ) !== trailingslashit( home_url( '/' . $path ) ) ) {
+				wp_safe_redirect( $url, 302 );
+				exit;
+			}
+		}
+	}
+
+	/** Is this page the About page (chosen in the settings, or carrying the About key)? */
+	private static function is_about_page( $id ) {
+		if ( 'about' === get_post_meta( $id, '_abc_page_key', true ) ) {
+			return true;
+		}
+		$chosen = absint( abc_setting( 'page_about', 0 ) );
+		if ( $chosen && $chosen === (int) $id ) {
+			return true;
+		}
+		return $chosen && function_exists( 'pll_get_post_translations' ) && in_array( (int) $id, array_map( 'intval', (array) pll_get_post_translations( $chosen ) ), true );
+	}
+
+	/** The About page always shows the entries of the About Timeline, even if its text does not contain them. */
+	public static function ensure_timeline( $content ) {
+		if ( is_admin() || ! is_singular( 'page' ) || ! in_the_loop() || ! is_main_query() ) {
+			return $content;
+		}
+		$id = get_the_ID();
+		if ( ! $id || ! self::is_about_page( $id ) || false !== strpos( $content, 'abt-chrono' ) || false !== strpos( $content, 'abc_career' ) ) {
+			return $content;
+		}
+		$tl = ABC_Render::career( array( 'section' => '', 'heading' => true ) );
+		return $tl ? $content . $tl : $content;
+	}
+
+	/** Addresses a timeline entry might have (/abc_career/…, /about-timeline/…) lead to the About page. */
+	public static function timeline_urls() {
+		if ( empty( $_SERVER['REQUEST_URI'] ) ) {
+			return;
+		}
+		$path = strtolower( trim( rawurldecode( (string) wp_parse_url( esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ), PHP_URL_PATH ) ), '/' ) );
+		if ( preg_match( '#(^|/)(abc_career|abc-career|about-timeline|career-section)(/|$)#', $path ) && ! is_page() ) {
+			$url = self::url();
+			if ( $url ) {
 				wp_safe_redirect( $url, 302 );
 				exit;
 			}
