@@ -23,7 +23,7 @@ while ( have_posts() ) :
 			<p class="abt-note__meta">
 				<span><?php echo esc_html( abc_t( 'by' ) ); ?> <?php echo esc_html( get_the_author_meta( 'display_name' ) ); ?></span> ·
 				<time datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( abc_format_date( get_the_date( 'Y-m-d' ) ) ); ?></time> ·
-				<span><?php echo esc_html( abc_t( 'min_read', abc_reading_time( $id ) ) ); ?></span>
+				<span><?php echo esc_html( abc_t( 'min_read', abc_reading_time( $id ) ) ); ?></span><?php do_action( 'abc_note_meta', $id ); // Extension point (e.g. view counter). ?>
 			</p>
 			<?php if ( has_excerpt() ) : ?><p class="abt-page-desc"><?php echo esc_html( get_the_excerpt() ); ?></p><?php endif; ?>
 		</div>
@@ -33,6 +33,7 @@ while ( have_posts() ) :
 			<figure class="abt-note__figure"><?php the_post_thumbnail( 'large' ); ?></figure>
 		<?php endif; ?>
 		<div class="abt-prose"><?php the_content(); ?></div>
+		<?php do_action( 'abc_after_note_content', $id ); // Extension point (e.g. share buttons). ?>
 		<?php if ( $tags && ! is_wp_error( $tags ) ) : ?>
 			<ul class="abt-taglist" aria-label="<?php echo esc_attr( abc_t( 'tags' ) ); ?>">
 				<?php foreach ( $tags as $t ) : ?><li><a href="<?php echo esc_url( get_term_link( $t ) ); ?>">#<?php echo esc_html( $t->name ); ?></a></li><?php endforeach; ?>

@@ -9,6 +9,7 @@ rm -rf build/*
 ( cd theme  && zip -qr -X "$ROOT/dist/ahcene-babori-academic-theme.zip" ahcene-babori-academic -x '*.DS_Store' )
 ( cd plugin && zip -qr -X "$ROOT/dist/ahcene-babori-core-plugin.zip" ahcene-babori-core -x '*.DS_Store' )
 ( cd plugin && zip -qr -X "$ROOT/dist/ahcene-babori-attendance-plugin.zip" ahcene-babori-attendance -x "*.DS_Store" )
+( cd plugin && zip -qr -X "$ROOT/dist/ahcene-babori-insights-plugin.zip" ahcene-babori-insights -x "*.DS_Store" )
 S=build/ahcene-babori-researcher
 mkdir -p "$S/source"
 cp dist/*.zip "$S/"

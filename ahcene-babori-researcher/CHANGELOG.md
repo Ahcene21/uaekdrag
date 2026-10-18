@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.44 – 2026-10-18 (new plugin: Share & Statistics 1.0.0)
+- **Share buttons on blog articles**: Facebook, X, LinkedIn, WhatsApp, Telegram, e-mail, copy link and the phone's native share menu. Plain links – nothing is loaded from the networks until a visitor clicks. Choose the networks under *Statistics → Sharing & tracking*; `[abi_share]` places the block anywhere. EN/FR/AR.
+- **Statistics for articles and the whole site** (new dashboard menu *Statistics*): views and visitors (today / 7 / 30 / 90 days / 1 year / all time), views-per-day chart, top pages and articles, referring websites, share clicks per network and most-shared articles; *Views* and *Shares* columns in the article lists; optional public view counter under the article title. First-party only: no cookies, no IP addresses stored, bots / logged-in editors / Do-Not-Track skipped, reloads within 30 minutes counted once, works behind page caches (JS beacon).
+- Theme: two extension points on the article template (`abc_note_meta`, `abc_after_note_content`).
+
 ## 1.0.43 – 2026-10-14 (core 1.0.28)
 - **Arabic font choice.** New bundled fonts (no external requests): Tajawal (new default for Arabic pages), Cairo, IBM Plex Sans Arabic, plus the existing Almarai. Choose under Researcher → Appearance → Arabic font, with a preview link per font (administrators can also use `?abc_font=cairo`). All fonts are SIL OFL (licences in `assets/fonts`).
 

@@ -110,3 +110,7 @@ Install and activate `ahcene-babori-attendance-plugin.zip` (needs the core plugi
 2. Allow camera access (the site must use HTTPS), choose the session date and point the phone at the QR code/barcode on the student card. Each new card is recorded with a short beep; scanning it again says "Already recorded".
 3. Review, delete or export (CSV) under the **Attendance** menu in the dashboard. Optionally paste a roster (`card code,Full name`) there to see names.
 Records are stored privately on your site and are never shown to visitors. Collect student data only as permitted by your institution's rules and delete it when no longer needed.
+
+## Share buttons and statistics
+
+Install `ahcene-babori-insights-plugin.zip` and activate it. Blog articles then show share buttons and a view counter; **Statistics** in the dashboard menu shows site and article statistics (**Sharing & tracking** chooses networks and switches tracking/counter on or off). No cookies and no IP addresses are stored. If your privacy policy lists analytics, mention first-party anonymous statistics there.
