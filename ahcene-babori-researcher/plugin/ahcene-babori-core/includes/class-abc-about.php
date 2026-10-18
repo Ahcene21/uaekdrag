@@ -13,6 +13,8 @@ class ABC_About {
 
 	public static function init() {
 		add_filter( 'wp_setup_nav_menu_item', array( __CLASS__, 'menu_item' ), 20 );
+		add_filter( 'walker_nav_menu_start_el', array( __CLASS__, 'final_html' ), 9999, 2 );
+		add_action( 'admin_menu', array( __CLASS__, 'admin_menu' ), 40 );
 		add_action( 'template_redirect', array( __CLASS__, 'alias_redirect' ), 5 );
 		add_filter( 'the_content', array( __CLASS__, 'ensure_timeline' ), 25 );
 		add_action( 'template_redirect', array( __CLASS__, 'timeline_urls' ), 4 );
@@ -80,6 +82,43 @@ class ABC_About {
 			pll_set_post_language( $id, abc_lang() );
 		}
 		return (string) get_permalink( $id );
+	}
+
+	/** Is this menu item an "About me" entry (by label, address or target)? */
+	public static function is_about_item( $item ) {
+		if ( empty( $item->title ) ) {
+			return false;
+		}
+		$url  = (string) ( $item->url ?? '' );
+		$own  = strtolower( (string) wp_parse_url( home_url(), PHP_URL_HOST ) );
+		$host = strtolower( (string) wp_parse_url( $url, PHP_URL_HOST ) );
+		$path = trim( rawurldecode( (string) wp_parse_url( $url, PHP_URL_PATH ) ), '/' );
+		$path = preg_replace( '#^(ar|fr|en)(/|$)#', '', $path );
+		$alias = $path && in_array( strtolower( $path ), array_map( 'strtolower', self::alias_slugs() ), true );
+		if ( in_array( (string) ( $item->object ?? '' ), array( 'abc_career', 'abc_career_section' ), true ) ) {
+			return true;
+		}
+		if ( '' !== $host && $host !== $own ) {
+			return false; // External destinations are never touched.
+		}
+		return self::is_about_label( $item->title ) || $alias || 'about' === (string) get_post_meta( (int) ( $item->object_id ?? 0 ), '_abc_page_key', true );
+	}
+
+	/**
+	 * Last word on the rendered menu: whatever earlier filters, Polylang or cache did, the About entry's
+	 * link in the final HTML is the real About page.
+	 */
+	public static function final_html( $out, $item ) {
+		if ( ! is_object( $item ) || ! self::is_about_item( $item ) ) {
+			return $out;
+		}
+		$url = self::url();
+		if ( ! $url ) {
+			return $out;
+		}
+		$count = 0;
+		$out   = preg_replace( '/<a\b([^>]*?)\shref=(["\'])[^"\']*\2/i', '<a$1 href="' . esc_url( $url ) . '" data-abt-about="1"', $out, 1, $count );
+		return $out;
 	}
 
 	/** Point About-like menu items (any type) to the About page. */
@@ -157,7 +196,11 @@ class ABC_About {
 		if ( ! $id || ! self::is_about_page( $id ) || false !== strpos( $content, 'abt-chrono' ) || false !== strpos( $content, 'abc_career' ) ) {
 			return $content;
 		}
-		$tl = ABC_Render::career( array( 'section' => '', 'heading' => true ) );
+		try {
+			$tl = ABC_Render::career( array( 'section' => '', 'heading' => true ) );
+		} catch ( Throwable $e ) {
+			return $content;
+		}
 		return $tl ? $content . $tl : $content;
 	}
 
@@ -174,5 +217,32 @@ class ABC_About {
 				exit;
 			}
 		}
+	}
+
+	/* ------------------------------------------------------------ diagnostics */
+
+	public static function admin_menu() {
+		add_submenu_page( 'abc-researcher', 'Menu link check', 'Menu link check', 'manage_options', 'abc-linkcheck', array( __CLASS__, 'render_check' ) );
+	}
+
+	public static function render_check() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
+		echo '<div class="wrap"><h1>Menu link check</h1><p>Shows how each entry of your menus is linked and what the site really outputs. The <strong>About me</strong> entry is always sent to the About page shown below.</p>';
+		$about = self::url();
+		echo '<p><strong>About page address:</strong> ' . ( $about ? '<a href="' . esc_url( $about ) . '" target="_blank" rel="noopener">' . esc_html( $about ) . '</a>' : 'not available' ) . '</p>';
+		if ( $about ) {
+			$r = wp_remote_get( $about, array( 'timeout' => 15, 'redirection' => 3 ) );
+			echo '<p><strong>Loading test:</strong> ' . ( is_wp_error( $r ) ? 'could not be tested from the server (' . esc_html( $r->get_error_message() ) . ') – open the link above to test it' : 'HTTP ' . (int) wp_remote_retrieve_response_code( $r ) ) . '</p>';
+		}
+		foreach ( wp_get_nav_menus() as $m ) {
+			echo '<h2>' . esc_html( $m->name ) . '</h2><table class="widefat striped" style="max-width:1000px"><thead><tr><th>Label</th><th>Type</th><th>Saved link</th><th>Treated as About?</th></tr></thead><tbody>';
+			foreach ( (array) wp_get_nav_menu_items( $m->term_id ) as $it ) {
+				printf( '<tr><td>%s</td><td>%s</td><td style="word-break:break-all">%s</td><td>%s</td></tr>', esc_html( $it->title ), esc_html( $it->type . ' / ' . $it->object ), esc_html( $it->url ), self::is_about_item( $it ) ? '<strong>yes → About page</strong>' : '—' );
+			}
+			echo '</tbody></table>';
+		}
+		echo '</div>';
 	}
 }

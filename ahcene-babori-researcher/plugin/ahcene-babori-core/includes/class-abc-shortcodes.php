@@ -631,7 +631,11 @@ class ABC_Shortcodes {
 	 */
 	public static function sc_career( $atts ) {
 		$a = shortcode_atts( array( 'section' => '', 'heading' => '1' ), $atts, 'abc_career' );
-		return ABC_Render::career( array( 'section' => sanitize_title( $a['section'] ), 'heading' => '0' !== $a['heading'] ) );
+		try {
+			return ABC_Render::career( array( 'section' => sanitize_title( $a['section'] ), 'heading' => '0' !== $a['heading'] ) );
+		} catch ( Throwable $e ) {
+			return '';
+		}
 	}
 
 	/**

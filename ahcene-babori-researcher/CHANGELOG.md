@@ -1,5 +1,10 @@
 # Changelog
 
+## Core 1.0.33 – 2026-10-18 – About link: a different approach (final-HTML guarantee + diagnostics)
+- The About entry is now fixed **in the final menu HTML**, after every other filter (Polylang, cache or other plugins can no longer change it). Tested with a filter that turns every other menu link into `#`: the About link stayed correct.
+- Rendering of the About Timeline is protected against errors (a failure there can no longer break the About page).
+- New **Researcher → Menu link check** screen: shows each menu entry, its saved link, whether it is treated as About, and the address of the About page with a server-side loading test.
+
 ## Core 1.0.32 – 2026-10-18 – About Timeline and the About link
 - Menu items that point to the **About Timeline** (its entries, sections, or addresses such as `/about-timeline/`, `/abc_career/…`, or labels like "Timeline / Parcours / الجدول الزمني") now lead to the About page, because the timeline has no page of its own.
 - The About page **always shows the About Timeline entries**: if the page text does not contain the timeline (old content, a page created by hand), the timeline is appended automatically.
