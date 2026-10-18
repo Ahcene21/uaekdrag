@@ -1,5 +1,8 @@
 # Changelog
 
+## Share & Statistics 1.0.1 – 2026-10-18
+- Share buttons now show the **logos** of Facebook, X, LinkedIn, WhatsApp and Telegram (plus e-mail, copy-link and phone-share icons) as round icon buttons that fill with the brand colour on hover. Name kept as accessible label and tooltip. Brand glyphs from Simple Icons (CC0).
+
 ## 1.0.44 – 2026-10-18 (new plugin: Share & Statistics 1.0.0)
 - **Share buttons on blog articles**: Facebook, X, LinkedIn, WhatsApp, Telegram, e-mail, copy link and the phone's native share menu. Plain links – nothing is loaded from the networks until a visitor clicks. Choose the networks under *Statistics → Sharing & tracking*; `[abi_share]` places the block anywhere. EN/FR/AR.
 - **Statistics for articles and the whole site** (new dashboard menu *Statistics*): views and visitors (today / 7 / 30 / 90 days / 1 year / all time), views-per-day chart, top pages and articles, referring websites, share clicks per network and most-shared articles; *Views* and *Shares* columns in the article lists; optional public view counter under the article title. First-party only: no cookies, no IP addresses stored, bots / logged-in editors / Do-Not-Track skipped, reloads within 30 minutes counted once, works behind page caches (JS beacon).

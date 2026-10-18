@@ -6,3 +6,10 @@
 .abi-btn:focus-visible{outline:3px solid #f2c94c;outline-offset:2px}
 .abi-share__msg{display:block;min-height:1.3em;margin-top:.5rem;font-size:.85rem;color:var(--teal,#0f6b4f);font-weight:600}
 .abi-views{white-space:nowrap}
+/* Icon buttons (brand logos) */
+.abi-share__list{gap:.6rem}
+.abi-btn{--c:var(--teal,#0f6b4f);width:46px;height:46px;padding:0;justify-content:center;border:2px solid var(--c);color:var(--c);background:#fff;border-radius:50%}
+.abi-btn:hover,.abi-btn:focus-visible{background:var(--c);color:#fff;border-color:var(--c)}
+.abi-btn[hidden]{display:none}
+.abi-ico{display:block}
+@media (prefers-reduced-motion:no-preference){.abi-btn:hover{transform:translateY(-2px)}.abi-btn{transition:background-color .15s,color .15s,transform .15s}}

@@ -67,15 +67,21 @@ class ABI_Share {
 			'email'    => 'mailto:?subject=' . $t . '&body=' . $u,
 		);
 		$labels = self::networks();
+		$icons  = require ABI_DIR . 'includes/icons.php';
+		$icon   = static function ( $n ) use ( $icons ) {
+			list( $color, $path, $stroke ) = $icons[ $n ];
+			$attr = $stroke ? 'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"' : 'fill="currentColor"';
+			return '<svg class="abi-ico" viewBox="0 0 24 24" width="22" height="22" ' . $attr . ' aria-hidden="true" focusable="false"><path d="' . esc_attr( $path ) . '"/></svg>';
+		};
 		$out    = '<div class="abi-share" data-url="' . esc_url( $url ) . '" data-title="' . esc_attr( $title ) . '"><p class="abi-share__t">' . esc_html( abi_t( 'share_title' ) ) . '</p><ul class="abi-share__list">';
 		foreach ( (array) $st['networks'] as $n ) {
 			if ( isset( $links[ $n ] ) ) {
 				$label = 'email' === $n ? abi_t( 'email' ) : $labels[ $n ];
-				$out  .= '<li><a class="abi-btn abi-btn--' . esc_attr( $n ) . '" data-net="' . esc_attr( $n ) . '" href="' . esc_url( $links[ $n ], array( 'https', 'mailto' ) ) . '" target="' . ( 'email' === $n ? '_self' : '_blank' ) . '" rel="noopener noreferrer" aria-label="' . esc_attr( sprintf( abi_t( 'share_on' ), $label ) ) . '">' . esc_html( $label ) . '</a></li>';
+				$out  .= '<li><a class="abi-btn abi-btn--' . esc_attr( $n ) . '" data-net="' . esc_attr( $n ) . '" href="' . esc_url( $links[ $n ], array( 'https', 'mailto' ) ) . '" target="' . ( 'email' === $n ? '_self' : '_blank' ) . '" rel="noopener noreferrer" aria-label="' . esc_attr( sprintf( abi_t( 'share_on' ), $label ) ) . '" title="' . esc_attr( $label ) . '" style="--c:' . esc_attr( $icons[ $n ][0] ) . '">' . $icon( $n ) . '</a></li>';
 			} elseif ( 'copy' === $n ) {
-				$out .= '<li><button type="button" class="abi-btn abi-btn--copy" data-net="copy">' . esc_html( abi_t( 'copy' ) ) . '</button></li>';
+				$out .= '<li><button type="button" class="abi-btn abi-btn--copy" data-net="copy" aria-label="' . esc_attr( abi_t( 'copy' ) ) . '" title="' . esc_attr( abi_t( 'copy' ) ) . '" style="--c:' . esc_attr( $icons['copy'][0] ) . '">' . $icon( 'copy' ) . '</button></li>';
 			} elseif ( 'native' === $n ) {
-				$out .= '<li><button type="button" class="abi-btn abi-btn--native" data-net="native" hidden>' . esc_html( abi_t( 'native' ) ) . '</button></li>';
+				$out .= '<li><button type="button" class="abi-btn abi-btn--native" data-net="native" aria-label="' . esc_attr( abi_t( 'native' ) ) . '" title="' . esc_attr( abi_t( 'native' ) ) . '" style="--c:' . esc_attr( $icons['native'][0] ) . '" hidden>' . $icon( 'native' ) . '</button></li>';
 			}
 		}
 		return $out . '</ul><span class="abi-share__msg" role="status" aria-live="polite"></span></div>';
