@@ -35,7 +35,7 @@ class ABC_About {
 		static $set = null;
 		if ( null === $set ) {
 			$set = array();
-			foreach ( array( 'about', 'about me', 'about us', 'my profile', 'profile', 'a propos', 'a propos de moi', 'mon profil', 'qui suis je', 'نبذه عني', 'نبذه', 'من انا', 'عني', 'نبذه تعريفيه', 'الملف الشخصي', 'about timeline', 'timeline', 'career', 'parcours', 'chronologie', 'الجدول الزمني', 'المسار الاكاديمي', 'المسار المهني', 'المسار' ) as $l ) {
+			foreach ( array( 'about', 'about me', 'about us', 'my profile', 'profile', 'a propos', 'a propos de moi', 'mon profil', 'qui suis je', 'نبذه عني', 'نبذه', 'من انا', 'عني', 'نبذه تعريفيه', 'الملف الشخصي', 'نبذه عن الباحث', 'عن الباحث', 'من نحن', 'تعريف بالباحث', 'about timeline', 'timeline', 'career', 'parcours', 'chronologie', 'الجدول الزمني', 'المسار الاكاديمي', 'المسار المهني', 'المسار' ) as $l ) {
 				$set[ self::norm( $l ) ] = true;
 			}
 			foreach ( array( 'nav_about' ) as $k ) {
@@ -55,33 +55,76 @@ class ABC_About {
 		return array( 'about', 'about-me', 'aboutme', 'about-us', 'my-profile', 'profile', 'a-propos', 'apropos', 'mon-profil', 'nubdha-anni', 'nabdha-anni', 'nubdha', 'who-am-i', 'about-timeline', 'abouttimeline', 'timeline', 'career', 'abc-career', 'abc_career', 'about_timeline', 'الجدول-الزمني', 'المسار', 'عني', 'نبذة', 'نبذة-عني', 'نبذه-عني', 'من-أنا', 'من-انا' );
 	}
 
-	/** URL of the About page, creating the page if the site has none. */
-	public static function url() {
-		$url = abc_find_page( 'about' );
-		if ( $url ) {
-			return $url;
+	/** ASCII slug per language (non-Latin slugs are a common cause of broken links on some servers). */
+	private static function slug_for( $lang ) {
+		return array( 'ar' => 'nubdha-anni', 'fr' => 'a-propos' )[ $lang ] ?? 'about';
+	}
+
+	/** ID of the About page in the current language; the page (or its translation) is created when missing. */
+	public static function page_id() {
+		$lang = abc_lang();
+		$base = 0;
+		$chosen = absint( abc_setting( 'page_about', 0 ) );
+		if ( $chosen && 'page' === get_post_type( $chosen ) ) {
+			$base = $chosen;
+		}
+		if ( ! $base ) {
+			$ids = get_posts( array( 'post_type' => 'page', 'post_status' => 'publish', 'posts_per_page' => 1, 'fields' => 'ids', 'meta_key' => '_abc_page_key', 'meta_value' => 'about', 'lang' => '' ) ); // phpcs:ignore WordPress.DB.SlowDBQuery
+			$base = $ids ? (int) $ids[0] : 0;
+		}
+		if ( function_exists( 'pll_get_post' ) && function_exists( 'pll_get_post_language' ) ) {
+			if ( $base ) {
+				$mine = (int) pll_get_post( $base, $lang );
+				if ( $mine && 'publish' === get_post_status( $mine ) ) {
+					return $mine;
+				}
+				if ( abc_norm_lang( (string) pll_get_post_language( $base ) ) === $lang && 'publish' === get_post_status( $base ) ) {
+					return $base;
+				}
+			}
+			// No About page in this language yet: create it and link it as a translation.
+			if ( get_transient( 'abc_about_lock_' . $lang ) ) {
+				return 0;
+			}
+			set_transient( 'abc_about_lock_' . $lang, 1, 5 * MINUTE_IN_SECONDS );
+			$id = wp_insert_post( array( 'post_type' => 'page', 'post_status' => 'publish', 'post_title' => abc_t( 'nav_about' ), 'post_name' => self::slug_for( $lang ), 'post_content' => '[abc_career]' ) );
+			if ( ! $id || is_wp_error( $id ) ) {
+				return 0;
+			}
+			update_post_meta( $id, '_abc_page_key', 'about' );
+			if ( function_exists( 'pll_set_post_language' ) ) {
+				pll_set_post_language( $id, $lang );
+			}
+			if ( $base && function_exists( 'pll_get_post_translations' ) && function_exists( 'pll_save_post_translations' ) ) {
+				$tr          = (array) pll_get_post_translations( $base );
+				$tr[ $lang ] = $id;
+				pll_save_post_translations( $tr );
+			}
+			return (int) $id;
+		}
+		// No multilingual plugin: one About page.
+		if ( $base && 'publish' === get_post_status( $base ) ) {
+			return $base;
 		}
 		if ( get_transient( 'abc_about_lock' ) ) {
-			return '';
+			return 0;
 		}
 		set_transient( 'abc_about_lock', 1, 5 * MINUTE_IN_SECONDS );
-		$id = wp_insert_post(
-			array(
-				'post_type'    => 'page',
-				'post_status'  => 'publish',
-				'post_title'   => abc_t( 'nav_about' ),
-				'post_name'    => 'about',
-				'post_content' => '[abc_career]',
-			)
-		);
+		$id = wp_insert_post( array( 'post_type' => 'page', 'post_status' => 'publish', 'post_title' => abc_t( 'nav_about' ), 'post_name' => 'about', 'post_content' => '[abc_career]' ) );
 		if ( ! $id || is_wp_error( $id ) ) {
-			return '';
+			return 0;
 		}
 		update_post_meta( $id, '_abc_page_key', 'about' );
-		if ( function_exists( 'pll_set_post_language' ) ) {
-			pll_set_post_language( $id, abc_lang() );
+		return (int) $id;
+	}
+
+	/** URL of the About page in the current language. */
+	public static function url() {
+		$id = self::page_id();
+		if ( $id ) {
+			return (string) get_permalink( $id );
 		}
-		return (string) get_permalink( $id );
+		return (string) abc_find_page( 'about' ); // Legacy lookup (slug / title) as the last resort.
 	}
 
 	/** Is this menu item an "About me" entry (by label, address or target)? */

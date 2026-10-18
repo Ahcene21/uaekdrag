@@ -1,5 +1,9 @@
 # Changelog
 
+## Core 1.0.34 – 2026-10-18 – About link in Arabic
+- The About page is now resolved **per language**: if the site has no About page in the visitor's language (typically Arabic), the page is created automatically and linked as a translation of the existing one, so the Arabic menu link always opens an Arabic About page instead of a missing page or the wrong-language one. Pages created this way get an ASCII address (`/about/`, `/a-propos/`, `/nubdha-anni/`) to avoid problems with Arabic addresses on some servers.
+- More Arabic labels recognised ("نبذة عن الباحث", "عن الباحث", "من نحن" …).
+
 ## Core 1.0.33 – 2026-10-18 – About link: a different approach (final-HTML guarantee + diagnostics)
 - The About entry is now fixed **in the final menu HTML**, after every other filter (Polylang, cache or other plugins can no longer change it). Tested with a filter that turns every other menu link into `#`: the About link stayed correct.
 - Rendering of the About Timeline is protected against errors (a failure there can no longer break the About page).
