@@ -791,3 +791,29 @@ html[dir="rtl"] .abt-vframe__play{translate:50% -50%}
   .abt-hero__grid:has(.abt-hero__portrait--video) .abt-hero__text{max-width:min(100%,calc(100% - 470px))}
 }
 @media (min-width:861px) and (max-width:1180px){.abt-hero__portrait--video,.abt-hero__portrait--video.is-playing{width:44%}.abt-hero__grid:has(.abt-hero__portrait--video) .abt-hero__text{max-width:min(100%,calc(100% - 380px))}}
+
+/* Publications page: cards with the cover (first page of the PDF) */
+.abc-pubgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:clamp(1rem,2.2vw,1.6rem)}
+.abc-pubcard{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg,16px);overflow:hidden;transition:box-shadow .2s,transform .2s,border-color .2s}
+.abc-pubcard:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px);border-color:var(--teal-light)}
+.abc-pubcard__cover{position:relative;display:block;aspect-ratio:3/3.6;background:linear-gradient(160deg,var(--tint),#fff);border-bottom:1px solid var(--line);overflow:hidden}
+.abc-pubcard__cover img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:transform .35s}
+.abc-pubcard:hover .abc-pubcard__cover img{transform:scale(1.04)}
+.abc-pubcard__cover.is-empty{display:grid;place-items:center;background:linear-gradient(150deg,var(--navy),var(--navy-2) 60%,var(--hero-end))}
+.abc-pubcard__ph{color:var(--teal-light);opacity:.85}
+.abc-pubcard__year{position:absolute;inset-block-start:.7rem;inset-inline-start:.7rem;background:var(--navy);color:#fff;font-weight:800;font-size:.85rem;padding:.2rem .65rem;border-radius:999px;font-variant-numeric:tabular-nums;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.abc-pubcard__oa{position:absolute;inset-block-end:.7rem;inset-inline-start:.7rem;background:var(--teal-light);color:var(--navy);font-weight:700;font-size:.72rem;padding:.18rem .6rem;border-radius:999px}
+.abc-pubcard__body{display:flex;flex-direction:column;gap:.3rem;padding:1rem 1.1rem 1.15rem;flex:1}
+.abc-pubcard__kicker{margin:0;font-size:.74rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--teal-dark)}
+html[lang="ar"] .abc-pubcard__kicker{letter-spacing:0;text-transform:none;font-size:.82rem}
+.abc-pubcard__title{margin:0;font-size:1.02rem;line-height:1.4}
+.abc-pubcard__title a{color:var(--navy);text-decoration:none}
+.abc-pubcard__title a:hover{color:var(--teal-dark);text-decoration:underline}
+.abc-pubcard__authors{margin:0;font-size:.88rem;color:var(--charcoal)}
+.abc-pubcard__venue{margin:0;font-size:.85rem;color:var(--muted)}
+.abc-pubcard__links{display:flex;flex-wrap:wrap;gap:.4rem;margin:auto 0 0;padding-top:.6rem}
+/* Single publication: cover beside the title */
+.abt-pubhead{display:grid;grid-template-columns:minmax(0,1fr);gap:1.4rem}
+@media (min-width:760px){.abt-pubhead{grid-template-columns:150px minmax(0,1fr);align-items:start}}
+.abt-pubhead__cover{display:block;border-radius:10px;overflow:hidden;border:3px solid rgba(255,255,255,.18);box-shadow:var(--shadow-lg);max-width:150px}
+.abt-pubhead__cover img{display:block;width:100%;height:auto}

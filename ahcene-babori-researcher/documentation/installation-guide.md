@@ -114,3 +114,9 @@ Records are stored privately on your site and are never shown to visitors. Colle
 ## Share buttons and statistics
 
 Install `ahcene-babori-insights-plugin.zip` and activate it. Blog articles then show share buttons and a view counter; **Statistics** in the dashboard menu shows site and article statistics (**Sharing & tracking** chooses networks and switches tracking/counter on or off). No cookies and no IP addresses are stored. If your privacy policy lists analytics, mention first-party anonymous statistics there.
+
+## Publication covers (first page of the PDF)
+
+1. Upload each article's PDF in the publication (field *PDF file*) – only PDFs you may legally share.
+2. Open **Researcher → Publication covers** and press **Generate all missing covers** (or use *Generate cover from the PDF* inside a publication, then Update).
+3. The publications page shows each article as a card with its first page. You can replace any cover with your own image in the *Cover image* field.

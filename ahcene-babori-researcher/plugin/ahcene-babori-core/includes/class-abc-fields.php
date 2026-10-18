@@ -49,6 +49,7 @@ class ABC_Fields {
 						'pub_url'      => array( 'type' => 'url', 'label' => 'Publisher / landing page URL', 'width' => 'half' ),
 						'pub_pdf_id'   => array( 'type' => 'media', 'label' => 'PDF file', 'mime' => 'application/pdf', 'help' => 'Upload only files you are legally allowed to share (e.g. accepted manuscript or open-access version).' ),
 						'pub_pdf_url'  => array( 'type' => 'url', 'label' => 'or external PDF URL', 'width' => 'half' ),
+						'pub_cover_id' => array( 'type' => 'media', 'label' => 'Cover image (first page of the PDF)', 'mime' => 'image', 'help' => 'Shown on the publications page. Use “Generate cover from the PDF” below the PDF field to create it automatically, or choose your own image.' ),
 						'pub_oa'       => array( 'type' => 'select', 'label' => 'Open Access status', 'options' => array( '' => '— Not specified —', 'open' => 'Open Access (gold)', 'green' => 'Green (repository copy)', 'hybrid' => 'Hybrid', 'closed' => 'Closed / subscription' ), 'width' => 'half' ),
 						'pub_repo_url' => array( 'type' => 'url', 'label' => 'Repository URL', 'help' => 'Institutional or subject repository record.', 'width' => 'half' ),
 						'pub_featured' => array( 'type' => 'checkbox', 'label' => 'Show on the homepage (featured)' ),

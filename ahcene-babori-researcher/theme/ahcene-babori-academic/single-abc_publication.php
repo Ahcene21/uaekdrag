@@ -37,8 +37,13 @@ while ( have_posts() ) :
 	}
 	?>
 <article <?php post_class( 'abt-single-pub' ); ?>>
+	<?php $cover = abc_pub_cover_url( $id, 'medium_large' ); ?>
 	<header class="abt-page-header">
-		<div class="abt-container">
+		<div class="abt-container<?php echo $cover ? ' abt-pubhead' : ''; ?>">
+			<?php if ( $cover ) : ?>
+				<a class="abt-pubhead__cover" href="<?php echo esc_url( $pdf ? $pdf : '#' ); ?>"<?php echo $pdf ? ' target="_blank" rel="noopener"' : ''; ?>><img src="<?php echo esc_url( $cover ); ?>" alt="<?php echo esc_attr( sprintf( abc_t( 'first_page_of' ), get_the_title() ) ); ?>" loading="eager" decoding="async"></a>
+			<?php endif; ?>
+			<div class="abt-pubhead__text">
 			<?php abt_breadcrumbs(); ?>
 			<p class="abt-badges">
 				<?php
@@ -57,6 +62,7 @@ while ( have_posts() ) :
 				echo esc_html( implode( ' · ', $bits ) );
 				?>
 			</p>
+			</div>
 		</div>
 	</header>
 

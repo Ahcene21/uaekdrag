@@ -143,6 +143,59 @@ class ABC_Render {
 	}
 
 	/**
+	 * Publication card with the cover (first page of the PDF) on top – used on the publications page.
+	 *
+	 * @param WP_Post $post Post.
+	 * @return string
+	 */
+	public static function publication_card( $post ) {
+		$id    = $post->ID;
+		$d     = abc_pub_data( $id );
+		$auth  = array();
+		foreach ( $d['authors'] as $a ) {
+			$auth[] = $a['given'] ? $a['family'] . ', ' . abc_initials( $a['given'] ) : $a['family'];
+		}
+		$venue = '';
+		if ( $d['journal'] ) {
+			$venue = '<i>' . esc_html( $d['journal'] ) . '</i>' . ( $d['volume'] ? ', ' . esc_html( $d['volume'] ) . ( $d['issue'] ? '(' . esc_html( $d['issue'] ) . ')' : '' ) : '' ) . ( $d['pages'] ? ', ' . esc_html( $d['pages'] ) : '' );
+		}
+		$oa    = abc_get( 'pub_oa', $id );
+		$pdf   = abc_file_or_url( 'pub_pdf_id', 'pub_pdf_url', $id );
+		$doi   = abc_doi_url( $d['doi'] );
+		$repo  = abc_get( 'pub_repo_url', $id );
+		$cover = abc_pub_cover_url( $id, 'medium_large' );
+		$link  = esc_url( get_permalink( $id ) );
+		$html  = '<article class="abc-pubcard" id="pub-' . (int) $id . '">';
+		$html .= '<a class="abc-pubcard__cover' . ( $cover ? '' : ' is-empty' ) . '" href="' . $link . '" tabindex="-1" aria-hidden="true">';
+		if ( $cover ) {
+			$html .= '<img src="' . esc_url( $cover ) . '" alt="" loading="lazy" decoding="async">';
+		} else {
+			$html .= '<span class="abc-pubcard__ph">' . abc_icon( 'doc', 38 ) . '</span>';
+		}
+		$html .= '<span class="abc-pubcard__year">' . ( $d['year'] ? esc_html( $d['year'] ) : '—' ) . '</span>';
+		if ( $oa && 'closed' !== $oa ) {
+			$html .= '<span class="abc-pubcard__oa">' . esc_html( abc_t( 'open_access' ) ) . '</span>';
+		}
+		$html .= '</a><div class="abc-pubcard__body">';
+		$type  = wp_strip_all_tags( self::terms( $id, 'abc_pub_type', false ) );
+		if ( $type ) {
+			$html .= '<p class="abc-pubcard__kicker">' . esc_html( $type ) . self::demo_badge( $id ) . '</p>';
+		}
+		$html .= '<' . self::$level . ' class="abc-pubcard__title"><a href="' . $link . '">' . esc_html( get_the_title( $id ) ) . '</a></' . self::$level . '>';
+		if ( $auth ) {
+			$html .= '<p class="abc-pubcard__authors">' . esc_html( implode( '; ', $auth ) ) . '</p>';
+		}
+		if ( $venue ) {
+			$html .= '<p class="abc-pubcard__venue">' . $venue . '</p>';
+		}
+		$btn = self::button( $pdf, 'PDF', 'doc' ) . self::button( $doi, 'DOI', 'link' ) . self::button( $repo, abc_t( 'repository' ), 'repository' );
+		if ( $btn ) {
+			$html .= '<p class="abc-pubcard__links">' . $btn . '</p>';
+		}
+		return $html . '</div></article>';
+	}
+
+	/**
 	 * Generic card for any post.
 	 *
 	 * @param WP_Post $post Post.

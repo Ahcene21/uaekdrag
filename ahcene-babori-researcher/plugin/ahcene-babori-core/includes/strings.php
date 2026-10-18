@@ -370,6 +370,11 @@ return array(
 		'fr' => 'Filtrer les publications',
 		'ar' => 'تصفية المنشورات',
 	),
+	'first_page_of' => array(
+		'en' => 'First page of “%s”',
+		'fr' => 'Première page de « %s »',
+		'ar' => 'الصفحة الأولى من «%s»',
+	),
 	'footer_menu' => array(
 		'en' => 'Footer menu',
 		'fr' => 'Menu du pied de page',

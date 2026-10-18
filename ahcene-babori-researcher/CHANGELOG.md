@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.46 – 2026-10-18 (core 1.0.29)
+- **New publications page design**: cards with the **cover of the article – the first page of its PDF** – on top, year badge, Open-Access ribbon, then type, title, authors, journal and PDF / DOI / repository buttons. Publications without a cover show a neutral placeholder. The cover also appears beside the title on the publication page.
+- **Cover generation**: *Researcher → Publication covers* creates the covers of all uploaded PDFs in one click; each publication also has a *Generate cover from the PDF* button (and a manual cover image field). The first page is rendered in the browser with the bundled PDF.js (Apache-2.0), so no server software is needed and nothing leaves your site. Only PDFs uploaded to the Media Library can be processed (not external links).
+
 ## Share & Statistics 1.1.1 – 2026-10-18
 - Fix: some blog articles showed no share buttons (posts not rendered by the blog-article template, e.g. standard posts, translated or imported ones). The buttons are now also appended to the article content itself, once per article, for blog articles and standard posts (filter `abi_share_types` to change the types).
 

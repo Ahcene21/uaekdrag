@@ -15,12 +15,11 @@ global $wp_query;
 	<?php echo ABC_Query::publication_filters(); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 	<p class="abt-count" role="status"><?php echo esc_html( abc_t( 'results_count', (int) $wp_query->found_posts ) ); ?></p>
 	<?php if ( have_posts() ) : ?>
-		<div class="abc-publist">
+		<div class="abc-pubgrid">
 			<?php
-			$last_year = null;
 			while ( have_posts() ) {
 				the_post();
-				echo ABC_Render::publication_item( get_post() ); // phpcs:ignore WordPress.Security.EscapeOutput
+				echo ABC_Render::publication_card( get_post() ); // phpcs:ignore WordPress.Security.EscapeOutput
 			}
 			?>
 		</div>

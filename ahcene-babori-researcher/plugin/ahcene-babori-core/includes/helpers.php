@@ -964,3 +964,27 @@ function abc_hero_video() {
 		$auto
 	);
 }
+
+
+/**
+ * Cover image of a publication: the chosen/generated cover, else the preview WordPress made for the PDF.
+ *
+ * @param int    $id   Publication ID.
+ * @param string $size Image size.
+ * @return string URL or ''.
+ */
+function abc_pub_cover_url( $id, $size = 'medium_large' ) {
+	$cid = absint( abc_get( 'pub_cover_id', $id ) );
+	if ( $cid && wp_attachment_is_image( $cid ) ) {
+		return (string) wp_get_attachment_image_url( $cid, $size );
+	}
+	$pdf = absint( abc_get( 'pub_pdf_id', $id ) );
+	if ( $pdf ) {
+		$meta = wp_get_attachment_metadata( $pdf );
+		if ( ! empty( $meta['sizes'] ) ) { // Core creates previews when Imagick + Ghostscript exist.
+			$u = wp_get_attachment_image_url( $pdf, $size );
+			return $u ? (string) $u : '';
+		}
+	}
+	return '';
+}
