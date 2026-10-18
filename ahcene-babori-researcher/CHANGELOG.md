@@ -1,5 +1,10 @@
 # Changelog
 
+## Core 1.0.31 – 2026-10-18 – "About me" menu link, definitive fix
+- The About entry of the main menu now works whatever it is: a page, a **custom link** (wrong address, "#", an old URL), a draft/deleted page, in any language. Any menu item titled like "About / About me / À propos / نبذة عني / من أنا / Mon profil" that points inside the site (or nowhere) is sent to the real About page (the page chosen under Researcher → Profile, the page with the About key, or a page with a usual slug).
+- If the site has **no About page at all** it is created automatically (it shows the About timeline) the first time it is needed.
+- Aliases `/about-me/`, `/a-propos/`, `/nubdha-anni/`, `/نبذة-عني/` … that are not real pages redirect to the About page.
+
 ## 1.0.47 – 2026-10-18 (core 1.0.30)
 - **Covers appear automatically on /publications/**: when you (logged in) open the publications page, every publication that has a PDF but no cover gets its cover created in the background from the PDF's first page, then the page refreshes. Visitors only see the finished covers (nothing extra is loaded for them).
 - **External PDF links are supported**: for publications whose PDF is a link (not an uploaded file) the site downloads that PDF once through a protected, editors-only route (the address is read from the saved publication, never from the request) to render page 1. Links must be public direct PDF files.
