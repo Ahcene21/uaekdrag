@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.45 – 2026-10-18 (Share & Statistics 1.1.0)
+- **Site visit counter in the footer** ("Site visits: N", total page views since the plugin was activated; can be switched off; `[abi_visits]` shortcode for the number).
+- **View counters for blog articles** on each article (under the title, also shown at 0) and on every article card in the blog lists.
+- Theme: footer extension point `abc_footer_stats`.
+
 ## Share & Statistics 1.0.1 – 2026-10-18
 - Share buttons now show the **logos** of Facebook, X, LinkedIn, WhatsApp and Telegram (plus e-mail, copy-link and phone-share icons) as round icon buttons that fill with the brand colour on hover. Name kept as accessible label and tooltip. Brand glyphs from Simple Icons (CC0).
 

@@ -13,3 +13,6 @@
 .abi-btn[hidden]{display:none}
 .abi-ico{display:block}
 @media (prefers-reduced-motion:no-preference){.abi-btn:hover{transform:translateY(-2px)}.abi-btn{transition:background-color .15s,color .15s,transform .15s}}
+.abi-visits{margin:0;display:inline-flex;align-items:center;gap:.4rem}
+.abi-visits svg{opacity:.85}
+.abi-card-views{display:flex;align-items:center;gap:.35rem;margin:.5rem 0 0;font-size:.82rem;color:var(--muted,#5a6773)}

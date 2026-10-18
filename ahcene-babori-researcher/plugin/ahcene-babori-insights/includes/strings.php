@@ -9,4 +9,5 @@ return array(
 	'native'      => array( 'en' => 'Share…', 'fr' => 'Partager…', 'ar' => 'مشاركة…' ),
 	'email'       => array( 'en' => 'Email', 'fr' => 'E-mail', 'ar' => 'بريد إلكتروني' ),
 	'views'       => array( 'en' => 'views', 'fr' => 'vues', 'ar' => 'مشاهدة' ),
+	'visits' => array( 'en' => 'Site visits', 'fr' => 'Visites du site', 'ar' => 'زيارات الموقع' ),
 );

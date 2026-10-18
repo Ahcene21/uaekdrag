@@ -257,7 +257,8 @@ class ABI_Stats {
 		echo '</p><p class="description">Buttons are plain links: nothing is loaded from Facebook, X, etc. until a visitor clicks. Use <code>[abi_share]</code> to place the buttons anywhere.</p>';
 		echo '<h2>Statistics</h2>';
 		printf( '<p><label><input type="checkbox" name="track" value="1"%s> Count page views and visitors (no cookies, no IP stored; skips bots, logged-in editors and visitors who send Do-Not-Track)</label></p>', checked( ! empty( $s['track'] ), true, false ) );
-		printf( '<p><label><input type="checkbox" name="show_views" value="1"%s> Show the view counter under each blog article title</label></p>', checked( ! empty( $s['show_views'] ), true, false ) );
+		printf( '<p><label><input type="checkbox" name="show_views" value="1"%s> Show the view counter on blog articles and article cards</label></p>', checked( ! empty( $s['show_views'] ), true, false ) );
+		printf( '<p><label><input type="checkbox" name="show_visits" value="1"%s> Show the total number of site visits in the footer</label></p>', checked( ! empty( $s['show_visits'] ), true, false ) );
 		echo '<p><button class="button button-primary">Save</button></p></form>';
 		echo '<hr><h2>Reset statistics</h2><form method="post" action="' . esc_url( admin_url( 'admin-post.php' ) ) . '" onsubmit="return confirm(\'Delete all statistics? This cannot be undone.\')"><input type="hidden" name="action" value="abi_reset">';
 		wp_nonce_field( 'abi_reset' );
@@ -275,6 +276,7 @@ class ABI_Stats {
 		$cur['networks']   = $nets;
 		$cur['track']      = empty( $_POST['track'] ) ? 0 : 1;
 		$cur['show_views'] = empty( $_POST['show_views'] ) ? 0 : 1;
+		$cur['show_visits'] = empty( $_POST['show_visits'] ) ? 0 : 1;
 		update_option( 'abi_settings', $cur, false );
 		wp_safe_redirect( admin_url( 'admin.php?page=abi-settings&done=1' ) );
 		exit;

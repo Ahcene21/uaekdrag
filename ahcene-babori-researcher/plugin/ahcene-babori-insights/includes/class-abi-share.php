@@ -12,6 +12,9 @@ class ABI_Share {
 	public static function init() {
 		add_action( 'abc_after_note_content', array( __CLASS__, 'echo_block' ) );
 		add_action( 'abc_note_meta', array( __CLASS__, 'echo_views' ) );
+		add_action( 'abc_footer_stats', array( __CLASS__, 'echo_visits' ) );
+		add_filter( 'abc_card_extra', array( __CLASS__, 'card_views' ), 20, 2 );
+		add_shortcode( 'abi_visits', array( __CLASS__, 'visits_shortcode' ) );
 		add_shortcode( 'abi_share', array( __CLASS__, 'shortcode' ) );
 		add_action( 'wp_enqueue_scripts', array( __CLASS__, 'assets' ) );
 	}
@@ -33,9 +36,7 @@ class ABI_Share {
 		if ( is_admin() || is_feed() || is_embed() || is_404() ) {
 			return;
 		}
-		if ( is_singular() ) {
-			wp_enqueue_style( 'abi', ABI_URL . 'assets/insights.css', array(), ABI_VERSION );
-		}
+		wp_enqueue_style( 'abi', ABI_URL . 'assets/insights.css', array(), ABI_VERSION );
 		wp_enqueue_script( 'abi', ABI_URL . 'assets/insights.js', array(), ABI_VERSION, array( 'in_footer' => true, 'strategy' => 'defer' ) );
 		$st = abi_settings();
 		wp_localize_script(
@@ -104,9 +105,40 @@ class ABI_Share {
 		}
 		$id = $id ? $id : get_the_ID();
 		$n  = (int) get_post_meta( $id, 'abi_views', true );
-		if ( $n < 1 ) {
+		echo ' · <span class="abi-views">' . esc_html( number_format_i18n( $n ) . ' ' . abi_t( 'views' ) ) . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput
+	}
+
+	/** Total page views of the whole site (cached 5 minutes). */
+	public static function total_visits() {
+		$n = get_transient( 'abi_total' );
+		if ( false === $n ) {
+			global $wpdb;
+			$n = (int) $wpdb->get_var( 'SELECT COALESCE(SUM(views),0) FROM ' . ABI_Stats::table() . " WHERE type='site'" ); // phpcs:ignore WordPress.DB
+			set_transient( 'abi_total', $n, 5 * MINUTE_IN_SECONDS );
+		}
+		return (int) $n;
+	}
+
+	/** Footer: "Site visits: 1,234". */
+	public static function echo_visits() {
+		$st = abi_settings();
+		if ( empty( $st['show_visits'] ) ) {
 			return;
 		}
-		echo ' · <span class="abi-views">' . esc_html( number_format_i18n( $n ) . ' ' . abi_t( 'views' ) ) . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput
+		echo '<p class="abi-visits"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg> ' . esc_html( abi_t( 'visits' ) ) . ': <strong>' . esc_html( number_format_i18n( self::total_visits() ) ) . '</strong></p>'; // phpcs:ignore WordPress.Security.EscapeOutput
+	}
+
+	public static function visits_shortcode() {
+		return esc_html( number_format_i18n( self::total_visits() ) );
+	}
+
+	/** Article cards: view counter for blog posts. */
+	public static function card_views( $html, $post ) {
+		$st = abi_settings();
+		if ( $post && 'abc_note' === $post->post_type && ! empty( $st['show_views'] ) ) {
+			$n     = (int) get_post_meta( $post->ID, 'abi_views', true );
+			$html .= '<p class="abi-card-views"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg> ' . esc_html( number_format_i18n( $n ) . ' ' . abi_t( 'views' ) ) . '</p>';
+		}
+		return $html;
 	}
 }

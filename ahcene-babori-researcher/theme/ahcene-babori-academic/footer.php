@@ -34,6 +34,7 @@ $profiles = ABC_Render::profiles( 'icons' );
 	<div class="abt-footer__bar">
 		<div class="abt-container abt-footer__bottom">
 			<p>© <?php echo esc_html( gmdate( 'Y' ) ); ?> <?php echo esc_html( abc_setting( 'name', 'Dr. Ahcene Babori' ) ); ?> · <?php echo esc_html( abc_t( 'rights' ) ); ?></p>
+			<?php do_action( 'abc_footer_stats' ); // Extension point (site visit counter). ?>
 			<a class="abt-totop" href="#top"><span><?php echo esc_html( abc_t( 'back_to_top' ) ); ?></span><i aria-hidden="true"><?php echo abc_icon( 'arrow', 16 ); // phpcs:ignore WordPress.Security.EscapeOutput ?></i></a>
 		</div>
 	</div>
